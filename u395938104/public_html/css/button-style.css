@@ -1,0 +1,52 @@
+.c{
+  padding-top: 15px; 
+}
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.btn-default,
+.btn-default:focus {
+color: #003A91;
+text-shadow: none;
+background-color: #fff;
+border: 2px solid #fff;
+}
+.btn-default:hover{
+color: #003A91;
+text-shadow: none; /* Prevent inheritence from `body` */
+background-color: #fff;
+border: 2px solid #003A91;
+}
+.btn-lg{
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+.btn-submit,
+.btn-submit:focus{
+color: #333;
+text-shadow: none;
+background-color: #fff;
+}
+.btn-submit:hover{
+color: #eee;
+text-shadow: none; /* Prevent inheritence from `body` */
+background-color: #003A91;
+}

@@ -1,0 +1,35 @@
+# Do not remove this line or mod_rewrite rules and search engine friendly URLs will stop working
+RewriteBase /
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW ERRORPAGEID:TaZydy
+ErrorDocument 400 /error/400.html
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE TaZydy:ERRORPAGEID
+
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW ERRORPAGEID:meJaqe
+ErrorDocument 401 /error/401.html
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE meJaqe:ERRORPAGEID
+
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW ERRORPAGEID:yzaVet
+ErrorDocument 403 /error/403.html
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE yzaVet:ERRORPAGEID
+
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW ERRORPAGEID:HyHyne
+ErrorDocument 404 /error/404.html
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE HyHyne:ERRORPAGEID
+
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW ERRORPAGEID:yMuQyj
+ErrorDocument 500 /error/500.html
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE yMuQyj:ERRORPAGEID
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400' rel='stylesheet' type='text/css'>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="Plataforma de estudos para o Vestibular">
+	    <link rel="icon" href="img/favicon.ico">
+		<link href="css/front-style.css" rel="stylesheet">
+		<link href="css/button-style.css" rel="stylesheet">
+		<link href="css/imput-style.css" rel="stylesheet">
+		<title>Vestibo: Entrar</title>
+	</head>
+	<body>
+		<div class="page">
+			<div class="header">
+				<div class="header-content">
+					<div class="header-left">
+						<a href="http://vestibo.com.br/"><img src="img/nav-logo-blue.png" class="logo" alt="Vestibo"></a>
+					</div>
+					<div class="header-right c">
+						<a href="cadastrar.html" class="btn btn-lg btn-default">Cadastrar-se</a>
+					</div>
+				</div>
+			</div>
+			<div class="body">
+				<form name="entrar" form method="POST" action="accounts/lr.php">
+					<div class="login-container">
+						<h1 style="color:#003A91;">Entrar</h1>
+						<div class="form-group">
+		          			<input type="enail" name="user_name" class="form-control" id="login_input_username" placeholder="Usuário">
+		        		</div>
+		        		<div class="form-group">
+		          			<input type="password" class="form-control" name="user_password" id="login_input_password" placeholder="Senha">
+		        		</div>
+		        		<input type="submit" class="btn btn-default" name="login" value="Entrar" /></input>
+		        		<a href="#" style="float:right;padding-right:12px;padding-top:8px;">Esqueci minha senha</a>
+					</div>
+				</form>
+			</div>
+			<div class="footer">
+				<div class="f-left">
+					Vestibo &copy; 2014.
+				</div>
+				<div class="f-right">
+					<a href="http://vestibo.com.br/termos.html">Termos e condições</a>
+					<a href="http://vestibo.com.br/quem-somos.html">Quem somos</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
