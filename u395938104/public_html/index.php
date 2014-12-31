@@ -8,7 +8,7 @@
 	    <meta name="description" content="Plataforma de estudos para o Vestibular">
 	    <link rel="icon" href="img/favicon.ico">
 		<title>Vestibo</title>
-		<link href="css/front-style.css" rel="stylesheet">
+		<link href="css/global-style.css" rel="stylesheet">
 		<link href="css/button-style.css" rel="stylesheet">
 		<link href="css/facebook-style.css" rel="stylesheet">
 	</head>
@@ -36,8 +36,8 @@
 						<a href="http://vestibo.com.br/"><img src="img/nav-logo-blue.png" class="logo" alt="Vestibo"></a>
 					</div>
 					<div class="header-right c">
-						<a href="cadastrar" class="header-link-right">Cadastrar-se</a>
-						<a href="entrar" class="btn btn-lg btn-default">Entrar</a>
+						<a href="cadastrar.html" class="header-link-right">Cadastrar-se</a>&nbsp&nbsp
+						<a href="entrar.html" class="btn btn-lg btn-default">Entrar</a>
 					</div>
 				</div>
 			</div><!-- /header -->

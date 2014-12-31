@@ -7,29 +7,32 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <meta name="description" content="Plataforma de estudos para o Vestibular">
 	    <link rel="icon" href="../img/favicon.ico">
-		<link href="../css/front-style.css" rel="stylesheet">
+		<link href="../css/global-style.css" rel="stylesheet">
 		<link href="../css/button-style.css" rel="stylesheet">
 		<link href="../css/imput-style.css" rel="stylesheet">
-		<link href="../css/menu-style.css" rel="stylesheet">
-		<link href="../css/user-control-style.css" rel="stylesheet">
 		<link href="../css/question-style.css" rel="stylesheet">
-		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="js/menu.js"></script>
+		<!--<script src="../js/jquery-1.10.2.js"></script>-->
 		<title>Vestibo</title>
 	</head>
 	<body>
 		<div class="page">
 			<div class="header">
 				<div class="header-left">
-					<img onclick="open_close_menu()" src="in_img/menu-blue.png" class="menu-anchor" alt="Vestibo"/>
-					<img src="../img/nav-logo-blue.png" class="logo" alt="Vestibo"/>
+					<nav>
+						<a href="#" class="menu-anchor nav-item"><img src="in_img/anchor.png" class="anchor" alt="Menu"/></a>
+						<a href="http://vestibo.com.br/" class="nav-item"><img src="../img/nav-logo-blue.png" class="logo" alt="Vestibo"/></a>
+						<div class="menu-content">
+							<ul>
+								<?php require_once("pvt/m.php"); ?>
+							</ul>
+						</div>
+					</nav>
 				</div>
 				<div class="header-right">
-					<?php //echo ('<a>'.$_SESSION['user_name'].'</a>'); ?>
-					<img class="user-img-circle" src="../img/user-image.png" alt="1"/>
+					<!--<?php //echo ('<a>'.$_SESSION['user_name'].'</a>'); ?>-->
+					<a href="#" class="nav-item"><img class="user-img-circle" src="../img/user-image.png" alt="1"/></a>
 				</div>
 			</div>
-			<?php require_once("pvt/m.php"); ?>
 			<div class="body">
 				<?php switch ($_GET['page']) {
 						case '0': require_once("pvt/0.php"); break;

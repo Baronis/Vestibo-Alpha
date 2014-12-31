@@ -66,20 +66,6 @@ p {
         === 2. Cabeçalho ===
         ====================
 */
-.logo{
-  width: 161px;
-  height: 80px;
-}
-.header-left {
-  display: block;
-  float: left;
-  margin-left: 44px;
-}
-.header-right {
-  display: block;
-  float: right;
-  margin-right: 44px;
-}
 .header{
   position: fixed;
   width: 100%;
@@ -88,11 +74,121 @@ p {
   left: 0;
   right: 0;
   background-color: #fff;
-  height: 80px;
+  height: 86px;
   -webkit-box-shadow: 0px 1px 8px #aaa;
   -moz-box-shadow: 0px 1px 8px #aaa;
   box-shadow: 0px 1px 8px #aaa;
   font-size: 18px;
+}
+.header-left {
+  display: inline-block;
+  float: left;
+  margin-left: 44px;
+}
+.header-right {
+  display: inline-block;
+  float: right;
+  margin-right: 44px;
+}
+.header-left a, .header-right a{
+  margin: 0;
+}
+.logo{
+  width: 161px;
+  height: 80px;
+}
+.anchor{
+  width: 80px;
+  height: 80px;
+}
+nav ul{
+  padding: 10px 0;
+  margin: 0;
+}
+.nav-item{
+  display: inline-block;
+}
+.nav-item:hover, .nav-item:focus{
+  background-color: #eee;
+}
+.menu-anchor{
+  width: auto; 
+  height: auto;
+  display: inline-block;
+  cursor: pointer;
+}
+.menu-content:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-width: 15px;
+  border-style: solid;
+  border-color: transparent transparent #003A91 transparent;
+  left: 60px;
+  bottom: 100%;
+  margin-left: -15px;
+}
+.menu-content{
+  position: fixed;
+  background-color: #003A91;
+  width: 250px;
+  max-height: 0;
+  overflow: hidden;
+  top: 80px;
+  left: 0;
+  bottom: 35px;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+    -webkit-box-shadow: 1px 5px 8px #aaa;
+    -moz-box-shadow: 1px 5px 8px #aaa;
+    box-shadow: 1px 5px 8px #aaa;
+}
+.menu-content ul li{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menu-content ul li a{
+  padding: 5px 15px;
+  margin: 0;
+  display: inline-block;
+  width: 220px;
+  max-height: 30px;
+  color: #eee;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+.menu-content ul li a:hover, .menu-content ul li a:focus{
+  background-color: #eee;
+  color: #003A91;
+}
+.active a{
+  border-left: 4px solid #eee;
+}
+.menu-anchor:focus ~ .menu-content{
+  max-height: 100%;
+}
+@media (max-height: 500px) {
+  .menu-content{
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+.user-img-circle{
+  cursor: pointer;
+  margin: 13px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  width: 50px;
+  height: 50px;
+  -webkit-box-shadow: 0 0 4px #aaa;
+  -moz-box-shadow: 0 0 4px #aaa;
+  box-shadow: 0 0 4px #aaa;
 }
 /*
         ==========================

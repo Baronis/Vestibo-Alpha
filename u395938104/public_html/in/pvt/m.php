@@ -1,70 +1,46 @@
 <?php
 	switch ($_GET['page']) {
 		case '0':
-			echo '<div id="m" class="esc">
-				<div class="menu-container">
-					<a href="?page=0" class="active">início<a>
-					<a href="?page=1">matérias<a>
-					<a href="?page=2">exercícios</a>
-					<a href="?page=3">simulados</a>
-					<a href="?page=4">desafios</a>
-					<a href="?page=5">ajustes</a>
-				</div>
-			</div>'; break;
+			echo '	<li class="active"><a href="?page=0">início</a></li>
+					<li><a href="?page=1">matérias</a></li>
+					<li><a href="?page=2">exercícios</a></li>
+					<li><a href="?page=3">simulados</a></li>
+					<li><a href="?page=4">desafios</a></li>
+					<li><a href="?page=5">ajustes</a></li>'; break;
 		case '1':
-			echo '<div id="m" class="esc">
-				<div class="menu-container">
-					<a href="?page=0">início<a>
-					<a href="?page=1" class="active">matérias<a>
-					<a href="?page=2">exercícios</a>
-					<a href="?page=3">simulados</a>
-					<a href="?page=4">desafios</a>
-					<a href="?page=5">ajustes</a>
-				</div>
-			</div>'; break;
+			echo '	<li><a href="?page=0">início</a></li>
+					<li class="active"><a href="?page=1">matérias</a></li>
+					<li><a href="?page=2">exercícios</a></li>
+					<li><a href="?page=3">simulados</a></li>
+					<li><a href="?page=4">desafios</a></li>
+					<li><a href="?page=5">ajustes</a></li>'; break;
 		case '2':
-			echo '<div id="m" class="esc">
-				<div class="menu-container">
-					<a href="?page=0">início<a>
-					<a href="?page=1">matérias<a>
-					<a href="?page=2" class="active">exercícios</a>
-					<a href="?page=3">simulados</a>
-					<a href="?page=4">desafios</a>
-					<a href="?page=5">ajustes</a>
-				</div>
-			</div>'; break;
+			echo '	<li><a href="?page=0">início</a></li>
+					<li><a href="?page=1">matérias</a></li>
+					<li class="active"><a href="?page=2">exercícios</a></li>
+					<li><a href="?page=3">simulados</a></li>
+					<li><a href="?page=4">desafios</a></li>
+					<li><a href="?page=5">ajustes</a></li>'; break;
 		case '3':
-			echo '<div id="m" class="esc">
-				<div class="menu-container">
-					<a href="?page=0">início<a>
-					<a href="?page=1">matérias<a>
-					<a href="?page=2">exercícios</a>
-					<a href="?page=3" class="active">simulados</a>
-					<a href="?page=4">desafios</a>
-					<a href="?page=5">ajustes</a>
-				</div>
-			</div>'; break;
+			echo '	<li><a href="?page=0">início</a></li>
+					<li><a href="?page=1">matérias</a></li>
+					<li><a href="?page=2">exercícios</a></li>
+					<li class="active"><a href="?page=3">simulados</a></li>
+					<li><a href="?page=4">desafios</a></li>
+					<li><a href="?page=5">ajustes</a></li>'; break;
 		case '4':
-			echo '<div id="m" class="esc">
-				<div class="menu-container">
-					<a href="?page=0">início<a>
-					<a href="?page=1">matérias<a>
-					<a href="?page=2">exercícios</a>
-					<a href="?page=3">simulados</a>
-					<a href="?page=4" class="active">desafios</a>
-					<a href="?page=5">ajustes</a>
-				</div>
-			</div>'; break;
+			echo '	<li><a href="?page=0">início</a></li>
+					<li><a href="?page=1">matérias</a></li>
+					<li><a href="?page=2">exercícios</a></li>
+					<li><a href="?page=3">simulados</a></li>
+					<li class="active"><a href="?page=4">desafios</a></li>
+					<li><a href="?page=5">ajustes</a></li>'; break;
 		case '5':
-			echo '<div id="m" class="esc">
-				<div class="menu-container">
-					<a href="?page=0">início<a>
-					<a href="?page=1">matérias<a>
-					<a href="?page=2">exercícios</a>
-					<a href="?page=3">simulados</a>
-					<a href="?page=4">desafios</a>
-					<a href="?page=5" class="active">ajustes</a>
-				</div>
-			</div>'; break;
+			echo '	<li><a href="?page=0">início</a></li>
+					<li><a href="?page=1">matérias</a></li>
+					<li><a href="?page=2">exercícios</a></li>
+					<li><a href="?page=3">simulados</a></li>
+					<li><a href="?page=4">desafios</a></li>
+					<li class="active"><a href="?page=5">ajustes</a></li>'; break;
 		default: header("location:?page=0"); break;}
 ?>
