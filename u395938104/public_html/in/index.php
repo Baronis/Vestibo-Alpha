@@ -11,28 +11,23 @@
 		<link href="../css/button-style.css" rel="stylesheet">
 		<link href="../css/imput-style.css" rel="stylesheet">
 		<link href="../css/question-style.css" rel="stylesheet">
-		<!--<script src="../js/jquery-1.10.2.js"></script>-->
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="js/menu.js"></script>
 		<title>Vestibo</title>
 	</head>
 	<body>
 		<div class="page">
 			<div class="header">
 				<div class="header-left">
-					<nav>
-						<a href="#" class="menu-anchor nav-item"><img src="in_img/anchor.png" class="anchor" alt="Menu"/></a>
-						<a href="http://vestibo.com.br/" class="nav-item"><img src="../img/nav-logo-blue.png" class="logo" alt="Vestibo"/></a>
-						<div class="menu-content">
-							<ul>
-								<?php require_once("pvt/m.php"); ?>
-							</ul>
-						</div>
-					</nav>
+					<a onclick="open_close_menu()" href="#" class="header-item"><img src="in_img/menu-blue.png" class="menu-anchor" alt="Vestibo"></a>
+					<a href="http://vestibo.com.br/" class="header-item"><img src="../img/nav-logo-blue.png" class="logo" alt="Vestibo"/></a>
 				</div>
 				<div class="header-right">
-					<!--<?php //echo ('<a>'.$_SESSION['user_name'].'</a>'); ?>-->
-					<a href="#" class="nav-item"><img class="user-img-circle" src="../img/user-image.png" alt="1"/></a>
+					<?php //echo ('<a>'.$_SESSION['user_name'].'</a>'); ?>
+					<a onclick="open_close_user_menu()" href="#" class="header-item"><img class="user-anchor" src="../img/user-image.png" alt="1"/></a>
 				</div>
 			</div>
+			<?php require_once("pvt/menu.php"); ?>
 			<div class="body">
 				<?php switch ($_GET['page']) {
 						case '0': require_once("pvt/0.php"); break;

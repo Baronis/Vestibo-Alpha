@@ -1,5 +1,9 @@
+/*
+        VESTIBO ALPHA === Button Stylesheet === LAMPI
+        Última revisão: 06/01/2014
+*/
 .c{
-  padding-top: 15px; 
+  padding: 15px 0;
 }
 .btn {
   display: inline-block;
@@ -34,9 +38,9 @@ background-color: #fff;
 border: 2px solid #003A91;
 }
 .btn-lg{
-  padding: 10px 16px;
+  padding: 13px 16px;
   font-size: 18px;
-  line-height: 1.33;
+  line-height: 1.33em;
   border-radius: 6px;
 }
 .btn-submit,
@@ -50,3 +54,8 @@ color: #eee;
 text-shadow: none; /* Prevent inheritence from `body` */
 background-color: #003A91;
 }
+/*
+        =======================================================================
+        =====        VESTIBO ALPHA === Button Stylesheet === LAMPI        =====
+        =======================================================================
+*/

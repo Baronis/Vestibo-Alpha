@@ -33,11 +33,11 @@
 			<div class="header">
 				<div class="header-content">
 					<div class="header-left">
-						<a href="http://vestibo.com.br/"><img src="img/nav-logo-blue.png" class="logo" alt="Vestibo"></a>
+						<a href="http://vestibo.com.br/" class="header-item"><img src="img/nav-logo-blue.png" class="logo" alt="Vestibo"></a>
 					</div>
 					<div class="header-right c">
-						<a href="cadastrar.html" class="header-link-right">Cadastrar-se</a>&nbsp&nbsp
-						<a href="entrar.html" class="btn btn-lg btn-default">Entrar</a>
+						<a href="cadastrar" class="btn btn-lg btn-default">Cadastrar-se</a>
+						<a href="entrar" class="btn btn-lg btn-default">Entrar</a>
 					</div>
 				</div>
 			</div><!-- /header -->

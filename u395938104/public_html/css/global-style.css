@@ -1,11 +1,13 @@
 /*
-        VESTIBO ALPHA === Stylesheet Mestre === LAMPI
-        Última revisão: 01/12/2014
+        VESTIBO ALPHA === Global Stylesheet === LAMPI
+        Última revisão: 06/01/2014
 
 >>>     Indice:
         
-        1. Global;
+        1. Geral;
         2. Cabeçalho;
+          2.1 Menu principal;
+          2.2 Painel de controle;
         3. Corpo da página;
         4. Containers de texto;
         5. Rodapé;
@@ -20,11 +22,11 @@
         Cinza médio alternativo: #F5F5F5;
         Cinza escuro: #E5E5E5;
         Azul escuro: #003A91;
-        Sombra: #aaa.
+        Sombra: #AAA;
 
 
         =================
-        === 1. Global ===
+        === 1. Geral ===
         =================
 */
 html, body {
@@ -66,6 +68,20 @@ p {
         === 2. Cabeçalho ===
         ====================
 */
+.logo{
+  width: 161px;
+  height: 80px;
+}
+.header-left {
+  display: block;
+  float: left;
+  margin-left: 44px;
+}
+.header-right {
+  display: block;
+  float: right;
+  margin-right: 44px;
+}
 .header{
   position: fixed;
   width: 100%;
@@ -77,47 +93,84 @@ p {
   height: 86px;
   -webkit-box-shadow: 0px 1px 8px #aaa;
   -moz-box-shadow: 0px 1px 8px #aaa;
+  -o-box-shadow: 0px 1px 8px #aaa;
   box-shadow: 0px 1px 8px #aaa;
   font-size: 18px;
 }
-.header-left {
+.header-item{
   display: inline-block;
-  float: left;
-  margin-left: 44px;
-}
-.header-right {
-  display: inline-block;
-  float: right;
-  margin-right: 44px;
-}
-.header-left a, .header-right a{
+  padding: 0 10px;
   margin: 0;
 }
-.logo{
-  width: 161px;
-  height: 80px;
-}
-.anchor{
-  width: 80px;
-  height: 80px;
-}
-nav ul{
-  padding: 10px 0;
-  margin: 0;
-}
-.nav-item{
-  display: inline-block;
-}
-.nav-item:hover, .nav-item:focus{
+.header-item:hover, .header-item:active, .header-item:focus{
   background-color: #eee;
 }
-.menu-anchor{
-  width: auto; 
+/*
+        ==========================
+        === 2.1 Menu principal ===
+        ==========================
+*/
+@media (max-height: 500px) {
+  .menu{
+    overflow: scroll;
+  }
+}
+.esc{
+  position: fixed;
+  background-color: #003A91;
+  width: 250px;
+  height: 100%;
+  top: 86px;
+  left: 0;
+  bottom: 35px;
+  margin-left: -250px;
+  padding: 0;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+li{
+  list-style-type: none;
+}
+.menu-container{
+  margin-top: 10px;
   height: auto;
-  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+}
+.menu-container a{
+  display: block;
+  margin: 0;
+  line-height: 40px;
+  color: #eee;
+  padding-left: 20px;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.menu-container a:hover{
+  background-color: #eee;
+  color: #003A91;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.menu-anchor{
+  width:32px;
+  height:32px;
+  padding: 24px 0;
   cursor: pointer;
 }
-.menu-content:after {
+.menu:after {
   content: '';
   position: absolute;
   width: 0;
@@ -125,17 +178,18 @@ nav ul{
   border-width: 15px;
   border-style: solid;
   border-color: transparent transparent #003A91 transparent;
-  left: 60px;
+  left: 70px;
   bottom: 100%;
   margin-left: -15px;
 }
-.menu-content{
+.active{
+  border-left: solid 4px #eee;
+}
+.menu{
   position: fixed;
   background-color: #003A91;
   width: 250px;
-  max-height: 0;
-  overflow: hidden;
-  top: 80px;
+  top: 86px;
   left: 0;
   bottom: 35px;
   margin: 0;
@@ -144,50 +198,26 @@ nav ul{
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
-    -webkit-box-shadow: 1px 5px 8px #aaa;
-    -moz-box-shadow: 1px 5px 8px #aaa;
-    box-shadow: 1px 5px 8px #aaa;
+  -webkit-box-shadow: 1px 5px 8px #aaa;
+  -moz-box-shadow: 1px 5px 8px #aaa;
+  -o-box-shadow: 1px 5px 8px #aaa;
+  box-shadow: 1px 5px 8px #aaa;
 }
-.menu-content ul li{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.menu-content ul li a{
-  padding: 5px 15px;
-  margin: 0;
-  display: inline-block;
-  width: 220px;
-  max-height: 30px;
-  color: #eee;
-  text-transform: uppercase;
-  font-size: 20px;
-}
-.menu-content ul li a:hover, .menu-content ul li a:focus{
-  background-color: #eee;
-  color: #003A91;
-}
-.active a{
-  border-left: 4px solid #eee;
-}
-.menu-anchor:focus ~ .menu-content{
-  max-height: 100%;
-}
-@media (max-height: 500px) {
-  .menu-content{
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
-}
-.user-img-circle{
+/*
+        ==============================
+        === 2.2 Painel de controle ===
+        ==============================
+*/
+.user-anchor{
   cursor: pointer;
-  margin: 13px;
+  margin: 13px 0;
   border-radius: 50%;
   border: 2px solid #fff;
   width: 50px;
   height: 50px;
   -webkit-box-shadow: 0 0 4px #aaa;
   -moz-box-shadow: 0 0 4px #aaa;
+  -o-box-shadow: 0 0 4px #aaa;
   box-shadow: 0 0 4px #aaa;
 }
 /*
@@ -288,6 +318,7 @@ nav ul{
   height: auto;
   -webkit-box-shadow: 0px -1px 8px #aaa;
   -moz-box-shadow: 0px -1px 8px #aaa;
+  -o-box-shadow: 0px -1px 8px #aaa;
   box-shadow: 0px -1px 8px #aaa;
   font-size: 16px;
   line-height: 35px;
@@ -312,6 +343,7 @@ nav ul{
   padding: 30px 30px;
   -webkit-box-shadow: 0px 1px 8px #aaa;
   -moz-box-shadow: 0px 1px 8px #aaa;
+  -o-box-shadow: 0px 1px 8px #aaa;
   box-shadow: 0px 1px 8px #aaa;
 }
 @media (min-width: 768px) {
@@ -324,6 +356,6 @@ nav ul{
 }
 /*
         =======================================================================
-        =====        VESTIBO ALPHA === Stylesheet Mestre === LAMPI        =====
+        =====        VESTIBO ALPHA === Global Stylesheet === LAMPI        =====
         =======================================================================
 */
