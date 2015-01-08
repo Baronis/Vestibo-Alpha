@@ -53,28 +53,32 @@
 					<div class="blue-container">
 						<div class="content">
 							<h1>Funcionalidades</h1>
-			            	<p class="lead">Realize simulados, aprenda com as melhores video-aulas da internet e receba questões diariamente de acordo com as sua necessidade, tudo isso de forma simples e prática para que você tenha o melhor desempenho nos Vestibulares.</p>
+			            	<p class="lead">O Vestibo é uma Plataforma que funciona de acordo com sua dificuldade, assim o material certo sempre será apresentado na hora certa a você...</p>
 	        				<div class="co">
-	    						<img class="img-circle" src="img/teste.png" alt="1">
+	    						<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
 	    						<h2>Treine</h2>
-									<p>Realize simulados, aprenda com as melhores video-aulas da internet e receba questões diariamente de acordo com as sua necessidade, tudo isso de forma simples e prática para que você tenha o melhor desempenho nos Vestibulares.</p>
+									<p>Com o Vestibo você pode estudar de uma forma prática e eficiente, com os melhores conteúdos didáticos da internet.</p>
 	    					</div>
 	        				<div class="co">
-	    						<img class="img-circle" src="img/teste2.png" alt="1">
-	    						<h2>Estude</h2>
-									<p>Realize simulados, aprenda com as melhores video-aulas da internet e receba questões diariamente de acordo com as sua necessidade, tudo isso de forma simples e prática para que você tenha o melhor desempenho nos Vestibulares.</p>
+	    						<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+	    						<h2>Divirta-se</h2>
+									<p>Com a plataforma você também pode se reunir com seus amigos via Facebook e compartilhar seu progresso com eles.</p>
 	    					</div>
 	        				<div class="co">
-	    						<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="1">
-	    						<h2>Desafie</h2>
-									<p>Realize simulados, aprenda com as melhores video-aulas da internet e receba questões diariamente de acordo com as sua necessidade, tudo isso de forma simples e prática para que você tenha o melhor desempenho nos Vestibulares.</p>
+	    						<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+	    						<h2>Aproveite</h2>
+	    						<p> Cadastre-se já e comece a estudar firme para os vestibulares e Enem, tudo isso acompanhado de seus amigos.</p>
 	    					</div>
 		            	</div>
 					</div>
 					<div class="simple-container">
 						<div class="content">
-							<h1>Vestibo, um novo jeito de se preparar para o vestibular</h1>
-			            	<p class="lead">Realize simulados, aprenda com as melhores video-aulas da internet e receba questões diariamente de acordo com as sua necessidade, tudo isso de forma simples e prática para que você tenha o melhor desempenho nos Vestibulares.</p>
+							<h1>O Vestibo oferece tudo isso de forma gratuita e dinâmica a você</h1>
+			            	<p class="lead">Cadastre-se já!</p>
+			            	<div class="cad-group">
+			            		<a href="cadastrar" class="btn btn-lg btn-default">Cadastrar-se</a>
+			            		<a href="entrar?fb=true" class="btn btn-lg btn-default">Entrar com o Facebook</a>
+							</div>
 						</div>
 					</div>
 					<div class="footer">

@@ -16,6 +16,7 @@
 		<title>Vestibo</title>
 	</head>
 	<body>
+	
 		<div class="page">
 			<div class="header">
 				<div class="header-left">
@@ -23,20 +24,26 @@
 					<a href="http://vestibo.com.br/" class="header-item"><img src="../img/nav-logo-blue.png" class="logo" alt="Vestibo"/></a>
 				</div>
 				<div class="header-right">
-					<?php //echo ('<a>'.$_SESSION['user_name'].'</a>'); ?>
 					<a onclick="open_close_user_menu()" href="#" class="header-item"><img class="user-anchor" src="../img/user-image.png" alt="1"/></a>
 				</div>
 			</div>
-			<?php require_once("pvt/menu.php"); ?>
+			<!--<?php //require_once("pvt/menu.php"); ?>-->
+			<div id="u" class="user-esc">
+				<div class="user-container">
+					<p><!--<?php //echo ('<a>'.$_SESSION['user_name'].'</a>'); ?>--></p>
+					<a href="?page=4">Perfil</a>
+					<a href="?page=5">Sair</a>
+				</div>
+			</div>
 			<div class="body">
-				<?php switch ($_GET['page']) {
+				<!--<?php /*switch ($_GET['page']) {
 						case '0': require_once("pvt/0.php"); break;
 						case '1': require_once("pvt/1.php"); break;
 						case '2': require_once("pvt/2.php"); break;
 						case '3': require_once("pvt/3.php"); break;
 						case '4': require_once("pvt/4.php"); break;
 						case '5': require_once("pvt/5.php"); break;
-						default: require_once("pvt/0.php"); break;} ?>
+						default: require_once("pvt/0.php"); break;}*/ ?>-->
 				<div class="simple-container">
 					<div class="content">
 						<div class="q-box">

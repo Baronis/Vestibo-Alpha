@@ -1,6 +1,6 @@
 /*
         VESTIBO ALPHA === Global Stylesheet === LAMPI
-        Última revisão: 06/01/2014
+        Última revisão: 08/01/2014 (Matheus Baroni)
 
 >>>     Indice:
         
@@ -220,6 +220,73 @@ li{
   -o-box-shadow: 0 0 4px #aaa;
   box-shadow: 0 0 4px #aaa;
 }
+.user-esc{
+  position: fixed;
+  background-color: #fff;
+  width: 150px;
+  height: 100%;
+  top: 86px;
+  right: 44px;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.4em;
+  font-family: sans-serif, Arial;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.user-menu{
+  position: fixed;
+  background-color: #fff;
+  min-width: 150px;
+  max-width: 300px;
+  top: 86px;
+  right: 44px;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+  -webkit-box-shadow: 1px 5px 8px #aaa;
+  -moz-box-shadow: 1px 5px 8px #aaa;
+  -o-box-shadow: 1px 5px 8px #aaa;
+  box-shadow: 1px 5px 8px #aaa;
+}
+.user-menu:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-width: 15px;
+  border-style: solid;
+  border-color: transparent transparent #fff transparent;
+  right: 22px;
+  bottom: 100%;
+  margin-left: 15px;
+}
+.user-container{
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.user-container p{
+  color: #000;
+  padding: 5px 10px;
+}
+.user-container a{
+  display: inline-block;
+  width: 100%;
+  padding: 5px 10px;
+  margin: 0;
+}
+.user-container a:hover{
+  color: #fff;
+  background-color: #003A91;
+}
 /*
         ==========================
         === 3. Corpo da página ===
@@ -301,6 +368,10 @@ li{
   padding: 50px 15px;
   margin-right: auto;
   margin-left: auto;
+}
+.cad-group{
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
 /*
         =================
