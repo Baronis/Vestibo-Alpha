@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="s1.css" rel="stylesheet">
+	<link rel="icon" href="icon.ico">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:300,400' rel='stylesheet' type='text/css'>
+	<meta charset="utf-8">
+	<title>Vestibo</title>
+</head>
+<body>
+	<script>
+	  window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '297272677138823',
+	      xfbml      : true,
+	      version    : 'v2.2'
+	    });
+	  };
+	  (function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "//connect.facebook.net/pt_BR/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+	</script>
+	<div class="like">
+		<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+	</div>
+	<div class="faixa">
+		<div class="x">
+			<div class="p"></div><div class="p"></div><div class="p"></div><div class="p"></div><div class="p"></div>
+		</div>
+	</div>
+	<div class="placa">
+		<img src="logo.png" class="logo">
+		<div class="texto">
+			<p>Bem vindo ao <a href="http://vestibo.com.br/">vestibo.com.br</a>!<br>
+			No momento, o site encontra-se em construção.<br>Aguarde novidades...</p>
+		</div>
+	</div>
+</body>
+</html>
