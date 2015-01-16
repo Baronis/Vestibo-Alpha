@@ -1,3 +1,9 @@
+<?php
+/* Inserir aqui código que verifica se o usuário já está logado, pela SESSION e pelo COOKIE:
+- Se sim, redireciona para in/index?page=0
+- Se não, apresente esta página. 
+*/
+?>
 <!DOCTYPE html>
 <html>
 	<head>

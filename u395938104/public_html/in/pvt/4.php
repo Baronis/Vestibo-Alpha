@@ -1,3 +1,1 @@
-<?php
- echo "<br><h1>PAGE = ".$_GET['page']."</h1>";
-?>
+<br><p class="lead">PAGE = <?php echo $_GET['page']; ?> </p>
