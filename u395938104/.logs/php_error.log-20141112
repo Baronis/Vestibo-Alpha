@@ -1,6 +1,0 @@
-[10-Nov-2014 16:04:33 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'10.1.2.12' (using password: YES) in /home/u395938104/public_html/accounts/classes/Registration.php on line 55
-[10-Nov-2014 16:04:33 UTC] PHP Warning:  mysqli::set_charset(): Couldn't fetch mysqli in /home/u395938104/public_html/accounts/classes/Registration.php on line 58
-[10-Nov-2014 16:04:33 UTC] PHP Warning:  Registration::registerNewUser(): Couldn't fetch mysqli in /home/u395938104/public_html/accounts/classes/Registration.php on line 59
-[10-Nov-2014 16:04:46 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'10.1.2.12' (using password: YES) in /home/u395938104/public_html/accounts/classes/Login.php on line 53
-[10-Nov-2014 16:04:46 UTC] PHP Warning:  mysqli::set_charset(): Couldn't fetch mysqli in /home/u395938104/public_html/accounts/classes/Login.php on line 56
-[10-Nov-2014 16:04:46 UTC] PHP Warning:  Login::dologinWithPostData(): Couldn't fetch mysqli in /home/u395938104/public_html/accounts/classes/Login.php on line 57
