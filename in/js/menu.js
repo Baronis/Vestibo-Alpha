@@ -2,19 +2,19 @@
         VESTIBO ALPHA === Menu Switch (Javascript) === LAMPI
         Última revisão: 15/01/2014 (Matheus Baroni)
 */
-function toggle_menu(){
+function toggle_menu() {
 	classe = document.getElementById('m').className;
-	if(classe == 'esc'){
+	if (classe == 'esc') {
     	document.getElementById('m').className = 'menu';
-	}else{
+	} else {
     	document.getElementById('m').className = 'esc';
 	}
 }
-function toggle_user_menu(){
+function toggle_user_menu() {
 	classe = document.getElementById('u').className;
-	if(classe == 'user-esc'){
+	if (classe == 'user-esc') {
     	document.getElementById('u').className = 'user-menu';
-	}else{
+	} else {
     	document.getElementById('u').className = 'user-esc';
 	}
 }
