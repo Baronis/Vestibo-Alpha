@@ -3,12 +3,11 @@
         Última revisão: 06/01/2014
 */
 .c{
-  padding: 15px 0;
+  padding: 10px 0;
 }
 .btn {
   display: inline-block;
   padding: 6px 12px;
-  margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;
   line-height: 1.42857143;
