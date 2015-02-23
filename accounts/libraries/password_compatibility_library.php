@@ -1,5 +1,4 @@
 <?php
-// Biblioteca de checagem de senha, encontrada na pagina opensource...
 /**
  * A Compatibility library with PHP 5.5's simplified password hashing API.
  *
@@ -218,6 +217,3 @@ if (!defined('PASSWORD_DEFAULT')) {
         return $status === 0;
     }
 }
-
-
-
