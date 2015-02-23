@@ -426,6 +426,24 @@ li{
     left: 50%;
   }
 }
+.cadastro-container{
+  background-color: #E5E5E5;
+  margin-top: 50px;
+  padding: 30px 35px;
+  -webkit-box-shadow: 0px 1px 8px #aaa;
+  -moz-box-shadow: 0px 1px 8px #aaa;
+  -o-box-shadow: 0px 1px 8px #aaa;
+  box-shadow: 0px 1px 8px #aaa;
+
+}
+@media (min-width: 768px) {
+  .cadastro-container{
+    position: absolute;
+    width: 500px;
+    margin-left: -250px;
+    left: 48%;
+  }
+}
 /*
         =================
         === 7. Extras ===

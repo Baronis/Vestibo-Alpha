@@ -1,4 +1,4 @@
-<meta http-equiv="refresh" content="1;url=../entrar?erro=true">
+<meta http-equiv="refresh" content="1;url=../entrar.html">
 <?php
 // mostra os erros
 if (isset($login)) {

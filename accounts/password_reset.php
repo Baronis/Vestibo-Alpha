@@ -17,12 +17,19 @@ require_once('translations/pt_BR.php');
 // include the PHPMailer library
 require_once('libraries/PHPMailer.php');
 
-// load the registration class
-require_once('classes/Registration.php');
+// load the login class
+require_once('classes/Login.php');
 
-// create the registration object. when this object is created, it will do all registration stuff automatically
-// so this single line handles the entire registration process.
-$registration = new Registration();
+// create a login object. when this object is created, it will do all login/logout stuff automatically
+// so this single line handles the entire login process.
+$login = new Login();
 
-// showing the register view (with the registration form, and messages/errors)
-include("views/register.php");
+// the user has just successfully entered a new password
+// so we show the index page = the login page
+if ($login->passwordResetWasSuccessful() == true && $login->passwordResetLinkIsValid() != true) {
+    include("views/not_logged_in.php");
+
+} else {
+    // show the request-a-password-reset or type-your-new-password form
+    include("views/password_reset.php");
+}

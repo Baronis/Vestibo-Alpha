@@ -27,24 +27,37 @@
 			</div>
 			<div class="body">
 				<form method="post" action="accounts/register.php" name="registerform">
-					<div class="login-container">
+					<div class="cadastro-container">
 						<h1 style="color:#003A91;">Cadastro</h1>
-						<div class="form-group">
+							<!--nome de usuario-->
 							<label for="login_input_username">Nome de Usuário</label>
 		          			<input type="text" class="form-control" id="login_input_username" pattern="[a-zA-Z0-9]{2,64}" placeholder="Digite aqui o nome que deseja, para entrar no vestibo..." name="user_name" required />
-		        		</div>
-						<div class="form-group">
+		          			<!--nome e sobrenome-->
+							<label for="login_input_nome">Nome</label>
+		          			<input type="text" class="form-control" id="login_input_nome" pattern="[a-zA-Z0-9]{2,64}" placeholder="Digite aqui seu nome aqui." name="user_nome" required />
+		          			<label for="login_input_usersobnome">Sobrenome</label>
+		          			<input type="text" class="form-control" id="login_input_sobnome" pattern="[a-zA-Z0-9]{2,64}" placeholder="Digite aqui seu Sobrenome aqui." name="user_sobnome" required />
+		          			<!--Data Nasc--><!--MUDARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR-->
+		          			<label for="login_input_user_nasc">Data de nascimento</label>
+		          			<input type="text" class="form-control" id="login_input_user_nasc" placeholder="exemplo 25,02,2010" name="user_nasc" required />
+		          			<!--email-->
 							<label for="login_input_email">Email</label>
 		          			<input type="email" class="form-control" id="login_input_email" placeholder="exemplo@exemplo.com" name="user_email" required />
-		        		</div>
-		        		<div class="form-group">
+		          			<!--senha-->
 		        			<label for="login_input_password_repeat">Senha</label>
 		          			<input type="password" class="form-control" id="login_input_password_new" placeholder="Senha" name="user_password_new" pattern=".{6,}" required autocomplete="off" />
 		          			<input type="password" class="form-control" id="login_input_password_repeat" placeholder="Confirme sua senha" name="user_password_repeat" pattern=".{6,}" required autocomplete="off" />
-		        		</div>
-		        		<div class="g-recaptcha" data-sitekey="6Lejtv4SAAAAAH-kSxHRvvfiy883m1EB_IbKvEcv"></div>
+		          			<br>
+		        		<!--<div class="g-recaptcha" data-sitekey="6Lejtv4SAAAAAH-kSxHRvvfiy883m1EB_IbKvEcv"></div>-->
+		        		<!--captcha-->
+    					<center><img src="accounts/tools/showCaptcha.php" alt="captcha" /></center>
+    					<label><?php echo WORDING_REGISTRATION_CAPTCHA; ?></label>
+    					<label>Digite os caracteres abaixo</label>
+    					<input class="form-control" type="text" name="captcha" placeholder="Digite aqui os caracteres acima..." required />
+    					<br>
+    					<!--separadorrr-->
 		        		<input class="btn btn-default" type="submit" name="register" value="Cadastrar"/>
-		        		<a href="termos.html" style="float:right;padding-right:12px;padding-top:8px;">Termos de uso</a>
+		        		<a class="btn btn-default" href="termos.html" style="float:right;padding-right:12px;padding-top:8px;">Termos de uso</a>
 					</div>
 				</form>
 			</div>
