@@ -10,7 +10,7 @@ textarea.form-control {
   padding-right: 30px;
 }
 .form-control {
-  display: block;
+  display: inline-block;
   width: 100%;
   height: auto;
   padding: 6px 12px;
@@ -83,6 +83,12 @@ textarea.form-control {
 .checkbox-inline + .checkbox-inline {
   margin-top: 0;
   margin-left: 10px;
+}
+.piece{
+  width: auto;
+}
+.form-group.half {
+  padding-right: 0;
 }
 /*
         ======================================================================

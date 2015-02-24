@@ -139,6 +139,40 @@ p {
     width: 44%;
   }
 }
+.login-container{
+  margin-top: 85px;
+  padding: 30px 30px;
+}
+@media (min-width: 768px) {
+  .login-container{
+    position: absolute;
+    width: 500px;
+    margin-left: -250px;
+    left: 50%;
+  }
+}
+.box-footer{
+  padding-top: 30px;
+  width: 100%;
+  height: auto;
+}
+.box-footer .left{
+  float: left;
+}
+.box-footer .right{
+  float: right;
+}
+.cadastro-container{
+  position: absolute;
+  width: 400px;
+  margin-left: -200px;
+  left: 50%;
+}
+@media (min-width: 768px) {
+  .cadastro-container{
+    padding-top: 40px;
+  }
+}
 /*
         ========================================================================
         =====        VESTIBO ALPHA === Classic Stylesheet === LAMPI        =====
