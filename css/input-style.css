@@ -85,7 +85,7 @@ textarea.form-control {
   margin-left: 10px;
 }
 .piece{
-  width: auto;
+  width: 44% !important;
 }
 .form-group.half {
   padding-right: 0;

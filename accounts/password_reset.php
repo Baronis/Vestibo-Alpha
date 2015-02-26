@@ -31,5 +31,5 @@ if ($login->passwordResetWasSuccessful() == true && $login->passwordResetLinkIsV
 
 } else {
     // show the request-a-password-reset or type-your-new-password form
-    include("views/password_reset.php");
+    include("passwordreset.php");
 }

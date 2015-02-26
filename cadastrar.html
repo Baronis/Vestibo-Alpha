@@ -12,6 +12,7 @@
 		<link href="css/input-style.css" rel="stylesheet">
 		<script src='https://www.google.com/recaptcha/api.js'></script>
 		<title>Vestibo: Cadastrar</title>
+		<script src="https://www.google.com/recaptcha/api.js"></script>
 	</head>
 	<body>
 		<div class="page">
@@ -31,9 +32,9 @@
 	          				<input type="text" class="form-control piece" id="login_input_nome" pattern="[a-zA-Z0-9]{2,64}" placeholder="Nome" name="user_nome" required />
 	          				<input type="text" class="form-control piece" id="login_input_sobnome" pattern="[a-zA-Z0-9]{2,64}" placeholder="Sobrenome" name="user_sobnome" required />
 	          			</div>
-	          			<!--Data Nasc--><!--MUDARRRRRRRRRR-->
+	          			<!--Data Nasc-->
 	          			<div class="form-group">
-	          				<input type="text" class="form-control" id="login_input_user_nasc" placeholder="Data de nasc. (exemplo 25,02,1997)" name="user_nasc" required />
+	          				<input type="date" class="form-control" id="login_input_user_nasc" placeholder="Data de nascimento" name="user_nasc" required />
 	          			</div>
 	          			<!--email-->
 	          			<div class="form-group">
@@ -44,14 +45,11 @@
 	          				<input type="password" class="form-control piece" id="login_input_password_new" placeholder="Senha" name="user_password_new" pattern=".{6,}" required autocomplete="off" />
 	          				<input type="password" class="form-control piece" id="login_input_password_repeat" placeholder="Redigite sua senha" name="user_password_repeat" pattern=".{6,}" required autocomplete="off" />
 	          			</div>
-		        		<!--<div class="g-recaptcha" data-sitekey="6Lejtv4SAAAAAH-kSxHRvvfiy883m1EB_IbKvEcv"></div>-->
-		        		<!--captcha-->
     					<div class="form-group">
-    					<center><img src="accounts/tools/showCaptcha.php" alt="captcha" /></center>
-    					<label><?php echo WORDING_REGISTRATION_CAPTCHA; ?></label>
-    					<input class="form-control" type="text" name="captcha" placeholder="Digite os caracteres acima" required />
+    						<img src="accounts/tools/showCaptcha.php" alt="!!!" />
+    						<label><?php echo WORDING_REGISTRATION_CAPTCHA; ?></label>
+    						<input class="form-control" type="text" name="captcha" placeholder="Digite os caracteres acima" required />
     					</div>
-    					<!--separadorrr-->
 		        		<input class="btn btn-default" type="submit" name="register" value="Cadastrar"/>
 		        		<div class="box-footer">
 		        			<div class="left">
