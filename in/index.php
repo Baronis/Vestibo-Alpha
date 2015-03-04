@@ -17,7 +17,6 @@
 		<title>Vestibo</title>
 	</head>
 	<body>
-	
 		<div class="page">
 			<div class="header">
 				<div class="header-left">
@@ -45,52 +44,14 @@
 						case '4': require_once("pvt/4.php"); break;
 						case '5': require_once("pvt/5.php"); break;
 						default: require_once("pvt/0.php"); break;} ?>
-				<div class="simple-container">
-					<div class="content">
-						<div class="q-box">
-							<div class="q-top-box">
-								<div class="top">
-									<p>Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box </p>	
-								</div>
-							</div>
-							<div class="q-alt-box">
-								<div class="alt">
-									<p>Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box </p>	
-								</div>
-							</div>
-							<div class="q-top-box">
-								<div class="top">
-									<p>Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box </p>	
-								</div>
-							</div>
-						</div>
-						<div class="q-box">
-							<div class="q-top-box">
-								<div class="top">
-									<p>UNESP - 2014 (01)</p><hr>
-									<p>Esta é uma questão teste. Estão corretas:</p>	
-								</div>
-							</div>
-							<div class="q-alt-box">
-								<div class="alt">
-									<input type="radio" id="a1" name="01"></input><label for="a1">Apenas I e IV estão corretas.</label>
-									<input type="radio" id="a2" name="01"></input><label for="a2">Apenas I e V estão corretas.</label>
-									<input type="radio" id="a3" name="01"></input><label for="a3">Apenas I e II estão corretas.</label>
-									<input type="radio" id="a4" name="01"></input><label for="a4">Apenas I, IV e V estão corretas.</label>
-									<input type="radio" id="a5" name="01"></input><label for="a5">Todas estão corretas.</label>
-								</div>
-							</div>
-						</div>
-					</div>
+			</div>
+			<div class="footer">
+				<div class="f-left">
+					Vestibo &copy; 2014.
 				</div>
-				<div class="footer">
-					<div class="f-left">
-						Vestibo &copy; 2014.
-					</div>
-					<div class="f-right">
-						<a href="http://vestibo.com.br/termos">Termos e condições</a>
-						<a href="http://vestibo.com.br/quem-somos">Quem somos</a>
-					</div>
+				<div class="f-right">
+					<a href="http://vestibo.com.br/termos">Termos e condições</a>
+					<a href="http://vestibo.com.br/quem-somos">Quem somos</a>
 				</div>
 			</div>
 		</div>

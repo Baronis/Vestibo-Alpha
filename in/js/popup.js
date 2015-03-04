@@ -7,7 +7,7 @@ function open_close_popup() {
     if (popup.style.display == 'none') {
         popup.style.display = 'block';
     }
-    if (popup.style.display == 'block') {
+    if (!popup.style.display || popup.style.display == 'block') {
         popup.style.display = 'none';
     }
 }
