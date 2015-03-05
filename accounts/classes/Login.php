@@ -1,72 +1,31 @@
 <?php
-
 /**
- * handles the user login/logout/session
+ * User login/logout/session
  * @author Panique
  * @link http://www.php-login.net
  * @link https://github.com/panique/php-login-advanced/
  * @license http://opensource.org/licenses/MIT MIT License
  */
+
 class Login
 {
-    /**
-     * @var object $db_connection The database connection
-     */
     private $db_connection = null;
-    /**
-     * @var int $user_id The user's id
-     */
     private $user_id = null;
-    /**
-     * @var string $user_name The user's name
-     */
     private $user_name = "";
-    /**
-     * @var string $user_email The user's mail
-     */
     private $user_email = "";
-    /**
-     * @var boolean $user_is_logged_in The user's login status
-     */
     private $user_is_logged_in = false;
-    /**
-     * @var string $user_gravatar_image_url The user's gravatar profile pic url (or a default one)
-     */
     public $user_gravatar_image_url = "";
-    /**
-     * @var string $user_gravatar_image_tag The user's gravatar profile pic url with <img ... /> around
-     */
     public $user_gravatar_image_tag = "";
-    /**
-     * @var boolean $password_reset_link_is_valid Marker for view handling
-     */
     private $password_reset_link_is_valid  = false;
-    /**
-     * @var boolean $password_reset_was_successful Marker for view handling
-     */
     private $password_reset_was_successful = false;
-    /**
-     * @var array $errors Collection of error messages
-     */
     public $errors = array();
-    /**
-     * @var array $messages Collection of success / neutral messages
-     */
     public $messages = array();
 
-    /**
-     * the function "__construct()" automatically starts whenever an object of this class is created,
-     * you know, when you do "$login = new Login();"
-     */
     public function __construct()
     {
-        // create/read session
         session_start();
 
-        // TODO: organize this stuff better and make the constructor very small
-        // TODO: unite Login and Registration classes ?
-
-        // check the possible login actions:
+        // possible login actions:
         // 1. logout (happen when user clicks logout button)
         // 2. login via session data (happens each time user opens a page on your php project AFTER he has successfully logged in via the login form)
         // 3. login via cookie
@@ -162,8 +121,8 @@ class Login
         // if database connection opened
         if ($this->databaseConnection()) {
             // database query, getting all the info of the selected user
-            $query_user = $this->db_connection->prepare('SELECT * FROM users WHERE user_name = :user_name');
-            $query_user->bindValue(':user_name', $user_name, PDO::PARAM_STR);
+            $query_user = $this->db_connection->prepare('SELECT * FROM cad_users WHERE cad_nick = :cad_nick');
+            $query_user->bindValue(':cad_nick', $user_name, PDO::PARAM_STR);
             $query_user->execute();
             // get result row (as an object)
             return $query_user->fetchObject();
@@ -201,16 +160,16 @@ class Login
                 // cookie looks good, try to select corresponding user
                 if ($this->databaseConnection()) {
                     // get real token from database (and all other data)
-                    $sth = $this->db_connection->prepare("SELECT user_id, user_name, user_email FROM users WHERE user_id = :user_id
-                                                      AND user_rememberme_token = :user_rememberme_token AND user_rememberme_token IS NOT NULL");
-                    $sth->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-                    $sth->bindValue(':user_rememberme_token', $token, PDO::PARAM_STR);
+                    $sth = $this->db_connection->prepare("  SELECT cad_id, cad_nick, cad_email FROM cad_users WHERE cad_id = :cad_id
+                                                            AND cad_rememberme_token = :cad_rememberme_token AND cad_rememberme_token IS NOT NULL");
+                    $sth->bindValue(':cad_id', $user_id, PDO::PARAM_INT);
+                    $sth->bindValue(':cad_rememberme_token', $token, PDO::PARAM_STR);
                     $sth->execute();
                     // get result row (as an object)
                     $result_row = $sth->fetchObject();
 
                     if (isset($result_row->user_id)) {
-                        // write user data into PHP SESSION [a file on your server]
+                        // write user data into php session
                         $_SESSION['user_id'] = $result_row->user_id;
                         $_SESSION['user_name'] = $result_row->user_name;
                         $_SESSION['user_email'] = $result_row->user_email;
@@ -228,19 +187,13 @@ class Login
                     }
                 }
             }
-            // A cookie has been used but is not valid... we delete it
+            // A cookie has been used but is not valid: delete it
             $this->deleteRememberMeCookie();
             $this->errors[] = MESSAGE_COOKIE_INVALID;
         }
         return false;
     }
 
-    /**
-     * Logs in with the data provided in $_POST, coming from the login form
-     * @param $user_name
-     * @param $user_password
-     * @param $user_rememberme
-     */
     private function loginWithPostData($user_name, $user_password, $user_rememberme)
     {
         if (empty($user_name)) {
@@ -259,8 +212,8 @@ class Login
             // if user has typed a valid email address, we try to identify him with his user_email
             } else if ($this->databaseConnection()) {
                 // database query, getting all the info of the selected user
-                $query_user = $this->db_connection->prepare('SELECT * FROM users WHERE user_email = :user_email');
-                $query_user->bindValue(':user_email', trim($user_name), PDO::PARAM_STR);
+                $query_user = $this->db_connection->prepare('SELECT * FROM cad_users WHERE cad_email = :cad_email');
+                $query_user->bindValue(':cad_email', trim($user_name), PDO::PARAM_STR);
                 $query_user->execute();
                 // get result row (as an object)
                 $result_row = $query_user->fetchObject();
@@ -276,10 +229,10 @@ class Login
             // using PHP 5.5's password_verify() function to check if the provided passwords fits to the hash of that user's password
             } else if (! password_verify($user_password, $result_row->user_password_hash)) {
                 // increment the failed login counter for that user
-                $sth = $this->db_connection->prepare('UPDATE users '
-                        . 'SET user_failed_logins = user_failed_logins+1, user_last_failed_login = :user_last_failed_login '
-                        . 'WHERE user_name = :user_name OR user_email = :user_name');
-                $sth->execute(array(':user_name' => $user_name, ':user_last_failed_login' => time()));
+                $sth = $this->db_connection->prepare('UPDATE cad_users '
+                        . 'SET cad_failed_logins = cad_failed_logins+1, cad_last_failed_login = :cad_last_failed_login '
+                        . 'WHERE cad_nick = :cad_nick OR cad_email = :cad_nick');
+                $sth->execute(array(':cad_name' => $user_name, ':cad_last_failed_login' => time()));
 
                 $this->errors[] = MESSAGE_PASSWORD_WRONG;
             // has the user activated their account with the verification email
@@ -299,10 +252,10 @@ class Login
                 $this->user_is_logged_in = true;
 
                 // reset the failed login counter for that user
-                $sth = $this->db_connection->prepare('UPDATE users '
-                        . 'SET user_failed_logins = 0, user_last_failed_login = NULL '
-                        . 'WHERE user_id = :user_id AND user_failed_logins != 0');
-                $sth->execute(array(':user_id' => $result_row->user_id));
+                $sth = $this->db_connection->prepare('UPDATE cad_users '
+                        . 'SET cad_failed_logins = 0, cad_last_failed_login = NULL '
+                        . 'WHERE cad_id = :cad_id AND cad_failed_logins != 0');
+                $sth->execute(array(':cad_id' => $result_row->user_id));
 
                 // if user has check the "remember me" checkbox, then generate token and write cookie
                 if (isset($user_rememberme)) {
@@ -323,7 +276,6 @@ class Login
                         // calculate new hash with new cost factor
                         $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT, array('cost' => HASH_COST_FACTOR));
 
-                        // TODO: this should be put into another method !?
                         $query_update = $this->db_connection->prepare('UPDATE users SET user_password_hash = :user_password_hash WHERE user_id = :user_id');
                         $query_update->bindValue(':user_password_hash', $user_password_hash, PDO::PARAM_STR);
                         $query_update->bindValue(':user_id', $result_row->user_id, PDO::PARAM_INT);
@@ -339,18 +291,16 @@ class Login
             }
         }
     }
-
-    /**
-     * Create all data needed for remember me cookie connection on client and server side
-     */
+    
+    // All data needed for remember me cookie connection on client and server side
     private function newRememberMeCookie()
     {
-        // if database connection opened
+        // if db connection opened
         if ($this->databaseConnection()) {
-            // generate 64 char random string and store it in current user data
+            // generate 64 char random string
             $random_token_string = hash('sha256', mt_rand());
-            $sth = $this->db_connection->prepare("UPDATE users SET user_rememberme_token = :user_rememberme_token WHERE user_id = :user_id");
-            $sth->execute(array(':user_rememberme_token' => $random_token_string, ':user_id' => $_SESSION['user_id']));
+            $sth = $this->db_connection->prepare("UPDATE cad_users SET cad_rememberme_token = :cad_rememberme_token WHERE cad_id = :cad_id");
+            $sth->execute(array(':cad_rememberme_token' => $random_token_string, ':cad_id' => $_SESSION['cad_id']));
 
             // generate cookie string that consists of userid, randomstring and combined hash of both
             $cookie_string_first_part = $_SESSION['user_id'] . ':' . $random_token_string;
@@ -362,16 +312,14 @@ class Login
         }
     }
 
-    /**
-     * Delete all data needed for remember me cookie connection on client and server side
-     */
+     // Delete all data needed for remember me cookie connection on client and server side
     private function deleteRememberMeCookie()
     {
-        // if database connection opened
+        // if db connection opened
         if ($this->databaseConnection()) {
             // Reset rememberme token
-            $sth = $this->db_connection->prepare("UPDATE users SET user_rememberme_token = NULL WHERE user_id = :user_id");
-            $sth->execute(array(':user_id' => $_SESSION['user_id']));
+            $sth = $this->db_connection->prepare("UPDATE cad_users SET cad_rememberme_token = NULL WHERE cad_id = :cad_id");
+            $sth->execute(array(':cad_id' => $_SESSION['user_id']));
         }
 
         // set the rememberme-cookie to ten years ago (3600sec * 365 days * 10).
@@ -380,32 +328,21 @@ class Login
         setcookie('rememberme', false, time() - (3600 * 3650), '/', COOKIE_DOMAIN);
     }
 
-    /**
-     * Perform the logout, resetting the session
-     */
     public function doLogout()
     {
         $this->deleteRememberMeCookie();
-
         $_SESSION = array();
         session_destroy();
-
         $this->user_is_logged_in = false;
         $this->messages[] = MESSAGE_LOGGED_OUT;
     }
 
-    /**
-     * Simply return the current state of the user's login
-     * @return bool user's login status
-     */
     public function isUserLoggedIn()
     {
         return $this->user_is_logged_in;
     }
 
-    /**
-     * Edit the user's name, provided in the editing form
-     */
+     // Edit the user's name, provided in the editing form
     public function editUserName($user_name)
     {
         // prevent database flooding
@@ -442,9 +379,7 @@ class Login
         }
     }
 
-    /**
-     * Edit the user's email, provided in the editing form
-     */
+    // Edit the user's email, provided in the editing form
     public function editUserEmail($user_email)
     {
         // prevent database flooding
@@ -458,8 +393,8 @@ class Login
 
         } else if ($this->databaseConnection()) {
             // check if new email already exists
-            $query_user = $this->db_connection->prepare('SELECT * FROM users WHERE user_email = :user_email');
-            $query_user->bindValue(':user_email', $user_email, PDO::PARAM_STR);
+            $query_user = $this->db_connection->prepare('SELECT * FROM cad_users WHERE cad_email = :cad_email');
+            $query_user->bindValue(':cad_email', $user_email, PDO::PARAM_STR);
             $query_user->execute();
             // get result row (as an object)
             $result_row = $query_user->fetchObject();
@@ -469,9 +404,9 @@ class Login
                 $this->errors[] = MESSAGE_EMAIL_ALREADY_EXISTS;
             } else {
                 // write users new data into database
-                $query_edit_user_email = $this->db_connection->prepare('UPDATE users SET user_email = :user_email WHERE user_id = :user_id');
-                $query_edit_user_email->bindValue(':user_email', $user_email, PDO::PARAM_STR);
-                $query_edit_user_email->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+                $query_edit_user_email = $this->db_connection->prepare('UPDATE cad_users SET cad_email = :cad_email WHERE cad_id = :cad_id');
+                $query_edit_user_email->bindValue(':cad_email', $user_email, PDO::PARAM_STR);
+                $query_edit_user_email->bindValue(':cad_id', $_SESSION['user_id'], PDO::PARAM_INT);
                 $query_edit_user_email->execute();
 
                 if ($query_edit_user_email->rowCount()) {
@@ -484,9 +419,7 @@ class Login
         }
     }
 
-    /**
-     * Edit the user's password, provided in the editing form
-     */
+    // Edit the user's password, provided in the editing form
     public function editUserPassword($user_password_old, $user_password_new, $user_password_repeat)
     {
         if (empty($user_password_new) || empty($user_password_repeat) || empty($user_password_old)) {
@@ -520,9 +453,9 @@ class Login
                     $user_password_hash = password_hash($user_password_new, PASSWORD_DEFAULT, array('cost' => $hash_cost_factor));
 
                     // write users new hash into database
-                    $query_update = $this->db_connection->prepare('UPDATE users SET user_password_hash = :user_password_hash WHERE user_id = :user_id');
-                    $query_update->bindValue(':user_password_hash', $user_password_hash, PDO::PARAM_STR);
-                    $query_update->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+                    $query_update = $this->db_connection->prepare('UPDATE cad_users SET cad_password_hash = :cad_password_hash WHERE cad_id = :cad_id');
+                    $query_update->bindValue(':cad_password_hash', $user_password_hash, PDO::PARAM_STR);
+                    $query_update->bindValue(':cad_id', $_SESSION['user_id'], PDO::PARAM_INT);
                     $query_update->execute();
 
                     // check if exactly one row was successfully changed:
@@ -540,10 +473,7 @@ class Login
         }
     }
 
-    /**
-     * Sets a random token into the database (that will verify the user when he/she comes back via the link
-     * in the email) and sends the according email.
-     */
+    // Sets a random token into the db (that will verify the user when he comes back via the link in the email) and sends the email.
     public function setPasswordResetDatabaseTokenAndSendMail($user_name)
     {
         $user_name = trim($user_name);
@@ -552,8 +482,7 @@ class Login
             $this->errors[] = MESSAGE_USERNAME_EMPTY;
 
         } else {
-            // generate timestamp (to see when exactly the user (or an attacker) requested the password reset mail)
-            // btw this is an integer ;)
+            // generate timestamp
             $temporary_timestamp = time();
             // generate random hash for email password reset verification (40 char string)
             $user_password_reset_hash = sha1(uniqid(mt_rand(), true));
@@ -564,15 +493,15 @@ class Login
             if (isset($result_row->user_id)) {
 
                 // database query:
-                $query_update = $this->db_connection->prepare('UPDATE users SET user_password_reset_hash = :user_password_reset_hash,
-                                                               user_password_reset_timestamp = :user_password_reset_timestamp
-                                                               WHERE user_name = :user_name');
-                $query_update->bindValue(':user_password_reset_hash', $user_password_reset_hash, PDO::PARAM_STR);
-                $query_update->bindValue(':user_password_reset_timestamp', $temporary_timestamp, PDO::PARAM_INT);
-                $query_update->bindValue(':user_name', $user_name, PDO::PARAM_STR);
+                $query_update = $this->db_connection->prepare('UPDATE cad_users SET cad_password_reset_hash = :cad_password_reset_hash,
+                                                               cad_password_reset_timestamp = :cad_password_reset_timestamp
+                                                               WHERE cad_nick = :cad_nick');
+                $query_update->bindValue(':cad_password_reset_hash', $user_password_reset_hash, PDO::PARAM_STR);
+                $query_update->bindValue(':cad_password_reset_timestamp', $temporary_timestamp, PDO::PARAM_INT);
+                $query_update->bindValue(':cad_nick', $user_name, PDO::PARAM_STR);
                 $query_update->execute();
 
-                // check if exactly one row was successfully changed:
+                // check if exactly one row was changed:
                 if ($query_update->rowCount() == 1) {
                     // send a mail to the user, containing a link with that token hash string
                     $this->sendPasswordResetMail($user_name, $result_row->user_email, $user_password_reset_hash);
@@ -588,21 +517,13 @@ class Login
         return false;
     }
 
-    /**
-     * Sends the password-reset-email.
-     */
+    // Sends the password-reset-email.
     public function sendPasswordResetMail($user_name, $user_email, $user_password_reset_hash)
     {
         $mail = new PHPMailer;
-
-        // please look into the config/config.php for much more info on how to use this!
-        // use SMTP or use mail()
         if (EMAIL_USE_SMTP) {
-            // Set mailer to use SMTP
             $mail->IsSMTP();
-            //useful for debugging, shows full SMTP errors
-            //$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
-            // Enable SMTP authentication
+            //useful for debugging: $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
             $mail->SMTPAuth = EMAIL_SMTP_AUTH;
             // Enable encryption, usually SSL/TLS
             if (defined(EMAIL_SMTP_ENCRYPTION)) {
@@ -634,9 +555,7 @@ class Login
         }
     }
 
-    /**
-     * Checks if the verification string in the account verification mail is valid and matches to the user.
-     */
+    // Checks if the verification string in the account verification mail is valid and matches to the user.
     public function checkIfEmailVerificationCodeIsValid($user_name, $verification_code)
     {
         $user_name = trim($user_name);
@@ -693,15 +612,15 @@ class Login
             $user_password_hash = password_hash($user_password_new, PASSWORD_DEFAULT, array('cost' => $hash_cost_factor));
 
             // write users new hash into database
-            $query_update = $this->db_connection->prepare('UPDATE users SET user_password_hash = :user_password_hash,
-                                                           user_password_reset_hash = NULL, user_password_reset_timestamp = NULL
-                                                           WHERE user_name = :user_name AND user_password_reset_hash = :user_password_reset_hash');
-            $query_update->bindValue(':user_password_hash', $user_password_hash, PDO::PARAM_STR);
-            $query_update->bindValue(':user_password_reset_hash', $user_password_reset_hash, PDO::PARAM_STR);
-            $query_update->bindValue(':user_name', $user_name, PDO::PARAM_STR);
+            $query_update = $this->db_connection->prepare('UPDATE cad_users SET cad_password_hash = :cad_password_hash,
+                                                           cad_password_reset_hash = NULL, cad_password_reset_timestamp = NULL
+                                                           WHERE cad_nick = :cad_nick AND cad_password_reset_hash = :cad_password_reset_hash');
+            $query_update->bindValue(':cad_password_hash', $user_password_hash, PDO::PARAM_STR);
+            $query_update->bindValue(':cad_password_reset_hash', $user_password_reset_hash, PDO::PARAM_STR);
+            $query_update->bindValue(':cad_nick', $user_name, PDO::PARAM_STR);
             $query_update->execute();
 
-            // check if exactly one row was successfully changed:
+            // check if exactly one row was changed:
             if ($query_update->rowCount() == 1) {
                 $this->password_reset_was_successful = true;
                 $this->messages[] = MESSAGE_PASSWORD_CHANGED_SUCCESSFULLY;
@@ -711,34 +630,29 @@ class Login
         }
     }
 
-    /**
-     * Gets the success state of the password-reset-link-validation.
-     * TODO: should be more like getPasswordResetLinkValidationStatus
-     * @return boolean
-     */
+    // Gets the success state of the password-reset-link-validation.
     public function passwordResetLinkIsValid()
     {
         return $this->password_reset_link_is_valid;
     }
 
-    /**
-     * Gets the success state of the password-reset action.
-     * TODO: should be more like getPasswordResetSuccessStatus
-     * @return boolean
-     */
+    // Gets the success state of the password-reset action.
     public function passwordResetWasSuccessful()
     {
         return $this->password_reset_was_successful;
     }
 
-    /**
-     * Gets the username
-     * @return string username
-     */
+    // Gets the username
     public function getUsername()
     {
         return $this->user_name;
     }
+
+
+
+
+
+
 
     /**
      * Get either a Gravatar URL or complete image tag for a specified email address.

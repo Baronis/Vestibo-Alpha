@@ -4,7 +4,7 @@ if (!extension_loaded('gd')) {
 }
 session_start();
 $iCaptchaLength = 4;
-$str_choice = 'ABCDEFGHJKLMNPRTUVWXYZ2346789';
+$str_choice = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ2346789';
 $str_captcha = '';
 for ($i=0; $i < $iCaptchaLength; $i++) {
     do {
