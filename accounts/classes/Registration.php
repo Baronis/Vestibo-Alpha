@@ -33,8 +33,7 @@ class Registration
             return true;
         } else {
             try {
-                $this->db_connection = new PDO('mysql:host=127.0.0.1;dbname=ves', 'root', 'admpass');
-                //$this->db_connection = new PDO('mysql:host='. DB_HOST .';dbname='. DB_NAME . ';charset=utf8;', DB_USER, DB_PASS);
+                $this->db_connection = new PDO('mysql:host='. DB_HOST .';dbname='. DB_NAME . ';charset=utf8;', DB_USER, DB_PASS);
                 return true;
             // If connection failed
             } catch (PDOException $e) {
