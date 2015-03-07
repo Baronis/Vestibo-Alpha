@@ -29,7 +29,8 @@ $login = new Login();
 if ($login->passwordResetWasSuccessful() == true && $login->passwordResetLinkIsValid() != true) {
     include("views/not_logged_in.php");
 
-} else {
+} else 
+{
     // show the request-a-password-reset or type-your-new-password form
     include("passwordreset.php");
 }

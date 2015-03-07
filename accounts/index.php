@@ -4,7 +4,7 @@
  * A simple PHP Login Script / ADVANCED VERSION
  * For more versions (one-file, minimal, framework-like) visit http://www.php-login.net
  *
- * @author Panique
+ * @author Panique edit por Lampi
  * @link http://www.php-login.net
  * @link https://github.com/panique/php-login-advanced/
  * @license http://opensource.org/licenses/MIT MIT License

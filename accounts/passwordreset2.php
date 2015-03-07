@@ -7,9 +7,9 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <meta name="description" content="Plataforma de estudos para o Vestibular">
 	    <link rel="icon" href="img/favicon.ico">
-		<link href="css/global-style.css" rel="stylesheet">
-		<link href="css/button-style.css" rel="stylesheet">
-		<link href="css/input-style.css" rel="stylesheet">
+		<link href="../css/global-style.css" rel="stylesheet">
+		<link href="../css/button-style.css" rel="stylesheet">
+		<link href="../css/input-style.css" rel="stylesheet">
 		<script src='https://www.google.com/recaptcha/api.js'></script>
 		<title>Vestibo: Redefinição de Senha</title>
 	</head>
@@ -26,17 +26,20 @@
 				</div>
 			</div>
 			<div class="body">
-				<form method="post" action="accounts/#MUDARAQUIIIIIIIIIIIIIIIII" name="passwordrenewform">
+				<form method="post" action="password_reset.php" name="passwordrenewform">
 					<div class="login-container">
 						<h1 style="color:#003A91;">Redefinição de Senha</h1>
 		        		<div class="form-group">
-		        			<!--MUDAR ISSO DEPOIS#######################################################################-->
+		        			<input type='hidden' name='user_name' value='<?php echo $_GET['user_name']; ?>' />
+    						<input type='hidden' name='user_password_reset_hash'
+    						value='<?php echo $_GET['verification_code']; ?>' />
+    						<!--Separando o hidden do normal-->
 		        			<label for="login_input_password_repeat">Digite Aqui sua Nova Senha</label>
 		          			<input type="password" class="form-control" id="login_input_password_new" placeholder="******" name="user_password_new" pattern=".{6,}" required autocomplete="off" />
 		          			<label for="login_input_password_repeat">Confirme Aqui sua Nova Senha</label>
-		          			<input type="password" class="form-control" id="login_input_password_repeat" placeholder="******" name="user_password_repeat" pattern=".{6,}" required autocomplete="off" />
+		          			<input type="password" class="form-control" id="login_input_password_repeat" 
+		          			placeholder="******" name="user_password_repeat" pattern=".{6,}" required autocomplete="off" />
 		        		</div>
-		        		<!--<div class="g-recaptcha" data-sitekey="6Lejtv4SAAAAAH-kSxHRvvfiy883m1EB_IbKvEcv"></div>-->
 		        		<input class="btn btn-default" type="submit" name="register" value="Cadastrar"/>
 					</div>
 				</form>
