@@ -62,7 +62,7 @@ define("EMAIL_PASSWORDRESET_CONTENT", "Clique aqui para redefinir sua senha:");
 /**
  * Configuração para o email de ativação
  */
-define("EMAIL_VERIFICATION_URL", "http://vestibo.com.br/dev/accounts/register.php");
+define("EMAIL_VERIFICATION_URL", "http://vestibo.com.br/dev/cadastrar.php");
 define("EMAIL_VERIFICATION_FROM", "naoresponda@vestibo.com.br");
 define("EMAIL_VERIFICATION_FROM_NAME", "Vestibo");
 define("EMAIL_VERIFICATION_SUBJECT", "Ativacao para Vestibo");

@@ -4,20 +4,12 @@
 if (version_compare(PHP_VERSION, '5.3.7', '<')) {
     exit('Sorry, this script does not run on a PHP version smaller than 5.3.7 !');
 } else if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-    // if you are using PHP 5.3 or PHP 5.4 you have to include the password_api_compatibility_library.php
-    // (this library adds the PHP 5.5 password hashing functions to older versions of PHP)
     require_once('libraries/password_compatibility_library.php');
 }
-// include the config
+
 require_once('config/config.php');
-
-// include the to-be-used language, english by default. feel free to translate your project and include something else
 require_once('translations/pt_BR.php');
-
-// include the PHPMailer library
 require_once('libraries/PHPMailer.php');
-
-// load the registration class
 require_once('classes/Registration.php');
 
 // create the registration object. when this object is created, it will do all registration stuff automatically
@@ -25,4 +17,51 @@ require_once('classes/Registration.php');
 $registration = new Registration();
 
 // showing the register view (with the registration form, and messages/errors)
-include("views/register.php");
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>php-login-advanced</title>
+    <style type="text/css">
+        
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin: 10px;
+        }
+        label {
+            position: relative;
+            vertical-align: middle;
+            bottom: 1px;
+        }
+        input[type=text],
+        input[type=password],
+        input[type=submit],
+        input[type=email] {
+            display: block;
+            margin-bottom: 15px;
+        }
+        input[type=checkbox] {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<?php
+// show potential errors / feedback (from registration object)
+if (isset($registration)) {
+    if ($registration->errors) {
+        foreach ($registration->errors as $error) {
+            echo $error;
+        }
+    }
+    if ($registration->messages) {
+        foreach ($registration->messages as $message) {
+            echo $message;
+        }
+    }
+}
+?>

@@ -2,7 +2,7 @@
 /**
 */
 // login & registration classes
-define("MESSAGE_ACCOUNT_NOT_ACTIVATED", "Sua conta ainda não foi ativada. Favor clicar no link de confirmação enviado por email.");
+define('MESSAGE_ACCOUNT_NOT_ACTIVATED', 'Sua conta ainda não foi ativada.<br>Favor clicar no link de confirmação enviado por email.<br><a href="../entrar.php">Ir para o Login.</a>');
 define("MESSAGE_CAPTCHA_WRONG", "Captcha incorreto!");
 define("MESSAGE_COOKIE_INVALID", "Cookie inválido");
 define("MESSAGE_DATABASE_ERROR", "Erro de conexão com o bd.");
@@ -31,7 +31,7 @@ define("MESSAGE_PASSWORD_TOO_SHORT", "Tamanho mínimo da senha é de 6 caractere
 define("MESSAGE_PASSWORD_WRONG", "Senha incorreta. Tente novamente.");
 define("MESSAGE_PASSWORD_WRONG_3_TIMES", "Você inseriu uma senha incorreta 3 vezes ou mais. Favor aguardar 30 segundos e tente novamente.");
 define("MESSAGE_REGISTRATION_ACTIVATION_NOT_SUCCESSFUL", "Desculpe, nenhum id encontrado...");
-define("MESSAGE_REGISTRATION_ACTIVATION_SUCCESSFUL", "Ativação bem sucedida! Você pode entrar agora!");
+define('MESSAGE_REGISTRATION_ACTIVATION_SUCCESSFUL", "Ativação bem sucedida! Você pode entrar agora!<a href="../entrar.php">Ir para o Login.</a>');
 define("MESSAGE_REGISTRATION_FAILED", "Desculpe, seu registro falhou. Volte e tente novamente.");
 define("MESSAGE_RESET_LINK_HAS_EXPIRED", "Este link de recuperação expirou. Use o link sempre em menos de uma hora.");
 define("MESSAGE_VERIFICATION_MAIL_ERROR", "Desculpe, não foi possível enviar um email de verificação. Sua conta não foi criada.");
