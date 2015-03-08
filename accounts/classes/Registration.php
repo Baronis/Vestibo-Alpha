@@ -111,7 +111,7 @@ class Registration
             if (count($result) > 0) {
                 for ($i = 0; $i < count($result); $i++) 
                 {
-                    $this->errors[] = ($result[$i]['user_name'] == $user_name) ? MESSAGE_USERNAME_EXISTS : MESSAGE_EMAIL_ALREADY_EXISTS;
+                    $this->errors[] = ($result[$i]['cad_nick'] == $user_name) ? MESSAGE_USERNAME_EXISTS : MESSAGE_EMAIL_ALREADY_EXISTS;
                 }
             } 
             else 
@@ -122,17 +122,14 @@ class Registration
                 $user_activation_hash = sha1(uniqid(mt_rand(), true));
 
                 // grava os usuarios no bd
-                $query_new_user_insert = 
-                $this->db_connection->prepare('INSERT INTO cad_users (cad_name, cad_password_hash, cad_email, cad_first_name, cad_last_name, cad_birth, cad_activation_hash, cad_registration_ip, cad_registration_datetime) 
+                $query_new_user_insert = $this->db_connection->prepare('INSERT INTO cad_users (cad_nick, cad_password_hash, cad_email, cad_first_name, cad_last_name, cad_birth, cad_activation_hash, cad_registration_ip, cad_registration_datetime) 
                 VALUES(:user_name, :user_password_hash, :user_email, :user_nome, :user_sobnome, :user_nasc, :user_activation_hash, :user_registration_ip, now())');
                 $query_new_user_insert->bindValue(':user_name', $user_name, PDO::PARAM_STR);
                 $query_new_user_insert->bindValue(':user_password_hash', $user_password_hash, PDO::PARAM_STR);
                 $query_new_user_insert->bindValue(':user_email', $user_email, PDO::PARAM_STR);
                 $query_new_user_insert->bindValue(':user_nome', $user_nome, PDO::PARAM_STR);
                 $query_new_user_insert->bindValue(':user_sobnome', $user_sobnome, PDO::PARAM_STR);
-                //dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 $query_new_user_insert->bindValue(':user_nasc', $user_nasc, PDO::PARAM_INT);
-                //dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 $query_new_user_insert->bindValue(':user_activation_hash', $user_activation_hash, PDO::PARAM_STR);
                 $query_new_user_insert->bindValue(':user_registration_ip', $_SERVER['REMOTE_ADDR'], PDO::PARAM_STR);
                 $query_new_user_insert->execute();

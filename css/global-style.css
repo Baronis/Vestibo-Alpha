@@ -351,6 +351,13 @@ li{
         === 4. Containers de texto ===
         ==============================
 */
+.msg-box{
+  width: 100%; height: auto;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #fff;
+  color: #003A91;
+}
 .blue-container{
   color:#eee;
   background-color: #003A91;
