@@ -31,6 +31,6 @@ if (isset($registration)) {
 <a href="index.php"><?php echo WORDING_BACK_TO_LOGIN; ?></a>
 
 <?php include('_footer.php'); ?>
-<meta http-equiv="refresh" content="1;url=../entrar.html">
+<meta http-equiv="refresh" content="1;url=../entrar.php">
 
 
