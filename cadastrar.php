@@ -21,7 +21,6 @@
 				<form method="post" action="cadastrar.php" name="registerform">
 					<div class="cadastro-container">
 						<?php
-							// check for minimum PHP version
 							if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 							    exit('Sorry, this script does not run on a PHP version smaller than 5.3.7 !');
 							} else if (version_compare(PHP_VERSION, '5.5.0', '<')) {
@@ -33,11 +32,8 @@
 							require_once('accounts/libraries/PHPMailer.php');
 							require_once('accounts/classes/Registration.php');
 
-							// create the registration object. when this object is created, it will do all registration stuff automatically
-							// so this single line handles the entire registration process.
 							$registration = new Registration();
 
-							// show potential errors / feedback (from registration object)
 							if (isset($registration)) {
 							    if ($registration->errors) {
 							        foreach ($registration->errors as $error) {

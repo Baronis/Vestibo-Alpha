@@ -31,7 +31,7 @@
 						require_once('accounts/libraries/PHPMailer.php');
 						require_once('accounts/classes/Login.php');
 
-						$login = new Login(); //IMPORTANT
+						$login = new Login();
 
 						if ($login->isUserLoggedIn() == true) {
 						    Header('Location: accounts/loading.php');

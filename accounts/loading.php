@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<title>Redirecionando</title>
+	<META http-equiv="refresh" content="2;URL=http://vestibo.com.br/dev/in">
 </head>
 <body>
 <style type="text/css">

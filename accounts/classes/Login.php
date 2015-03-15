@@ -1,13 +1,12 @@
 <?php
 /**
  * Handles the user registration
- * @author Panique @ Edição disto --- Lampi
+ * @author Panique @ Edição --- Lampi
  * @link http://www.php-login.net
  * @link https://github.com/panique/php-login-advanced/
  * @license http://opensource.org/licenses/MIT MIT License
  */
-class Login
-{
+class Login {
     private $db_connection = null;
     private $user_id = null;
     private $user_name = "";
@@ -20,14 +19,11 @@ class Login
     public $errors = array();
     public $messages = array();
 
-    /** Sobre variáveis daqui para baixo
-    * Nas @var(variáveis) da sessao se usa user_variavel e nos dados do bd se usa cad_variavel, 
+    /** Sobre variáveis abaixo
+    * Nas variáveis da sessao usa-se user_variavel e nos dados do bd se usa cad_variavel, 
     * exceto para o user_name que no bd se chama cad_nick...
-    * a função "__construct()" começa automaticamente sempre quando o obj dessa class é criado,
-    * mesma coisa que "$login = new Login();"
     */
-    public function __construct()
-    {
+    public function __construct() {
         session_start();
         // checa as possíveis ações do login
         // 1. Logout (toda vez que ela dá logout)
@@ -36,23 +32,19 @@ class Login
         // 4. login via post data ou login comum
 
         // se ele tentou dar logout
-        if (isset($_GET["logout"])) 
-        {
+        if (isset($_GET["logout"])) {
             $this->doLogout();
         } 
         // if se o usuário está logado na sessão
-        elseif (!empty($_SESSION['user_name']) && ($_SESSION['user_logged_in'] == 1)) 
-        {
+        elseif (!empty($_SESSION['user_name']) && ($_SESSION['user_logged_in'] == 1)) {
             $this->loginWithSessionData();
             // usuario tentou mudar user_name
-            if (isset($_POST["user_edit_submit_name"])) 
-            {
+            if (isset($_POST["user_edit_submit_name"])) {
                 //editando o user_name...
                 $this->editUserName($_POST['user_name']);
             } 
             // user tenta mudar o email
-            elseif (isset($_POST["user_edit_submit_email"])) 
-            {
+            elseif (isset($_POST["user_edit_submit_email"])) {
                 //editando o user_email...
                 $this->editUserEmail($_POST['user_email']);
             } 
@@ -75,14 +67,11 @@ class Login
         }
 
         // checando se ele já pediu para redefinir a senha
-        if (isset($_POST["request_password_reset"]) && isset($_POST['user_name'])) 
-        {
+        if (isset($_POST["request_password_reset"]) && isset($_POST['user_name'])) {
             $this->setPasswordResetDatabaseTokenAndSendMail($_POST['user_name']);
-        } elseif (isset($_GET["user_name"]) && isset($_GET["verification_code"])) 
-        {
+        } elseif (isset($_GET["user_name"]) && isset($_GET["verification_code"])) {
             $this->checkIfEmailVerificationCodeIsValid($_GET["user_name"], $_GET["verification_code"]);
-        } elseif (isset($_POST["submit_new_password"]))
-        {
+        } elseif (isset($_POST["submit_new_password"])) {
             $this->editNewPassword($_POST['user_name'], $_POST['user_password_reset_hash'], $_POST['user_password_new'], $_POST['user_password_repeat']);
         }
         //gravatar se precisar...
@@ -91,22 +80,17 @@ class Login
         }
     }
     //checa se a conexão com o bd foi aberta...
-    private function databaseConnection()
-    {
+    private function databaseConnection() {
         // if se a conexão já existe
-        if ($this->db_connection != null) 
-        {
+        if ($this->db_connection != null) {
             return true;
-        } else 
-        {
-            try 
-            {
+        } else {
+            try {
                 // conexão com o bd
                 $this->db_connection = new PDO('mysql:host='. DB_HOST .';dbname='. DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
                 return true;
             } 
-            catch (PDOException $e) 
-            {
+            catch (PDOException $e) {
                 $this->errors[] = MESSAGE_DATABASE_ERROR . $e->getMessage();
             }
         }
@@ -114,42 +98,34 @@ class Login
         return false;
     }
     //procura no banco o user_name com as seguintes especificações...
-    private function getUserData($user_name)
-    {
+    private function getUserData($user_name) {
         // se a conexão foi aberta...
-        if ($this->databaseConnection()) 
-        {
+        if ($this->databaseConnection()) {
             // db query,pegando toda a info do user...
             $query_user = $this->db_connection->prepare('SELECT * FROM cad_users WHERE cad_nick = :user_name');
             $query_user->bindValue(':user_name', $user_name, PDO::PARAM_STR);
             $query_user->execute();
             // pegando o resultado agr...
             return $query_user->fetchObject();
-        } else 
-        {
+        } else {
             return false;
         }
     }
     //LOGS na SESSION_data
-    private function loginWithSessionData()
-    {
+    private function loginWithSessionData() {
         $this->user_name = $_SESSION['user_name'];
         $this->user_email = $_SESSION['user_email'];
         //Deixa os status de logado para true...
         $this->user_is_logged_in = true;
     }
     //LOGS NA COOKIE_data
-    private function loginWithCookieData()
-    {
-        if (isset($_COOKIE['rememberme'])) 
-        {
+    private function loginWithCookieData() {
+        if (isset($_COOKIE['rememberme'])) {
             // extrair dados via cookie
             list ($user_id, $token, $hash) = explode(':', $_COOKIE['rememberme']);
             // checa tipo a validade do cookie
-            if ($hash == hash('sha256', $user_id . ':' . $token . COOKIE_SECRET_KEY) && !empty($token)) 
-            {
-                if ($this->databaseConnection()) 
-                {
+            if ($hash == hash('sha256', $user_id . ':' . $token . COOKIE_SECRET_KEY) && !empty($token)) {
+                if ($this->databaseConnection()) {
                     // pegas os dados certos do cookie...
                     $sth = $this->db_connection->prepare("SELECT cad_id, cad_nick, cad_email FROM cad_users WHERE cad_id = :user_id
                     AND cad_rememberme_token = :user_rememberme_token AND cad_rememberme_token IS NOT NULL");
@@ -159,8 +135,7 @@ class Login
                     // get row do resultado
                     $result_row = $sth->fetchObject();
 
-                    if (isset($result_row->user_id)) 
-                    {
+                    if (isset($result_row->user_id)) {
                         // escreve no php sessão
                         $_SESSION['user_id'] = $result_row->cad_id;
                         $_SESSION['user_name'] = $result_row->cad_nick;
@@ -184,27 +159,22 @@ class Login
         return false;
     }
     //LOGIN com POST
-    private function loginWithPostData($user_name, $user_password, $user_rememberme)
-    {
-        if (empty($user_name)) 
-        {
+    private function loginWithPostData($user_name, $user_password, $user_rememberme) {
+        if (empty($user_name)) {
             $this->errors[] = MESSAGE_USERNAME_EMPTY;
         } 
-        else if (empty($user_password)) 
-        {
+        else if (empty($user_password)) {
             $this->errors[] = MESSAGE_PASSWORD_EMPTY;
         } 
         else {
             // usuario loga com user_name or email e senha
             // se ele não digitou seu email correto, tenta pelo user_name
-            if (!filter_var($user_name, FILTER_VALIDATE_EMAIL)) 
-            {
+            if (!filter_var($user_name, FILTER_VALIDATE_EMAIL)) {
                 // query, pega todas as infos do user
                 $result_row = $this->getUserData(trim($user_name));
 
             } 
-            else if ($this->databaseConnection()) 
-            {
+            else if ($this->databaseConnection()) {
                 //query....
                 $query_user = $this->db_connection->prepare('SELECT * FROM cad_users WHERE cad_email = :user_email');
                 $query_user->bindValue(':user_email', trim($user_name), PDO::PARAM_STR);
@@ -212,15 +182,12 @@ class Login
                 $result_row = $query_user->fetchObject();
             }
             // if se o usu nao existe
-            if (! isset($result_row->cad_id)) 
-            {
+            if (! isset($result_row->cad_id)) {
                 $this->errors[] = MESSAGE_LOGIN_FAILED;
-            } else if (($result_row->cad_failed_logins >= 3) && ($result_row->cad_last_failed_login > (time() - 30))) 
-            {
+            } else if (($result_row->cad_failed_logins >= 3) && ($result_row->cad_last_failed_login > (time() - 30))) {
                 $this->errors[] = MESSAGE_PASSWORD_WRONG_3_TIMES;
             } 
-            else if (! password_verify($user_password, $result_row->cad_password_hash)) 
-            {
+            else if (! password_verify($user_password, $result_row->cad_password_hash)) {
                 $sth = $this->db_connection->prepare('UPDATE cad_users '
                         . 'SET cad_failed_logins = cad_failed_logins+1, cad_last_failed_login = :user_last_failed_login '
                         . 'WHERE cad_nick = :user_name OR cad_email = :user_name');
@@ -259,8 +226,7 @@ class Login
                         $query_update->execute();
 
                         if ($query_update->rowCount() == 0) {
-                        } else {
-                        }
+                        } else {}
                     }
                 }
             }

@@ -7,7 +7,7 @@
             window.location = '../index.php'
         	</script>");
 	}
-	$dbsel=mysql_select_db("vestibo_lab");
+	$dbsel=mysql_select_db("ves");
 	if (!$dbsel)
 	{
 		die ("<script language='JavaScript'>

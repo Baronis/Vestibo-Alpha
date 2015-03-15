@@ -39,18 +39,18 @@
                <br>
                <select class="campo" name="altCorreta">
                   <option value="" selected>Alternativa Correta</option>
-                  <option value="alt1">Alternativa 1</option>
-                  <option value="alt2">Alternativa 2</option>
-                  <option value="alt3">Alternativa 3</option>
-                  <option value="alt4">Alternativa 4</option>
-                  <option value="alt5">Alternativa 5</option>
+                  <option value="1">Alternativa 1</option>
+                  <option value="2">Alternativa 2</option>
+                  <option value="3">Alternativa 3</option>
+                  <option value="4">Alternativa 4</option>
+                  <option value="5">Alternativa 5</option>
                </select>
                <label for="">Comentário</label>
                <textarea class="ckeditor" rows="3" cols="50" id="ck" name="comentario"></textarea>
                <br>
                <select class="campo" name="sub">
-                  <option value="??-???">?? - ???</option>
-                  <option value="??-???">?? - ???</option>
+                  <option value="01002">?? - ???</option>
+                  <option value="01003">?? - ???</option>
                </select>
                <br>
                <input type="submit" class="btn" value="Cadastrar">

@@ -1,6 +1,4 @@
 <?php
-/**
-*/
 // login & registration classes
 define('MESSAGE_ACCOUNT_NOT_ACTIVATED', 'Sua conta ainda não foi ativada.<br>Favor clicar no link de confirmação enviado por email.<br><a href="../entrar.php">Ir para o Login.</a>');
 define("MESSAGE_CAPTCHA_WRONG", "Captcha incorreto!");
@@ -18,7 +16,6 @@ define("MESSAGE_LOGGED_OUT", "Você saiu..");
 define("MESSAGE_NOME_EMPTY", "Digite seu Nome...");
 define("MESSAGE_SOBRENOME_EMPTY", "Digite seu Sobrenome...");
 define("MESSAGE_NASCIMENTO_EMPTY", "Digite a data de seu nascimento...");
-// The "login failed"-message is a security improved feedback that doesn't show a potential attacker if the user exists or not
 define("MESSAGE_LOGIN_FAILED", "Login falhou.");
 define("MESSAGE_OLD_PASSWORD_WRONG", "Sua senha antiga está incorreta.");
 define("MESSAGE_PASSWORD_BAD_CONFIRM", "As senhas informadas não coincidem");
@@ -31,12 +28,12 @@ define("MESSAGE_PASSWORD_TOO_SHORT", "Tamanho mínimo da senha é de 6 caractere
 define("MESSAGE_PASSWORD_WRONG", "Senha incorreta. Tente novamente.");
 define("MESSAGE_PASSWORD_WRONG_3_TIMES", "Você inseriu uma senha incorreta 3 vezes ou mais. Favor aguardar 30 segundos e tente novamente.");
 define("MESSAGE_REGISTRATION_ACTIVATION_NOT_SUCCESSFUL", "Desculpe, nenhum id encontrado...");
-define('MESSAGE_REGISTRATION_ACTIVATION_SUCCESSFUL", "Ativação bem sucedida! Você pode entrar agora!<a href="../entrar.php">Ir para o Login.</a>');
+define("MESSAGE_REGISTRATION_ACTIVATION_SUCCESSFUL", 'Ativação bem sucedida!<br>Você pode entrar agora!<a href="entrar.php">Ir para o Login.</a>');
 define("MESSAGE_REGISTRATION_FAILED", "Desculpe, seu registro falhou. Volte e tente novamente.");
 define("MESSAGE_RESET_LINK_HAS_EXPIRED", "Este link de recuperação expirou. Use o link sempre em menos de uma hora.");
 define("MESSAGE_VERIFICATION_MAIL_ERROR", "Desculpe, não foi possível enviar um email de verificação. Sua conta não foi criada.");
 define("MESSAGE_VERIFICATION_MAIL_NOT_SENT", "Email de verificação não foi enviado! Erro: ");
-define("MESSAGE_VERIFICATION_MAIL_SENT", "Sua conta foi criada e enviamos um email. Clique no link de verificação deste email.");
+define("MESSAGE_VERIFICATION_MAIL_SENT", "Sua conta foi criada e enviamos um email.<br>Clique no link de verificação deste email.");
 define("MESSAGE_USER_DOES_NOT_EXIST", "Este usuário não existe");
 define("MESSAGE_USERNAME_BAD_LENGTH", "Usuário não pode conter menos que 2 caracteres ou mais que 64");
 define("MESSAGE_USERNAME_CHANGE_FAILED", "Desculpe, a alteração do nome de usuário falhou");

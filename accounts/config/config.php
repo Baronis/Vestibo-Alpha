@@ -1,21 +1,10 @@
 <?php
-
-/**
- * Configuração para a conexão com o bd
- * DB_HOST: database host(127.0.0.1 ou localhost)
- * DB_NAME: nome do db
- * DB_USER: o usuário do db com direitos de SELECT,DELETE,INSERT,etc
- * DB_PASS: a senha desse mesmo usuário
- */
 define("DB_HOST", "mysql.hostinger.com.br");
-define("DB_NAME", "u395938104_ves");
-define("DB_USER", "u395938104_root");
-define("DB_PASS", "rootrootroot");
-
+define("DB_NAME", "u395938104_1");
+define("DB_USER", "u395938104_adm");
+define("DB_PASS", "admpass");
 /**
  * Configuração para os cookies
- *
- *
  * para saber mais sobre tempo de cookies e etc... links abaixo
  * @see http://stackoverflow.com/q/9618217/1114320
  * @see http://www.php.net/manual/en/function.setcookie.php
@@ -27,7 +16,6 @@ define("DB_PASS", "rootrootroot");
 define("COOKIE_RUNTIME", 1209600);
 define("COOKIE_DOMAIN", ".127.0.0.1");
 define("COOKIE_SECRET_KEY", "1gp@TMPS{+$78sfpMJFe-92s");
-
 /**
  * Configuração para o email:
  *
@@ -49,7 +37,6 @@ define("EMAIL_SMTP_USERNAME", "naoresponda@vestibo.com.br");
 define("EMAIL_SMTP_PASSWORD", "goldenkeyvestibo");
 define("EMAIL_SMTP_PORT", 2525);
 define("EMAIL_SMTP_ENCRYPTION", "ssl");
-
 /**
  * Configuração para o email de redefinição...
  */
@@ -58,7 +45,6 @@ define("EMAIL_PASSWORDRESET_FROM", "naoresponda@vestibo.com.br");
 define("EMAIL_PASSWORDRESET_FROM_NAME", "Vestibo");
 define("EMAIL_PASSWORDRESET_SUBJECT", "Redefinir sua senha");
 define("EMAIL_PASSWORDRESET_CONTENT", "Clique aqui para redefinir sua senha:");
-
 /**
  * Configuração para o email de ativação
  */
@@ -67,11 +53,6 @@ define("EMAIL_VERIFICATION_FROM", "naoresponda@vestibo.com.br");
 define("EMAIL_VERIFICATION_FROM_NAME", "Vestibo");
 define("EMAIL_VERIFICATION_SUBJECT", "Ativacao para Vestibo");
 define("EMAIL_VERIFICATION_CONTENT", "Clique aqui para ativar sua conta:");
-
-//Configuração para a "força" da senha, no caso ela irá gerar vários char no nível 10, 
 //existe vários níveis de segurança, mas o 10 é padrão...
 define("HASH_COST_FACTOR", "10");
-
-//O.O
-// U
-//___
+?>
