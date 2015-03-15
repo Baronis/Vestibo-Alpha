@@ -31,6 +31,6 @@
 		echo "<h1>Sucesso!</h1>";
 		echo ("<script language='JavaScript'>
             var si = alert('Questão adicionada com sucesso ao servidor!')
-            window.location = './alt_alu.php'
+            window.location = './index.php'
         	</script>");
 ?>

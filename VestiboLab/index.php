@@ -49,14 +49,21 @@
                <textarea class="ckeditor" rows="3" cols="50" id="ck" name="comentario"></textarea>
                <br>
                <select class="campo" name="sub">
-                  <option value="01002">?? - ???</option>
-                  <option value="01003">?? - ???</option>
+               <option value="">Disciplina</option>
+               <?php
+                  include_once("bd.php");
+                  $sql="SELECT * FROM p_sub";
+                  $ds=mysql_query($sql) or die(mysql_error());
+                  while($x=mysql_fetch_assoc($ds)){
+                     echo '<option value="'.$x['p_id'].'"">'.$x['p_name'].'</option>';
+                  }
+               ?>
                </select>
                <br>
                <input type="submit" class="btn" value="Cadastrar">
             </form>
          </center>
-         <p style="color: #eee">Versão 0.1.2A r1 LAMPI</p>
+         <p style="color: #eee">VestiboLab 1.0r5 LAMPI</p>
       </div>
       <script>CKEDITOR.replace( 'x' )</script>
    </body>
