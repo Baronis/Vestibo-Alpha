@@ -24,7 +24,7 @@
 						if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 						    exit('Sorry, this script does not run on a PHP version smaller than 5.3.7 !');
 						} else if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-						    require_once('libraries/password_compatibility_library.php');
+						    require_once('accounts/libraries/password_compatibility_library.php');
 						}
 						require_once('accounts/config/config.php');
 						require_once('accounts/translations/pt_BR.php');
@@ -59,6 +59,10 @@
 	        			<!--Senha--><input type="password" class="form-control" name="user_password" id="login_input_password" placeholder="Senha">
 	        		</div>
 	        		<input type="hidden" name="asking" value="true">
+	        		<div class="form-group">
+	        			<input type="checkbox" id="user_rememberme" name="user_rememberme" value="1" />
+						<label for="user_rememberme">Lembrar de mim.</label>
+					</div>
 	        		<input type="submit" class="btn btn-default" name="login" value="Entrar" />
 	        		</input>
 	        		<a class="btn btn-default" href="accounts/views/password_reset.php" 

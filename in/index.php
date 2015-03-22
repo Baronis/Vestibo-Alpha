@@ -1,3 +1,18 @@
+<?php
+	if (version_compare(PHP_VERSION, '5.3.7', '<')) {
+	    exit('Sorry, this script does not run on a PHP version smaller than 5.3.7 !');
+	} else if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+	    require_once('accounts/libraries/password_compatibility_library.php');
+	}
+	require_once('accounts/config/config.php');
+	require_once('accounts/classes/Login.php');
+
+	$login = new Login();
+
+	if ($login->isUserLoggedIn() == false) {
+	    Header('Location: ../entrar.php');
+	}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -20,7 +35,7 @@
 		<div class="page">
 			<div class="header">
 				<div class="header-left">
-					<a onclick="toggle_menu()" href="#" class="header-item"><img src="in_img/menu-blue.png" class="menu-anchor" alt="Vestibo"></a>
+					<a onclick="toggle_menu()" href="#" class="header-item"><img src="../img/menu-blue.png" class="menu-anchor" alt="Vestibo"></a>
 					<a href="http://vestibo.com.br/" class="header-item"><img src="../img/nav-logo-blue.png" class="logo" alt="Vestibo"/></a>
 				</div>
 				<div class="header-right">
@@ -51,8 +66,8 @@
 					Vestibo &copy; 2014.
 				</div>
 				<div class="f-right">
-					<a href="http://vestibo.com.br/termos">Termos e condições</a>
-					<a href="http://vestibo.com.br/quem-somos">Quem somos</a>
+					<a href="http://vestibo.com.br/dev/termos">Termos e condições</a>
+					<a href="http://vestibo.com.br/dev/quem-somos">Quem somos</a>
 				</div>
 			</div>
 		</div>
