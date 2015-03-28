@@ -2,11 +2,12 @@
 $_SESSION['user_id'] = 1; // Temporário
 // $sort = new sortQuestions(); Utilize esta linha para chamar a classe!
 
-// Sorteador de Questões NAO TESTADO (r2)
+// Sorteador de Questões NAO TESTADO (r3)
 class sortQuestions {
 
 	// Variável que armazena a conexão
 	private $conn = null;
+	public $prod = null;
 	// Esta função é iniciada junto com a classe
 	public function __construct() {
 		if($this->databaseConnection()) {
@@ -14,7 +15,7 @@ class sortQuestions {
 			$nQ = $_GET['nQ'];
 
 			if(isset($_POST['subject'])){
-				$prod = sortBySubject($nQ);
+				$this->prod = sortBySubject($nQ);
 			}
 
 			$stmt = $this->conn->prepare('SELECT sub_id FROM perf WHERE user_id = ?;');
@@ -26,15 +27,14 @@ class sortQuestions {
 		    }
 		    $stmt->close();
 		    if(count($subArray) == 0){
-		    	$prod = $this->sortByRandom($nQ);
+		    	$this->prod = $this->sortByRandom($nQ);
 			} else {
-				$prod = $this->sortByPerformace($nQ, $subArray);
+				$this->prod = $this->sortByPerformace($nQ, $subArray);
 			}
 			$this->conn->close();
 			// Continuar daki! <---
-			var_dump($prod);
 		} else {
-			echo "Problema ao acessar o Banco de Dados!";
+			echo ERROR_DB;
 		}
 	}
 
@@ -43,7 +43,7 @@ class sortQuestions {
 
 		$this->conn = new mysqli('localhost', 'root', 'admpass', 'ves');
 		if ($this->conn->connect_error) {
-			echo "ERROR_DB";
+			echo ERROR_DB_CONN;
 			return false;
 		} else {
 			return true;
@@ -61,7 +61,7 @@ class sortQuestions {
 	    }
 	    $stmt->close();
 	    if ($nQ > count($res)) {
-	    	echo "<b>Aviso: Numero de questoes pedidas excede o numero de questoes disponiveis no servidor!</b><br>";
+	    	echo WARNING_QUESTIONS_EXCEPTION;
 	    }
 	    shuffle($res);
 	    for ($i=0; $i < $nQ ; $i++) {
@@ -81,7 +81,7 @@ class sortQuestions {
 		}
 		$stmt->close();
 		if ($nQ > count($res)) {
-	    	echo "<b>Aviso: Numero de questoes pedidas excede o numero de questoes disponiveis no servidor!</b><br>";
+	    	echo WARNING_QUESTIONS_EXCEPTION;
 	    }
 	    $n = $nQ - 1;
 	    for ($i=0; $i < $n; $i++) { 
@@ -102,7 +102,7 @@ class sortQuestions {
 		}
 		$stmt->close();
 		if ($nQ > count($res)) {
-	    	echo "<b>Aviso: Numero de questoes pedidas excede o numero de questoes disponiveis no servidor!</b><br>";
+	    	echo WARNING_QUESTIONS_EXCEPTION;
 	    }
 	    $n = $nQ - 1;
 	    for ($i=0; $i < $n; $i++) { 

@@ -93,6 +93,7 @@ else if(!isset($_SESSION['curTask']) && isset($_POST['sub'])):
 	require('inc/defines.php');
 	require('inc/sortQuestions.php');
 	$sort = new sortQuestions();
+	var_dump($sort->prod); //Temporário
 else: ?>
 <div class="simple-container">
 	<div class="content">
