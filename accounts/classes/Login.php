@@ -18,8 +18,8 @@ class Login {
     private $password_reset_was_successful = false;
     public $errors = array();
     public $messages = array();
-
-    /** Sobre variáveis abaixo
+    
+    /* Sobre variáveis abaixo
     * Nas variáveis da sessao usa-se user_variavel e nos dados do bd se usa cad_variavel, 
     * exceto para o user_name que no bd se chama cad_nick...
     */

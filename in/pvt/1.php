@@ -1,23 +1,25 @@
+<?php
+// PAGE 1: Matérias
+?>
 <div class="simple-container">
 	<div class="content">
 		<div class="q-box">
 			<div class="q-top-box">
 				<div class="top">
-					<h2>Progresso</h2>
-					<p>25% concluído. Ultima aula vista: Biologia: Artrópodes</p>
-					<p>Ver grade completa.</p>
+					<p>Foto de perfil<a style="float: right;" href="#">Alterar</a></p>
 				</div>
 			</div>
-			<div class="q-alt-box">
+			<?php if(!$_SESSION['fb']){
+				echo '<div class="q-alt-box">
 				<div class="alt">
-					<p>Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box </p>	
+					<p>Cadastro<a style="float: right;" href="#">Alterar</a></p>
 				</div>
 			</div>
 			<div class="q-top-box">
 				<div class="top">
-					<p>Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box Tesste Q-Box </p>	
+					<p>Senha<a style="float: right;" href="#">Alterar</a></p>
 				</div>
-			</div>
+			</div>';} ?>
 		</div>
 	</div>
 </div>

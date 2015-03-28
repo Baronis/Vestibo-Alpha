@@ -1,3 +1,6 @@
+<?php
+// PAGE 5: Ajustes
+?>
 <div class="simple-container">
 	<div class="content">
 		<div class="q-box">

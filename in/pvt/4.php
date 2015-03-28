@@ -1,3 +1,6 @@
+<?php
+// PAGE 4: Desafios
+?>
 <div class="simple-container">
 	<div class="content">
 		<h1>Página 1 de 9.</h1>

@@ -4,8 +4,8 @@
 	} else if (version_compare(PHP_VERSION, '5.5.0', '<')) {
 	    require_once('accounts/libraries/password_compatibility_library.php');
 	}
-	require_once('accounts/config/config.php');
-	require_once('accounts/classes/Login.php');
+	require_once('../accounts/config/config.php');
+	require_once('../accounts/classes/Login.php');
 
 	$login = new Login();
 
@@ -47,7 +47,7 @@
 				<div class="user-container">
 					<p><?php echo ('<a>'.$_SESSION['user_name'].'</a>'); ?></p>
 					<a href="?page=4">Perfil</a>
-					<a href="?page=5">Sair</a>
+					<a href="?logout">Sair</a>
 				</div>
 			</div>
 			<div class="body">
