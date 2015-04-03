@@ -1,5 +1,9 @@
 <?php
 	echo('<meta charset="utf-8">');
+	if ($_SESSION['user_name'] != 'will15' || $_SESSION['user_name'] != 'baronis') {
+		die("Você não é o William!");
+	}
+	
 	include_once("bd.php");
 	$vestibular = $_POST ['vestibular'];
 	$ano = $_POST ['ano'];

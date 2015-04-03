@@ -1,7 +1,6 @@
 <?php
 // PAGE 0: Início
 ?>
-<br><p class="lead">PAGE = <?php echo $_GET['page']; ?> </p>
 <div class="simple-container">
 	<div class="content">
 		<div class="q-box">

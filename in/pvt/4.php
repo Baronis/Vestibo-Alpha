@@ -3,8 +3,7 @@
 ?>
 <div class="simple-container">
 	<div class="content">
-		<h1>Página 1 de 9.</h1>
-		<form action="http://localhost/Teste/index.php" method="get">
+		<form action="http://localhost/Teste/index.php?page=2" method="post">
 		<div class="q-box">
 			<div class="q-top-box">
 				<div class="top">

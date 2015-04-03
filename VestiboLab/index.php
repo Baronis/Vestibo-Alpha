@@ -2,10 +2,25 @@
    <head>
       <meta charset="utf-8">
       <link rel="stylesheet" type="text/css" href="css/estilo.css" />
-      <script src="http://localhost/_/ckeditor/ckeditor.js"></script>
+      <script src="ckeditor/ckeditor.js"></script>
       <title>Cadastrar questões - VESTIBO LAB</title>
    </head>
    <body>
+   <?php
+
+   require_once('../accounts/config/config.php');
+   require_once('../accounts/classes/Login.php');
+
+   $login = new Login();
+
+   if ($login->isUserLoggedIn() == false) {
+       Header('Location: ../entrar.php');
+   }
+
+   if ($_SESSION['user_name'] != 'will15') {
+      die("Você não é o William!");
+   }
+   ?>
       <div id="box">
          <center>
             <img src="logo.png" id="logo">
@@ -63,7 +78,7 @@
                <input type="submit" class="btn" value="Cadastrar">
             </form>
          </center>
-         <p style="color: #eee">VestiboLab 1.0r5 LAMPI</p>
+         <p style="color: #eee">VestiboLab r6 LAMPI</p>
       </div>
       <script>CKEDITOR.replace( 'x' )</script>
    </body>

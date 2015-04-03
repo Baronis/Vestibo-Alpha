@@ -45,7 +45,7 @@
 			<?php require_once("inc/menu.php"); ?>
 			<div id="u" class="user-esc">
 				<div class="user-container">
-					<p><?php echo ('<a>'.$_SESSION['user_name'].'</a>'); ?></p>
+					<?php echo ('<a style="color:black;">'.$_SESSION['user_name'].'</a>'); ?>
 					<a href="?page=4">Perfil</a>
 					<a href="?logout">Sair</a>
 				</div>
