@@ -18,7 +18,7 @@
 			<a href="http://vestibo.com.br/"><img src="img/nav-logo-blue.png" class="logo" alt="Vestibo"></a>
 		</div>
 		<div class="body">
-			<form name="entrar" form method="POST" action="entrar.php">
+			<form name="entrar" form method="POST" action="esqueci">
 				<div class="login-container">
 					<?php
 						if (version_compare(PHP_VERSION, '5.3.7', '<')) {
@@ -49,33 +49,45 @@
 						        }
 						    }
 						}
-					?>
-					<h1 style="color:#003A91; text-align: left;">Entrar</h1>
+
+						if ($login->passwordResetWasSuccessful() == true && $login->passwordResetLinkIsValid() != true) {
+						    Header('Location: entrar');
+						}
+
+						if ($login->passwordResetLinkIsValid() == true) { ?>
+
+					<h1 style="color:#003A91; text-align: left;">Redefinição de senha</h1>
+				    <input type='hidden' name='user_name' value='<?php echo $_GET['user_name']; ?>' />
+				    <input type='hidden' name='user_password_reset_hash' value='<?php echo $_GET['verification_code']; ?>' />
 					<div class="form-group">
-						<!--username--><input type="enail" name="user_name" class="form-control" id="login_input_username" 
-	          			placeholder="Nome de usuário">
-	        		</div>
-	        		<div class="form-group">
-	        			<!--Senha--><input type="password" class="form-control" name="user_password" id="login_input_password" placeholder="Senha">
-	        		</div>
-	        		<input type="hidden" name="asking" value="true">
-	        		<div class="form-group">
-	        			<input type="checkbox" id="user_rememberme" name="user_rememberme" value="1" />
-						<label for="user_rememberme">Lembrar de mim.</label>
+						<input type="password" class="form-control" name="user_password_new" id="user_password_new" pattern=".{6,}" required autocomplete="off" placeholder="Nova senha">
 					</div>
-	        		<input type="submit" class="btn btn-default" name="login" value="Entrar" />
-	        		</input>
-	        		<a class="btn btn-default" href="esqueci" 
-	        		style="float:right;padding-right:12px;padding-top:8px;">Esqueci minha senha</a>
+					<div class="form-group">
+						<input type="password" class="form-control" name="user_password_repeat" id="user_password_repeat" pattern=".{6,}" required autocomplete="off" placeholder="Redigite nova senha">
+					</div>
+					<input type="submit" class="btn btn-default" name="submit_new_password" value="Redefinir" />
+					</input>
+
+						<?php } else { ?>
+
+					<h1 style="color:#003A91; text-align: left;">Redefinição de senha</h1>
+					<div class="form-group">
+						<input type="text" name="user_name" class="form-control" id="user_name" required placeholder="Nome de usuário">
+					</div>
+					<input type="submit" class="btn btn-default" name="request_password_reset" value="Próximo" />
+					</input>
+
+						<?php } ?>
+
 	        		<div class="box-footer">
 	        			<div class="left">
-							<a href="http://vestibo.com.br/termos.html">Termos e condições</a>
+							<a href="http://vestibo.com.br/dev/termos">Termos e condições</a>
 						</div>
 						<div class="right">
-							<a href="http://vestibo.com.br/quem-somos.html">Quem somos</a>
+							<a href="http://vestibo.com.br/dev/quem-somos">Quem somos</a>
 						</div>
 						<div class="centered">
-							<p>Vestibo &copy; 2014.</p>
+							<p>Vestibo &copy; 2015.</p>
 						</div>
 	        		</div>
 				</div>

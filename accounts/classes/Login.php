@@ -275,7 +275,7 @@ class Login {
             $this->errors[] = MESSAGE_USERNAME_INVALID;
         } else {
             $result_row = $this->getUserData($user_name);
-            if (isset($result_row->user_id)) {
+            if (isset($result_row->cad_id)) {
                 $this->errors[] = MESSAGE_USERNAME_EXISTS;
             } else {
                 $query_edit_user_name = $this->db_connection->prepare('UPDATE cad_users SET cad_nick = :user_name WHERE cad_id = :user_id');
@@ -336,7 +336,7 @@ class Login {
             $this->errors[] = MESSAGE_PASSWORD_TOO_SHORT;
         } else {
             $result_row = $this->getUserData($_SESSION['user_name']);
-            if (isset($result_row->user_password_hash)) {
+            if (isset($result_row->cad_password_hash)) {
                 if (password_verify($user_password_old, $result_row->user_password_hash)) {
                     $hash_cost_factor = (defined('HASH_COST_FACTOR') ? HASH_COST_FACTOR : null);
                     $user_password_hash = password_hash($user_password_new, PASSWORD_DEFAULT, array('cost' => $hash_cost_factor));
@@ -361,22 +361,21 @@ class Login {
         $user_name = trim($user_name);
         if (empty($user_name)) {
             $this->errors[] = MESSAGE_USERNAME_EMPTY;
-
         } 
         else {
             $temporary_timestamp = time();
             $user_password_reset_hash = sha1(uniqid(mt_rand(), true));
             $result_row = $this->getUserData($user_name);
-            if (isset($result_row->user_id)) {
+            if (isset($result_row->cad_id)) {
                 $query_update = $this->db_connection->prepare('UPDATE cad_users SET cad_password_reset_hash = :user_password_reset_hash,
                                                                cad_password_reset_timestamp = :user_password_reset_timestamp
-                                                               WHERE cad_nick = :user_name');
+                                                               WHERE cad_nick = :user_nick');
                 $query_update->bindValue(':user_password_reset_hash', $user_password_reset_hash, PDO::PARAM_STR);
                 $query_update->bindValue(':user_password_reset_timestamp', $temporary_timestamp, PDO::PARAM_INT);
-                $query_update->bindValue(':user_name', $user_name, PDO::PARAM_STR);
+                $query_update->bindValue(':user_nick', $user_name, PDO::PARAM_STR);
                 $query_update->execute();
                 if ($query_update->rowCount() == 1) {
-                    $this->sendPasswordResetMail($user_name, $result_row->user_email, $user_password_reset_hash);
+                    $this->sendPasswordResetMail($user_name, $result_row->cad_email, $user_password_reset_hash);
                     return true;
                 } else {
                     $this->errors[] = MESSAGE_DATABASE_ERROR;
@@ -428,9 +427,9 @@ class Login {
             $this->errors[] = MESSAGE_LINK_PARAMETER_EMPTY;
         } else {
             $result_row = $this->getUserData($user_name);
-            if (isset($result_row->user_id) && $result_row->user_password_reset_hash == $verification_code) {
+            if (isset($result_row->cad_id) && $result_row->cad_password_reset_hash == $verification_code) {
                 $timestamp_one_hour_ago = time() - 3600;
-                if ($result_row->user_password_reset_timestamp > $timestamp_one_hour_ago) {
+                if ($result_row->cad_password_reset_timestamp > $timestamp_one_hour_ago) {
                     $this->password_reset_link_is_valid = true;
                 } else {
                     $this->errors[] = MESSAGE_RESET_LINK_HAS_EXPIRED;
