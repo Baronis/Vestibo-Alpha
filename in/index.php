@@ -26,9 +26,7 @@
 		<link href="../css/button-style.css" rel="stylesheet">
 		<link href="../css/imput-style.css" rel="stylesheet">
 		<link href="../css/question-style.css" rel="stylesheet">
-		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="js/menu.js"></script>
-		<script src="js/popup.js"></script>
+		<!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
 		<title>Vestibo</title>
 	</head>
 	<body>
@@ -71,5 +69,8 @@
 				</div>
 			</div>
 		</div>
+		<script src="http://vestibo.com.br/dev/lib/jquery-1.10.2.js"></script>
+		<script src="js/menu.js"></script>
+		<script src="js/popup.js"></script>
 	</body>
 </html>
