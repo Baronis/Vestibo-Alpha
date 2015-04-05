@@ -27,7 +27,7 @@ define("COOKIE_SECRET_KEY", "1gp@TMPS{+$78sfpMJFe-92s");
  * define("EMAIL_SMTP_PORT", 465); a porta usada
  * define("EMAIL_SMTP_ENCRYPTION", "ssl"); e a encriptação do email ssl é dafault em todos...
  *
- * It's really recommended to use SMTP! kkk
+ * It's really recommended to use SMTP!
  *
  */
 define("EMAIL_USE_SMTP", false);
@@ -55,4 +55,10 @@ define("EMAIL_VERIFICATION_SUBJECT", "Ativacao para Vestibo");
 define("EMAIL_VERIFICATION_CONTENT", "Clique aqui para ativar sua conta:");
 //existe vários níveis de segurança, mas o 10 é padrão...
 define("HASH_COST_FACTOR", "10");
+/**
+ * Caminho para a gravação das imagens de perfil dos usuários
+ */
+define('HTTP_IMAGE_PATH', 'http://vestibo.com.br/dev/img/users/');
+define('LOCAL_IMAGE_PATH', '../img/users/');
+define('HTTP_DEFAULT_IMAGE_PATH', 'http://vestibo.com.br/dev/img/user-image.png');
 ?>

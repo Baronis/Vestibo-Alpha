@@ -42,6 +42,11 @@ define("MESSAGE_USERNAME_EMPTY", "Campo nome de usuário está vazio");
 define("MESSAGE_USERNAME_EXISTS", "Desculpe, este nome de usuário já foi utilizado. Escolha outro.");
 define("MESSAGE_USERNAME_INVALID", "Nome de usuário fora do padrão: somente a-Z e números são permitidos, 2 a 64 caracteres");
 define("MESSAGE_USERNAME_SAME_LIKE_OLD_ONE", "Desculpe, o nome de usuário é o mesmo atual. Escolha outro.");
+define("MESSAGE_IMAGE_TOO_BIG", "A imagem é muito grande.<br>Por favor, escolha uma imagem de até 500kb.");
+define("MESSAGE_UNSUPPORTED_IMAGE", "Desculpe, mas este formato de imagem não é suportado");
+define("MESSAGE_PROCESSING_IMAGE_FAILURE", "Erro ao processar a imagem.");
+define("MESSAGE_IMAGE_CHANGE_FAILED", "Desculpe, mas não foi possível enviar a imagem para o banco de dados.");
+define("MESSAGE_IMAGE_CHANGED_SUCCESSFULLY", "Imagem alterada com sucesso.");
 // views
 define("WORDING_BACK_TO_LOGIN", "Voltar ao Login");
 define("WORDING_CHANGE_EMAIL", "Alterar email");

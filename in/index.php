@@ -6,7 +6,7 @@
 	}
 	require_once('../accounts/config/config.php');
 	require_once('../accounts/classes/Login.php');
-
+	require_once('../accounts/translations/pt_BR.php');
 	$login = new Login();
 
 	if ($login->isUserLoggedIn() == false) {
@@ -37,14 +37,14 @@
 					<a href="http://vestibo.com.br/" class="header-item"><img src="../img/nav-logo-blue.png" class="logo" alt="Vestibo"/></a>
 				</div>
 				<div class="header-right">
-					<a onclick="toggle_user_menu()" href="#" class="header-item"><img class="user-anchor" src="../img/user-image.png" alt="1"/></a>
+					<a onclick="toggle_user_menu()" href="#" class="header-item"><img class="user-anchor" <?php echo 'src="'.$_SESSION['user_image'].'"';?> alt="1"/></a>
 				</div>
 			</div>
 			<?php require_once("inc/menu.php"); ?>
 			<div id="u" class="user-esc">
 				<div class="user-container">
 					<?php echo ('<a style="color:black;">'.$_SESSION['user_name'].'</a>'); ?>
-					<a href="?page=4">Perfil</a>
+					<a href="?page=5">Perfil</a>
 					<a href="?logout">Sair</a>
 				</div>
 			</div>

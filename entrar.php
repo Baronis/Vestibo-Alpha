@@ -52,7 +52,7 @@
 					?>
 					<h1 style="color:#003A91; text-align: left;">Entrar</h1>
 					<div class="form-group">
-						<!--username--><input type="enail" name="user_name" class="form-control" id="login_input_username" 
+						<!--username--><input type="text" name="user_name" class="form-control" id="login_input_username" 
 	          			placeholder="Nome de usuário">
 	        		</div>
 	        		<div class="form-group">

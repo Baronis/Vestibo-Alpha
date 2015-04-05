@@ -53,6 +53,11 @@ class Login {
                 // editando a senha
                 $this->editUserPassword($_POST['user_password_old'], $_POST['user_password_new'], $_POST['user_password_repeat']);
             }
+            // usuario tenta trocar a imagem de perfil
+            elseif (isset($_POST['user_edit_submit_image'])) {
+                // trocando a imagem
+                $this->editUserImage($_FILES['new_image']);
+            }
 
         // login via cookie
         } elseif (isset($_COOKIE['rememberme'])) {
@@ -73,10 +78,6 @@ class Login {
             $this->checkIfEmailVerificationCodeIsValid($_GET["user_name"], $_GET["verification_code"]);
         } elseif (isset($_POST["submit_new_password"])) {
             $this->editNewPassword($_POST['user_name'], $_POST['user_password_reset_hash'], $_POST['user_password_new'], $_POST['user_password_repeat']);
-        }
-        //gravatar se precisar...
-        if ($this->isUserLoggedIn() == true) {
-            $this->getGravatarImageUrl($this->user_email);
         }
     }
     //checa se a conexão com o bd foi aberta...
@@ -140,6 +141,10 @@ class Login {
                         $_SESSION['user_id'] = $result_row->cad_id;
                         $_SESSION['user_name'] = $result_row->cad_nick;
                         $_SESSION['user_email'] = $result_row->cad_email;
+                        $_SESSION['user_image'] = $result_row->cad_image;
+                        if (!$_SESSION['user_image']) {
+                            $_SESSION['user_image'] = HTTP_DEFAULT_IMAGE_PATH;
+                        }
                         $_SESSION['user_logged_in'] = 1;
 
                         // declara user_id
@@ -201,6 +206,10 @@ class Login {
                 $_SESSION['user_id'] = $result_row->cad_id;
                 $_SESSION['user_name'] = $result_row->cad_nick;
                 $_SESSION['user_email'] = $result_row->cad_email;
+                $_SESSION['user_image'] = $result_row->cad_image;
+                if (!$_SESSION['user_image']) {
+                    $_SESSION['user_image'] = HTTP_DEFAULT_IMAGE_PATH;
+                }
                 $_SESSION['user_logged_in'] = 1;
                 $this->user_id = $result_row->cad_id;
                 $this->user_name = $result_row->cad_nick;
@@ -305,12 +314,10 @@ class Login {
             $query_user->bindValue(':user_email', $user_email, PDO::PARAM_STR);
             $query_user->execute();
             $result_row = $query_user->fetchObject();
-
             // se o email existe
-            if (isset($result_row->user_id)) {
+            if (isset($result_row->cad_id)) {
                 $this->errors[] = MESSAGE_EMAIL_ALREADY_EXISTS;
-            } 
-            else {
+            } else {
                 $query_edit_user_email = $this->db_connection->prepare('UPDATE cad_users SET cad_email = :user_email WHERE cad_id = :user_id');
                 $query_edit_user_email->bindValue(':user_email', $user_email, PDO::PARAM_STR);
                 $query_edit_user_email->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
@@ -325,7 +332,7 @@ class Login {
             }
         }
     }
-    //editar a senha do usuario..............
+    //editar a senha do usuario
     public function editUserPassword($user_password_old, $user_password_new, $user_password_repeat) {
         if (empty($user_password_new) || empty($user_password_repeat) || empty($user_password_old)) {
             $this->errors[] = MESSAGE_PASSWORD_EMPTY;
@@ -337,7 +344,7 @@ class Login {
         } else {
             $result_row = $this->getUserData($_SESSION['user_name']);
             if (isset($result_row->cad_password_hash)) {
-                if (password_verify($user_password_old, $result_row->user_password_hash)) {
+                if (password_verify($user_password_old, $result_row->cad_password_hash)) {
                     $hash_cost_factor = (defined('HASH_COST_FACTOR') ? HASH_COST_FACTOR : null);
                     $user_password_hash = password_hash($user_password_new, PASSWORD_DEFAULT, array('cost' => $hash_cost_factor));
                     $query_update = $this->db_connection->prepare('UPDATE cad_users SET cad_password_hash = :user_password_hash WHERE cad_id = :user_id');
@@ -480,15 +487,75 @@ class Login {
         return $this->user_name;
     }
     //opção para a imagem pegando ela pelo 'gravatar'
-    public function getGravatarImageUrl($email, $s = 50, $d = 'mm', $r = 'g', $atts = array()) {
-        $url = 'http://www.gravatar.com/avatar/';
-        $url .= md5(strtolower(trim($email)));
-        $url .= "?s=$s&d=$d&r=$r&f=y";
-        $this->user_gravatar_image_url = $url;
-        $url = '<img src="' . $url . '"';
-        foreach ($atts as $key => $val)
-            $url .= ' ' . $key . '="' . $val . '"';
-        $url .= ' />';
-        $this->user_gravatar_image_tag = $url;
+    public function editUserImage($image) {
+        if ($this->databaseConnection()) {
+            if (empty($image)) {
+                $this->errors[] = MESSAGE_IMAGE_INVALID;
+            } else {
+                // processa a imagem
+                $max_file_size = 1024*500;
+                $valid_exts = array('jpeg', 'jpg', 'png');
+                $s = 140;
+                if($image['size'] < $max_file_size) {
+                    // get file extension
+                    $ext = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+                    if (in_array($ext, $valid_exts)) {
+                        // resize image
+                        $fileName = md5(uniqid(time())).'.'.$ext;
+                        $path = LOCAL_IMAGE_PATH.$fileName;
+                        $dbPath = HTTP_IMAGE_PATH.$fileName;
+                        $user_image_url = $this->setIimage($path, $ext, $image, $s, $s);
+                        if ($user_image_url) {
+                            $query_edit = $this->db_connection->prepare('UPDATE cad_users SET cad_image = :user_image_url WHERE cad_nick = :user_name LIMIT 1;');
+                            $query_edit->bindValue(':user_image_url', $dbPath, PDO::PARAM_STR);
+                            $query_edit->bindValue(':user_name', $_SESSION['user_name'], PDO::PARAM_STR);
+                            $query_edit->execute();
+                            if ($query_edit->rowCount() == 1) {
+                                $_SESSION['user_image'] = $user_image_url;
+                                $this->messages[] = MESSAGE_IMAGE_CHANGED_SUCCESSFULLY;
+                            } else {
+                                $this->errors[] = MESSAGE_IMAGE_CHANGE_FAILED;
+                            }
+                        } else {
+                            $this->errors[] = MESSAGE_PROCESSING_IMAGE_FAILURE; 
+                        }
+                    } else {
+                        $this->errors[] = MESSAGE_UNSUPPORTED_IMAGE;
+                    }
+                } else{
+                    $this->errors[] = MESSAGE_IMAGE_TOO_BIG;
+                }
+            }
+        }
+    }
+
+    public function setIimage($path, $endPath, $image, $width, $height){
+        // Get original image x y
+        list($w, $h) = getimagesize($image['tmp_name']);
+        // calculate new image size with ratio
+        $ratio = max($width/$w, $height/$h);
+        $h = ceil($height / $ratio);
+        $x = ($w - $width / $ratio) / 2;
+        $w = ceil($width / $ratio);
+        // new file name
+
+
+        // read binary data from image file
+        $imgString = file_get_contents($image['tmp_name']);
+        $image = imagecreatefromstring($imgString);
+        $tmp = imagecreatetruecolor($width, $height);
+        imagecopyresampled($tmp, $image, 0, 0, $x, 0, $width, $height, $w, $h);
+
+        // Save image
+        if ($endPath == 'jpeg' || $endPath == 'jpg' || $endPath == 'jpe') {
+            imagejpeg($tmp, $path, 100);
+        } elseif ($endPath == 'png') {
+            imagepng($tmp, $path, 0);
+        } else {
+            return false;
+        }
+        imagedestroy($image);
+        imagedestroy($tmp);
+        return $path;
     }
 }

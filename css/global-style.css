@@ -477,6 +477,20 @@ li{
   background-color: #FFF;
   padding: 15px;
 }
+.popup-form {
+  padding: 10px;
+  text-align: left;
+  background-color: #eee;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+.popup-alert {
+  text-align: left;
+  padding: 7px;
+  background-color: #eee;
+  color: #003A91;
+  border-radius: 5px;
+}
 /*
         =======================================================================
         =====        VESTIBO ALPHA === Global Stylesheet === LAMPI        =====
