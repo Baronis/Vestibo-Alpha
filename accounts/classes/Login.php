@@ -504,20 +504,24 @@ class Login {
                         $fileName = md5(uniqid(time())).'.'.$ext;
                         $path = LOCAL_IMAGE_PATH.$fileName;
                         $dbPath = HTTP_IMAGE_PATH.$fileName;
-                        $user_image_url = $this->setIimage($path, $ext, $image, $s, $s);
-                        if ($user_image_url) {
-                            $query_edit = $this->db_connection->prepare('UPDATE cad_users SET cad_image = :user_image_url WHERE cad_nick = :user_name LIMIT 1;');
-                            $query_edit->bindValue(':user_image_url', $dbPath, PDO::PARAM_STR);
-                            $query_edit->bindValue(':user_name', $_SESSION['user_name'], PDO::PARAM_STR);
-                            $query_edit->execute();
-                            if ($query_edit->rowCount() == 1) {
-                                $_SESSION['user_image'] = $user_image_url;
-                                $this->messages[] = MESSAGE_IMAGE_CHANGED_SUCCESSFULLY;
+                        if ($this->deleteUsersCurrentImage()) {
+                            $user_image_url = $this->setIimage($path, $ext, $image, $s, $s);
+                            if ($user_image_url) {
+                                $query_edit = $this->db_connection->prepare('UPDATE cad_users SET cad_image = :user_image_url WHERE cad_nick = :user_name LIMIT 1;');
+                                $query_edit->bindValue(':user_image_url', $dbPath, PDO::PARAM_STR);
+                                $query_edit->bindValue(':user_name', $_SESSION['user_name'], PDO::PARAM_STR);
+                                $query_edit->execute();
+                                if ($query_edit->rowCount() == 1) {
+                                    $_SESSION['user_image'] = $user_image_url;
+                                    $this->messages[] = MESSAGE_IMAGE_CHANGED_SUCCESSFULLY;
+                                } else {
+                                    $this->errors[] = MESSAGE_IMAGE_CHANGE_FAILED;
+                                }
                             } else {
-                                $this->errors[] = MESSAGE_IMAGE_CHANGE_FAILED;
+                                $this->errors[] = MESSAGE_PROCESSING_IMAGE_FAILURE; 
                             }
                         } else {
-                            $this->errors[] = MESSAGE_PROCESSING_IMAGE_FAILURE; 
+                            $this->errors[] = MESSAGE_OLDIMAGE_DELETE_FAILED;
                         }
                     } else {
                         $this->errors[] = MESSAGE_UNSUPPORTED_IMAGE;
@@ -537,15 +541,11 @@ class Login {
         $h = ceil($height / $ratio);
         $x = ($w - $width / $ratio) / 2;
         $w = ceil($width / $ratio);
-        // new file name
-
-
         // read binary data from image file
         $imgString = file_get_contents($image['tmp_name']);
         $image = imagecreatefromstring($imgString);
         $tmp = imagecreatetruecolor($width, $height);
         imagecopyresampled($tmp, $image, 0, 0, $x, 0, $width, $height, $w, $h);
-
         // Save image
         if ($endPath == 'jpeg' || $endPath == 'jpg' || $endPath == 'jpe') {
             imagejpeg($tmp, $path, 100);
@@ -557,5 +557,15 @@ class Login {
         imagedestroy($image);
         imagedestroy($tmp);
         return $path;
+    }
+
+    public function deleteUsersCurrentImage() {
+        $result_row = $this->getUserData($_SESSION['user_name']);
+        $fileName = explode(DIRECTORY_SEPARATOR, $result_row->cad_image);
+        $path = LOCAL_IMAGE_PATH.DIRECTORY_SEPARATOR.end($fileName);
+        if(unlink($path)) {
+            return true;
+        }
+        return false;
     }
 }
