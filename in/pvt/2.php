@@ -102,8 +102,8 @@ elseif(!isset($_SESSION['curTask']) && isset($_POST['sub'])):
 	$v = $_SESSION['user_name'].time();
 	$_SESSION['curTask'] = sha1($v);
 	require('inc/defines.php');
-	require('inc/sortQuestions.php');
-	$sort = new sortQuestions();
+	require('inc/SortQuestions.php');
+	$sort = new SortQuestions();
 
 else: ?>
 <div class="simple-container">
