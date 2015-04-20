@@ -1,6 +1,5 @@
 <?php
-// $sort = new sortQuestions(); Utilize esta linha para chamar a classe!
-// Sorteador de Questões NAO TESTADO (r4)
+// Sorteador de Questões PARCIALMENTE TESTADO (r4)
 class sortQuestions {
 	// Variável que armazena a conexão
 	private $conn 	= null;
@@ -39,7 +38,7 @@ class sortQuestions {
             return true;
         } else {
             try {
-                $this->conn = new PDO('mysql:host=mysql.hostinger.com.br;dbname=u395938104_1;charset=utf8', 'u395938104_adm', 'admpass');
+                $this->conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USER, DB_PASS);
                 return true;
             } catch (PDOException $e) {
                 die (ERROR_DB_CONN);
