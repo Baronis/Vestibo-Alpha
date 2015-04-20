@@ -2,7 +2,9 @@
 // PAGE 2: Exercícios
 if (isset($_SESSION['curTask'])):
 
-//TO DO Continuar teste gerado! ===
+	require('inc/FormBehaviour.php');
+	$form = new FormBehaviour();
+	var_dump($_POST);
 
 elseif(!isset($_SESSION['curTask']) && !isset($_POST['sub'])): ?>
 <div id="popup">
@@ -23,7 +25,7 @@ elseif(!isset($_SESSION['curTask']) && !isset($_POST['sub'])): ?>
 				<div class="top">
 					<form id="por" method="post" action="index?page=2">
 					<input type="hidden" name="sub" value="01">
-					<input type="hidden" name="nQ" value="2">
+					<input type="hidden" name="nQ" value="20">
 					<p>Português<a style="float: right;" href="javascript:{}" onclick="document.getElementById('por').submit(); return false;">Começar!</a></p>
 					</form>
 				</div>
@@ -32,7 +34,7 @@ elseif(!isset($_SESSION['curTask']) && !isset($_POST['sub'])): ?>
 				<div class="alt">
 					<form id="mat" method="post" action="index?page=2">
 					<input type="hidden" name="sub" value="2">
-					<input type="hidden" name="nQ" value="2">
+					<input type="hidden" name="nQ" value="20">
 					<p>Matemática<a style="float: right;" href="javascript:{}" onclick="document.getElementById('mat').submit(); return false;">Começar!</a></p>
 					</form>
 				</div>
@@ -41,7 +43,7 @@ elseif(!isset($_SESSION['curTask']) && !isset($_POST['sub'])): ?>
 				<div class="top">
 					<form id="his" method="post" action="index?page=2">
 					<input type="hidden" name="sub" value="3">
-					<input type="hidden" name="nQ" value="2">
+					<input type="hidden" name="nQ" value="20">
 					<p>História<a style="float: right;" href="javascript:{}" onclick="document.getElementById('his').submit(); return false;">Começar!</a></p>
 					</form>
 				</div>
@@ -50,7 +52,7 @@ elseif(!isset($_SESSION['curTask']) && !isset($_POST['sub'])): ?>
 				<div class="alt">
 					<form id="geo" method="post" action="index?page=2">
 					<input type="hidden" name="sub" value="4">
-					<input type="hidden" name="nQ" value="2">
+					<input type="hidden" name="nQ" value="20">
 					<p>Geografia<a style="float: right;" href="javascript:{}" onclick="document.getElementById('geo').submit(); return false;">Começar!</a></p>
 					</form>
 				</div>
@@ -59,7 +61,7 @@ elseif(!isset($_SESSION['curTask']) && !isset($_POST['sub'])): ?>
 				<div class="top">
 					<form id="qui" method="post" action="index?page=2">
 					<input type="hidden" name="sub" value="5">
-					<input type="hidden" name="nQ" value="3">
+					<input type="hidden" name="nQ" value="20">
 					<p>Química<a style="float: right;" href="javascript:{}" onclick="document.getElementById('qui').submit(); return false;">Começar!</a></p>
 					</form>
 				</div>
@@ -68,7 +70,7 @@ elseif(!isset($_SESSION['curTask']) && !isset($_POST['sub'])): ?>
 				<div class="alt">
 					<form id="fis" method="post" action="index?page=2">
 					<input type="hidden" name="sub" value="6">
-					<input type="hidden" name="nQ" value="2">
+					<input type="hidden" name="nQ" value="20">
 					<p>Física<a style="float: right;" href="javascript:{}" onclick="document.getElementById('fis').submit(); return false;">Começar!</a></p>
 					</form>
 				</div>
@@ -77,7 +79,7 @@ elseif(!isset($_SESSION['curTask']) && !isset($_POST['sub'])): ?>
 				<div class="top">
 					<form id="bio" method="post" action="index?page=2">
 					<input type="hidden" name="sub" value="7">
-					<input type="hidden" name="nQ" value="2">
+					<input type="hidden" name="nQ" value="20">
 					<p>Biologia<a style="float: right;" href="javascript:{}" onclick="document.getElementById('bio').submit(); return false;">Começar!</a></p>
 					</form>
 				</div>
@@ -86,7 +88,7 @@ elseif(!isset($_SESSION['curTask']) && !isset($_POST['sub'])): ?>
 				<div class="alt">
 					<form id="ing" method="post" action="index?page=2">
 					<input type="hidden" name="sub" value="8">
-					<input type="hidden" name="nQ" value="2">
+					<input type="hidden" name="nQ" value="20">
 					<p>Inglês<a style="float: right;" href="javascript:{}" onclick="document.getElementById('ing').submit(); return false;">Começar!</a></p>
 					</form>
 				</div>
@@ -96,11 +98,13 @@ elseif(!isset($_SESSION['curTask']) && !isset($_POST['sub'])): ?>
 </div>
 <?php
 elseif(!isset($_SESSION['curTask']) && isset($_POST['sub'])):
+
 	$v = $_SESSION['user_name'].time();
-	//$_SESSION['curTask'] = sha1($v);
+	$_SESSION['curTask'] = sha1($v);
 	require('inc/defines.php');
 	require('inc/sortQuestions.php');
 	$sort = new sortQuestions();
+
 else: ?>
 <div class="simple-container">
 	<div class="content">
