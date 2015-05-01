@@ -1,17 +1,19 @@
-var q=21;var p=q-1;//q - variavel da sessao de quantas questoes vao ter
-var me=0;
+var qtdquestions=21;var p=qtdquestions-1;
+//at é de atual
+var numquesat=0;
 var atpag=1;
-var sla=q/10;
-var qtdpag= Math.ceil(sla);
+var contapags=qtdquestions/10;
+var qtdpag= Math.ceil(contapags);
 alert("ATENCAO! Ao se reponder uma questao a cor verde significa que a questao foi repondida, e nao que esta correta ou incorreta.");
 //ao se inicializa executa
 window.onload = function(){showpages();}
+//exibe os blocos de questoes ou os esconde
 function showpages()
 {
-	alert("Pagina: "+atpag+"/"+qtdpag);//ver se fica melhor ex:qtdpage=3, Pagina: 1 de 3 ou Pagina: 1/3
+	alert("Pagina: "+atpag+" de "+qtdpag);
 	if(atpag == 1 && qtdpag <= 1 && p<10)
 	{
-		for(var i=0;i<q; i++)
+		for(var i=0;i<qtdquestions; i++)
 		{
 			document.getElementById("div"+i).style.visibility="visible";
 			document.getElementById("div"+i).style.display = "block";
@@ -23,47 +25,46 @@ function showpages()
 		{
 			document.getElementById("div"+i).style.visibility = "visible";
 			document.getElementById("div"+i).style.display = "block";
-			m=i;
-		};me=m;
-		for(var i=10;i<=q; i++)
+			numques=i;
+		};numquesat=numques;
+		for(var i=10;i<=qtdquestions; i++)
 		{
 			document.getElementById("div"+i).style.visibility="hidden";
 			document.getElementById("div"+i).style.display = "none";
 		};
 		atpag++;
 	}
-			
-	else if(atpag > 1)//ver se comeca com pagina =1 ou null, posssivelmente melhor comeca com 1
+	else if(atpag > 1)
 	{
-		var test=q-((atpag*10)-10);
+		var test=qtdquestions-((atpag*10)-10);
 		if (test<10) 
 		{
-			for (var x = me; x <= q; x++) {
+			for (var x = numquesat; x <= qtdquestions; x++) {
 				document.getElementById("div"+x).style.visibility="visible";
 				document.getElementById("div"+x).style.display = "block";
 			};
-			for(var i=me;i>=0;i--){
+			for(var i=numquesat;i>=0;i--){
 				document.getElementById("div"+i).style.visibility="hidden";
 				document.getElementById("div"+i).style.display = "none";
 			};
 		}
 		else{
-			var m2=m+10;
-			for(var x=me;x<m2;x++)
+			var numques2=numques+10;
+			for(var x=numquesat;x<numques2;x++)
 			{
 				document.getElementById("div"+x).style.visibility="visible";
 				document.getElementById("div"+x).style.display = "block";
-				m=x;
+				numques=x;
 			};
-			for(var i=me;i>=0;i--){
+			for(var i=numquesat;i>=0;i--){
 				document.getElementById("div"+i).style.visibility="hidden";
 				document.getElementById("div"+i).style.display = "none";
 			};
-			for (var x = m2; x < q; x++) {
+			for (var x = numques2; x < qtdquestions; x++) {
 				document.getElementById("div"+x).style.visibility="hidden";
 				document.getElementById("div"+x).style.display = "none";
 			};
-			me=m;
+			numquesat=numques;
 			atpag++;
 		}
 	}
@@ -72,6 +73,7 @@ function feito(local)
 {
 	document.getElementById(local).style.color="#1EA206";
 }
+//confere se todos as questoes foram respondidas
 function verifica(){
 	var campoquestao=document.getElementsByName("divs");
 	var c = 1;
