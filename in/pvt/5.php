@@ -61,7 +61,7 @@
 							<input type="submit" class="btn btn-default" name="user_edit_submit_name" value="Alterar" />
 	        				</input>
 						</form>
-						<a href="javascript:void(0)" onclick="open_close_popup();">Cancelar</a>
+						<a href="javascript:void(0)" onclick="close_popup();">Cancelar</a>
 					</div>
 				</div>
 			</div>
@@ -86,15 +86,13 @@
 							<input type="submit" class="btn btn-default" name="user_edit_submit_password" value="Alterar" />
 	        				</input>
 						</form>
-						<a href="javascript:void(0)" onclick="open_close_popup();">Cancelar</a>
+						<a href="javascript:void(0)" onclick="close_popup();">Cancelar</a>
 					</div>
 				</div>
 			</div>
-
 			';
 		} elseif ($_GET['e'] == 'email') {
 			echo '
-			
 			<div id="popup">
 				<div class="popup-box">
 					<div class="popup-box-content">
@@ -108,11 +106,10 @@
 							<input type="submit" class="btn btn-default" name="user_edit_submit_email" value="Alterar" />
 	        				</input>
 						</form>
-						<a href="javascript:void(0)" onclick="open_close_popup();">Cancelar</a>
+						<a href="javascript:void(0)" onclick="close_popup();">Cancelar</a>
 					</div>
 				</div>
 			</div>
-
 			';
 		} elseif ($_GET['e'] == 'image') {
 			echo '
@@ -128,7 +125,7 @@
 							<input type="submit" class="btn btn-default" name="user_edit_submit_image" value="Alterar" />
 	        				</input>
 						</form>
-						<a href="javascript:void(0)" onclick="open_close_popup();">Cancelar</a>
+						<a href="javascript:void(0)" onclick="close_popup();">Cancelar</a>
 					</div>
 				</div>
 			</div>

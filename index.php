@@ -1,9 +1,7 @@
 ﻿<?php
 	require_once('accounts/config/config.php');
 	require_once('accounts/classes/Login.php');
-
 	$login = new Login();
-
 	if ($login->isUserLoggedIn() == true) {
 	    Header('Location: accounts/loading.php');
 	}
@@ -40,6 +38,7 @@
 		   }(document, 'script', 'facebook-jssdk'));
 		</script>
 		<div class="page">
+		<div class="like"><div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div></div>
 			<div class="header">
 				<div class="header-content">
 					<div class="header-left">
@@ -50,9 +49,8 @@
 						<a href="entrar" class="btn btn-lg btn-default">Entrar</a>
 					</div>
 				</div>
-			</div><!-- /header -->
+			</div>
 			<div class="body">
-				<div class="like"><div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div></div>
 				<div class="centered">
 					<div class="simple-container">
 						<div class="content">
@@ -65,17 +63,17 @@
 							<h1>Funcionalidades</h1>
 			            	<p class="lead">O Vestibo é uma Plataforma que funciona de acordo com sua dificuldade, assim o material certo sempre será apresentado na hora certa a você...</p>
 	        				<div class="co">
-	    						<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+	    						<img class="img-circle" src="img/divulgacao/Pen.png">
 	    						<h2>Treine</h2>
 								<p>Com o Vestibo você pode estudar de uma forma prática e eficiente, com os melhores conteúdos didáticos da internet.</p>
 	    					</div>
 	        				<div class="co">
-	    						<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+	    						<img class="img-circle" src="img/divulgacao/Share.png">
 	    						<h2>Compartilhe</h2>
 								<p>Com a plataforma você também pode se reunir com seus amigos via Facebook e compartilhar seu progresso com eles.</p>
 	    					</div>
 	        				<div class="co">
-	    						<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+	    						<img class="img-circle" src="img/divulgacao/Book.png">
 	    						<h2>Aproveite</h2>
 	    						<p> Cadastre-se já e comece a estudar firme para os vestibulares e Enem, tudo isso acompanhado de seus amigos.</p>
 	    					</div>
@@ -92,15 +90,27 @@
 						</div>
 					</div>
 					<div class="footer">
-						<div class="f-left">Vestibo &copy; 2014.</div>
+						<div class="f-left">Vestibo &copy; 2015.</div>
 						<div class="f-right">
 							<a href="http://vestibo.com.br/termos.html">Termos e condições</a>
 							<a href="http://vestibo.com.br/quem-somos.html">Quem somos</a>
 						</div>
 					</div>
 				</div>
-			</div><!-- /body -->
-		</div><!-- /page -->
+			</div>
+		</div>
+		<div id="popup">
+			<div class="popup-box">
+				<div class="popup-box-content">
+					<h1>Atenção!</h1>
+					<img style="padding: 5px; width: 30%; height: 30%;" src="../img/alerta.png">
+					<p class="lead">Este site se encontra em fase inicial de desenvolvimento. Seu uso é destinado apenas para os <b>desenvolvedores</b> da plataforma!</p>
+					<a href="javascript:void(0)" onclick="close_popup();" class="btn btn-lg btn-default">Eu sou um desenvolvedor!</a>
+				</div>
+			</div>
+		</div>
+		<script src="lib/jquery-1.10.2.js"></script>
+		<script src="in/js/popup.js"></script>
 	</body>
 </html>
 

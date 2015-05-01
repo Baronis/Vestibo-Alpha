@@ -9,7 +9,6 @@ class sortQuestions {
 		if($this->databaseConnection()) {
 			if(!isset($_POST['nQ'])) {die(ERROR_GET_NUMBER);}
 			$nQ = $_POST['nQ'];
-
 			if(isset($_POST['sub'])){
 				$this->prod = $this->sortBySubject($nQ);
 			} else {
@@ -24,8 +23,10 @@ class sortQuestions {
 				}
 			}
 			if($this->prod) {
-				$this->showQuestions();
-				//unset($_SESSION['curTask']);
+				$_SESSION['prod'] = $this->prod;
+				$_SESSION['prepared'] = true;
+				header("Location: index?page=2");
+				//$this->showQuestions();
 			}
 		} else {
 			echo ERROR_DB;
@@ -93,48 +94,6 @@ class sortQuestions {
 	    }
 		shuffle($fRes);
 		return $fRes;
-	}
-
-	// Adiciona as questões buscadas à página
-	private function showQuestions() {
-		$x = count($this->prod);
-		$output = '	<div class="simple-container">
-						<div class="content">
-							<form action="index?page=2" method="post">';
-		for ($i=0; $i < $x; $i++) {
-			$a = $this->prod[$i];
-			$output .= '<div class="q-box">
-							<div class="q-top-box">
-								<div class="top">
-									<p> '.$a[1].' - '.$a[2].' ('.$a[3].')</p><hr>
-									<p>'.$a[4].'</p>	
-								</div>
-							</div>
-							<div class="q-alt-box">
-								<div class="alt">
-									<input value="1" type="radio" id="'.$a[0].'" name="'.$a[3].'"></input><label for="'.$a[0].'">'.$a[5].'</label>
-									<input value="2" type="radio" id="'.$a[0].'" name="'.$a[3].'"></input><label for="'.$a[0].'">'.$a[6].'</label>
-									<input value="3" type="radio" id="'.$a[0].'" name="'.$a[3].'"></input><label for="'.$a[0].'">'.$a[7].'</label>
-									<input value="4" type="radio" id="'.$a[0].'" name="'.$a[3].'"></input><label for="'.$a[0].'">'.$a[8].'</label>
-									<input value="5" type="radio" id="'.$a[0].'" name="'.$a[3].'"></input><label for="'.$a[0].'">'.$a[9].'</label>
-								</div>
-							</div>';
-			if(!empty($a[12])) {
-				$output .= '<div class="q-top-box">
-								<div class="top">
-									<p>'.$a[12].'</p>
-								</div>
-							</div>
-						</div>';
-			} else {
-				$output .= '</div>';
-			}
-		}
-		$output .= '<input type="submit">
-				</form>
-			</div>
-		</div>';
-		echo $output;
 	}
 }
 ?>

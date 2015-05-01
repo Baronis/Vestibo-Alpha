@@ -1,6 +1,6 @@
 /*
         VESTIBO ALPHA === Global Stylesheet === LAMPI
-        Última revisão: 15/01/2014 (Matheus Baroni)
+        Última revisão: 25/04/2015 (Matheus Baroni)
 
 >>>     Indice:
         
@@ -465,7 +465,7 @@ li{
   position: fixed;
   width: 100%; height: 120%;
   background-color: rgba(0,0,0,0.7);
-  display: block;
+  display: none;
 }
 .popup-box{
   width: 550px;

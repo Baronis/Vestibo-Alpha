@@ -2,7 +2,6 @@
 	require_once('../accounts/config/config.php');
 	require_once('../accounts/classes/Login.php');
 	$login = new Login();
-
 	if ($login->isUserLoggedIn() == false) {
 	    Header('Location: ../entrar.php');
 	}
@@ -18,9 +17,8 @@
 	    <link rel="icon" href="../img/favicon.ico">
 		<link href="../css/global-style.css" rel="stylesheet">
 		<link href="../css/button-style.css" rel="stylesheet">
-		<link href="../css/imput-style.css" rel="stylesheet">
+		<link href="../css/input-style.css" rel="stylesheet">
 		<link href="../css/question-style.css" rel="stylesheet">
-		<!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
 		<title>Vestibo</title>
 	</head>
 	<body>
@@ -55,15 +53,15 @@
 			</div>
 			<div class="footer">
 				<div class="f-left">
-					Vestibo &copy; 2014.
+					Vestibo &copy; 2015.
 				</div>
 				<div class="f-right">
-					<a href="http://vestibo.com.br/dev/termos">Termos e condições</a>
-					<a href="http://vestibo.com.br/dev/quem-somos">Quem somos</a>
+					<a href="http://vestibo.com.br/termos">Termos e condições</a>
+					<a href="http://vestibo.com.br/quem-somos">Quem somos</a>
 				</div>
 			</div>
 		</div>
-		<script src="http://vestibo.com.br/dev/lib/jquery-1.10.2.js"></script>
+		<script src="../lib/jquery-1.10.2.js"></script>
 		<script src="js/menu.js"></script>
 		<script src="js/popup.js"></script>
 	</body>
