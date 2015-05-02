@@ -95,7 +95,7 @@ function feito(local) {
 		for (var x = 0; x < campoquestao.length; x++){
 			if(locais[x] ==undefined){pageteste++;locais[x]=local;testvalue=false;break;}
 		};
-	}testvalue=false;alert(pageteste);
+	}testvalue=false;
 }
 //confere se todos as questoes foram respondidas
 function verifica() {
