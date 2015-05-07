@@ -3,18 +3,18 @@
         =====        VESTIBO ALPHA === FormBehaviour  (Javascript) === LAMPI     =====
         ==============================================================================
 
-        Ultima revisao: 02/05/2015		(Dennys Pistoni e William Vecchini)
+        Ultima revisao: 07/05/2015		(Dennys Pistoni e William Vecchini)
 */
-var pageteste=0;
-var qtdquestions=21;var p=qtdquestions-1;
+	var pageteste=0;
+var qtdquestions=11;var p=qtdquestions-1;
 //at é de atual
 var numquesat=0;
 var atpag=1;
 var contapags=qtdquestions/10;
 var qtdpag= Math.ceil(contapags);
-var campoquestao=document.getElementsByName("divs");
-locais = new Array(campoquestao.length);
 var testvalue =false;
+var campoquestao=11;
+locais = new Array(campoquestao);
 alert("ATENCAO! Ao se reponder uma questao a cor verde significa que a questao foi repondida, e nao que esta correta ou incorreta.");
 //ao se inicializa executa
 window.onload = function(){showpages();}
@@ -88,19 +88,19 @@ function showpages() {
 //marca a quetao feita e liga as funcoes verifica e showpages
 function feito(local) {
 	document.getElementById(local).style.color="#1EA206";
-	for (var x = 0; x < campoquestao.length; x++){
+	for (var x = 0; x < campoquestao; x++){
 		if(locais[x]==local){testvalue =true;}
 	};
 	if(testvalue == false){
-		for (var x = 0; x < campoquestao.length; x++){
+		for (var x = 0; x < campoquestao; x++){
 			if(locais[x] ==undefined){pageteste++;locais[x]=local;testvalue=false;break;}
 		};
-	}testvalue=false;
+	}testvalue=false;alert(pageteste);
 }
 //confere se todos as questoes foram respondidas
 function verifica() {
 	var c = 1;
-	for (var x = 0; x < campoquestao.length; x++)
+	for (var x = 0; x < campoquestao; x++)
 	{
 		var radios = document.getElementsByName("id_res"+x);
 		if(document.getElementById("div"+x).style.visibility == "visible" && document.getElementById("div"+x).style.display == "block" )
@@ -125,6 +125,8 @@ function encerra(){
 		contaques=qtdquestions-numquesat;
 		if(pageteste == contaques){
 			alert("encerrou");
+			document.FormQuestions.action="";
+			document.FormQuestions.submit();
 		}
 	}
 }
