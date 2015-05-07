@@ -149,11 +149,12 @@ class FormBehaviour {
 		$x = count($this->curProd);
 		$output = '	<div class="simple-container">
 						<div class="content">
-							<form action="index?page=2" method="post">
+							<form action="" method="post" name="FormQuestions">
 							<input type="hidden" name="form" value="'.$this->numberOfCurPage.'">';
 		for ($i=0; $i < $x; $i++) {
 			$a = $this->curProd[$i];
-			$output .= '<div class="q-box">
+			$l="div".$i;
+			$output .= '<div class="q-box" id="div'.$i.'">
 							<div class="q-top-box">
 								<div class="top">
 									<p> '.$a[1].' - '.$a[2].' ('.$a[3].')</p><hr>
@@ -162,11 +163,11 @@ class FormBehaviour {
 							</div>
 							<div class="q-alt-box">
 								<div class="alt">
-									<input value="1" type="radio" id="'.$a[0].'" name="'.$a[3].'"></input><label for="'.$a[0].'">'.$a[5].'</label>
-									<input value="2" type="radio" id="'.$a[0].'" name="'.$a[3].'"></input><label for="'.$a[0].'">'.$a[6].'</label>
-									<input value="3" type="radio" id="'.$a[0].'" name="'.$a[3].'"></input><label for="'.$a[0].'">'.$a[7].'</label>
-									<input value="4" type="radio" id="'.$a[0].'" name="'.$a[3].'"></input><label for="'.$a[0].'">'.$a[8].'</label>
-									<input value="5" type="radio" id="'.$a[0].'" name="'.$a[3].'"></input><label for="'.$a[0].'">'.$a[9].'</label>
+									<input value="1" type="radio" id="'.$a[0].'" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'">'.$a[5].'</label>
+									<input value="2" type="radio" id="'.$a[0].'" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'">'.$a[6].'</label>
+									<input value="3" type="radio" id="'.$a[0].'" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'">'.$a[7].'</label>
+									<input value="4" type="radio" id="'.$a[0].'" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'">'.$a[8].'</label>
+									<input value="5" type="radio" id="'.$a[0].'" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'">'.$a[9].'</label>
 								</div>
 							</div>';
 			if(!empty($a[12])) {
@@ -180,7 +181,7 @@ class FormBehaviour {
 				$output .= '</div>';
 			}
 		}
-		$output .= '<input type="submit">
+		$output .= '<input type="submit" onclikck="btFaz();">
 				</form>
 			</div>
 		</div>';
