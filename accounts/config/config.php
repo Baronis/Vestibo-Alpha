@@ -32,7 +32,7 @@ define("EMAIL_SMTP_ENCRYPTION", "ssl");
 /**
  * Configuração para o email de redefinição...
  */
-define("EMAIL_PASSWORDRESET_URL", "http://vestibo.com.br/dev/esqueci");
+define("EMAIL_PASSWORDRESET_URL", "http://vestibo.com.br/esqueci");
 define("EMAIL_PASSWORDRESET_FROM", "naoresponda@vestibo.com.br");
 define("EMAIL_PASSWORDRESET_FROM_NAME", "Vestibo");
 define("EMAIL_PASSWORDRESET_SUBJECT", "Redefinir sua senha");
@@ -40,7 +40,7 @@ define("EMAIL_PASSWORDRESET_CONTENT", "Clique aqui para redefinir sua senha:");
 /**
  * Configuração para o email de ativação
  */
-define("EMAIL_VERIFICATION_URL", "http://vestibo.com.br/dev/cadastrar");
+define("EMAIL_VERIFICATION_URL", "http://vestibo.com.br/cadastrar");
 define("EMAIL_VERIFICATION_FROM", "naoresponda@vestibo.com.br");
 define("EMAIL_VERIFICATION_FROM_NAME", "Vestibo");
 define("EMAIL_VERIFICATION_SUBJECT", "Ativacao para Vestibo");
@@ -50,9 +50,9 @@ define("HASH_COST_FACTOR", "10");
 /**
  * Caminho para a gravação das imagens de perfil dos usuários
  */
-define('HTTP_IMAGE_PATH', 'http://vestibo.com.br/dev/img/users/');
+define('HTTP_IMAGE_PATH', 'http://vestibo.com.br/img/users/');
 define('LOCAL_IMAGE_PATH', '../img/users/');
-define('HTTP_DEFAULT_IMAGE_PATH', 'http://vestibo.com.br/dev/img/user-image.png');
+define('HTTP_DEFAULT_IMAGE_PATH', 'http://vestibo.com.br/img/user-image.png');
 
 //conteudo do pt_BR 
 

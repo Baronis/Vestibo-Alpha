@@ -5,7 +5,7 @@
 
         Ultima revisao: 07/05/2015		(Dennys Pistoni e William Vecchini)
 */
-	var pageteste=0;
+var pageteste=0;
 var qtdquestions=11;var p=qtdquestions-1;
 //at é de atual
 var numquesat=0;
@@ -131,7 +131,7 @@ function encerra(){
 	}
 }
 //executa todas as funcoes relacionadas ao botao
- function btFaz(){
+function btFaz(){
 	verifica();
 	showpages();
 	encerra();

@@ -4,7 +4,7 @@ if (isset($_SESSION['curTask'])):
 
 	require_once('inc/FormBehaviour.php');
 	$form = new FormBehaviour();
-	var_dump($_POST);
+	?> <script src="../js/form_behaviour_script.js"></script> <?php
 
 elseif (!isset($_SESSION['curTask']) && !isset($_POST['sub'])): ?>
 <div id="popup">

@@ -3,7 +3,7 @@ class FormBehaviour {
 	// Variável que armazena a conexão
 	private $conn 					= null;
 	// Variável que armazena as questões sorteadas
-	private $prod 					= $_SESSION['prod'];
+	private $prod 					= null;
 	// Variáveis aplicadas ao gerenciamento das páginas
 	private $numberOfPages 			= null;
 	private $numberOfCurPage 		= null;
@@ -12,7 +12,11 @@ class FormBehaviour {
 	public $questionsOfThisPage 	= null;
 	// Esta função é iniciada junto com a classe
 	public function __construct() {
-		if ($_SESSION['prepared']) {
+		if ($_SESSION['prod']) {
+			$this->prod = $_SESSION['prod'];
+		}
+
+		if ($_SESSION['curTask']) {
 			if ($this->preparePages()) {
 				$this->setData();
 			}
@@ -24,6 +28,7 @@ class FormBehaviour {
 			} else {
 				$this->getQuestions($this->numberOfCurPage, $this->numberOfPages);
 				$this->setData();
+				$this->printQuestions();
 			}
 		}
 	}
@@ -47,14 +52,14 @@ class FormBehaviour {
 	// Divide as questões por página
 	private function preparePages() {
 		$nQ = count($this->prod);
-		$nP = $nQ/$maxQuestionsPerPage;
+		$nP = $nQ/$this->maxQuestionsPerPage;
 		ceil($nP);
 		$this->numberOfPgaes = $nP;
 		$this->numberOfCurPage = 1;
 		$_SESSION['curPage'] = $this->numberOfCurPage;
 		$_SESSION['numberOfPages'] = $this->numberOfPages;
 		$this->getQuestions($this->numberOfCurPage, $this->numberOfPages);
-		unset($_SESSION['prepared']);
+		unset($_SESSION['curTask']);
 		return true;
 	}
 
@@ -124,23 +129,15 @@ class FormBehaviour {
 
 	//Realiza o processo de mostragem e correção simulktânea
 	private function setData() {
-		if(isset($_POST['form'])) {
-			if($_SESSION['cf']) {
-				$Pag = $_POST['pagina'];
-				$idques = $_POST['id_question'];
-				$itemselec = $_POST['item_selected'];
-				$dataString = $this->correction($idques, $itemselec);
-				//tem q mexe com data, mas é a ultima coisa a ver aqui
-				//no caso das pag vai armazenando e quando chega na ultima grava q acabo pra iniciar outra
-				//quando coloca no hostinger libera os if da sessao
-
-				//TODO É SÓ FAZER
-			}
-			else {
-				die("sem sessao cf");
-			}
-		} else {
-			echo "ERRO DO POST";
+		if(isset($_POST['questions_form_submit'])) {
+			$Pag = $_POST['pagina'];
+			$idques = $_POST['id_question'];
+			$itemselec = $_POST['item_selected'];
+			$dataString = $this->correction($idques, $itemselec);
+			//tem q mexe com data, mas é a ultima coisa a ver aqui
+			//no caso das pag vai armazenando e quando chega na ultima grava q acabo pra iniciar outra
+			//quando coloca no hostinger libera os if da sessao
+			//TODO É SÓ FAZER
 		}
 	}
 
@@ -153,7 +150,7 @@ class FormBehaviour {
 							<input type="hidden" name="form" value="'.$this->numberOfCurPage.'">';
 		for ($i=0; $i < $x; $i++) {
 			$a = $this->curProd[$i];
-			$l="div".$i;
+			$l = "div".$i;
 			$output .= '<div class="q-box" id="div'.$i.'">
 							<div class="q-top-box">
 								<div class="top">
@@ -181,7 +178,7 @@ class FormBehaviour {
 				$output .= '</div>';
 			}
 		}
-		$output .= '<input type="submit" onclikck="btFaz();">
+		$output .= '<input type="submit" name="questions_form_submit" onclikck="btFaz();">
 				</form>
 			</div>
 		</div>';
