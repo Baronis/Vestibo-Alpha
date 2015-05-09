@@ -18,7 +18,9 @@ class FormBehaviour {
 
 		if ($_SESSION['curTask']) {
 			if ($this->preparePages()) {
+				$this->getQuestions($this->numberOfCurPage, $this->numberOfPages);
 				$this->setData();
+				$this->printQuestions();
 			}
 		} else {
 			$this->numberOfPgaes = $_SESSION['numberOfPages'];
@@ -143,13 +145,14 @@ class FormBehaviour {
 
 	// Adiciona as questões ao HTML
 	private function printQuestions() {
-		$x = count($this->curProd);
+		//var_dump($this->questionsOfThisPage);
+		$x = count($this->questionsOfThisPage);
 		$output = '	<div class="simple-container">
 						<div class="content">
 							<form action="" method="post" name="FormQuestions">
 							<input type="hidden" name="form" value="'.$this->numberOfCurPage.'">';
 		for ($i=0; $i < $x; $i++) {
-			$a = $this->curProd[$i];
+			$a = $this->questionsOfThisPage[$i];
 			$l = "div".$i;
 			$output .= '<div class="q-box" id="div'.$i.'">
 							<div class="q-top-box">
