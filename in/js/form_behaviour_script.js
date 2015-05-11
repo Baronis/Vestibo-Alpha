@@ -6,14 +6,15 @@
         Ultima revisao: 07/05/2015		(Dennys Pistoni e William Vecchini)
 */
 var pageteste=0;
-var qtdquestions=11;var p=qtdquestions-1;
+var t=0;
+var qtdquestions=20;var p=qtdquestions-1;
 //at é de atual
 var numquesat=0;
 var atpag=1;
 var contapags=qtdquestions/10;
 var qtdpag= Math.ceil(contapags);
 var testvalue =false;
-var campoquestao=11;
+var campoquestao=20;
 locais = new Array(campoquestao);
 alert("ATENCAO! Ao se reponder uma questao a cor verde significa que a questao foi repondida, e nao que esta correta ou incorreta.");
 //ao se inicializa executa
@@ -27,7 +28,9 @@ function showpages() {
 		{
 			document.getElementById("div"+i).style.visibility="visible";
 			document.getElementById("div"+i).style.display = "block";
+
 		};
+		t++;
 	}
 	else if(atpag == 1 && qtdpag >= 1)
 	{
@@ -37,9 +40,9 @@ function showpages() {
 			document.getElementById("div"+i).style.display = "block";
 			numques=i;
 		};numquesat=numques;
-		for(var i=10;i<=qtdquestions; i++)
+		for(var i=10;i<qtdquestions; i++)
 		{
-			document.getElementById("div"+i).style.visibility="hidden";
+			document.getElementById("div"+i).style.visibility = "hidden";
 			document.getElementById("div"+i).style.display = "none";
 		};
 		atpag++;
@@ -47,18 +50,20 @@ function showpages() {
 	else if(atpag > 1)
 	{
 		var test=qtdquestions-((atpag*10)-10);
-		if (test<10)
+		if (test<=10)
 		{
 			if(pageteste == 10){
-				for (var x = numquesat; x <= qtdquestions; x++) {
-					document.getElementById("div"+x).style.visibility="visible";
-					document.getElementById("div"+x).style.display = "block";
+				for (var x = numquesat; x < qtdquestions; x++) {
+					document.getElementById('div'+x).style.visibility="visible";
+					document.getElementById('div'+x).style.display = "block";
+					numques=x;
 				};
 				for(var i=numquesat;i>=0;i--){
-					document.getElementById("div"+i).style.visibility="hidden";
-					document.getElementById("div"+i).style.display = "none";
+					document.getElementById('div'+i).style.visibility="hidden";
+					document.getElementById('div'+i).style.display = "none";
 				};
-				pageteste=0;
+				pageteste=0;numquesat=numques;
+				t++;
 			}
 		}
 		else
@@ -95,7 +100,7 @@ function feito(local) {
 		for (var x = 0; x < campoquestao; x++){
 			if(locais[x] ==undefined){pageteste++;locais[x]=local;testvalue=false;break;}
 		};
-	}testvalue=false;alert(pageteste);
+	}testvalue=false;
 }
 //confere se todos as questoes foram respondidas
 function verifica() {
@@ -122,11 +127,12 @@ function verifica() {
 function encerra(){
 	if(atpag == qtdpag){
 		var contaques;
-		contaques=qtdquestions-numquesat;
+		contaques=qtdquestions-(numquesat+1);
 		if(pageteste == contaques){
+			if(t==2){
 			alert("encerrou");
 			document.FormQuestions.action="";
-			document.FormQuestions.submit();
+			document.FormQuestions.submit();}
 		}
 	}
 }
