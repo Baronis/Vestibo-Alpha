@@ -22,6 +22,7 @@
 		<title>Vestibo</title>
 	</head>
 	<body>
+		<script src="../lib/jquery-1.10.2.js"></script>
 		<div class="page">
 			<div class="header">
 				<div class="header-left">
@@ -61,7 +62,6 @@
 				</div>
 			</div>
 		</div>
-		<script src="../lib/jquery-1.10.2.js"></script>
 		<script src="js/menu.js"></script>
 		<script src="js/popup.js"></script>
 	</body>
