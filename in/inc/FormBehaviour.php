@@ -4,34 +4,16 @@ class FormBehaviour {
 	private $conn 					= null;
 	// Variável que armazena as questões sorteadas
 	private $prod 					= null;
-	// Variáveis aplicadas ao gerenciamento das páginas
-	private $numberOfPages 			= null;
-	private $numberOfCurPage 		= null;
-	private $curProd 				= null;
 	private $maxQuestionsPerPage 	= 10;
-	public $questionsOfThisPage 	= null;
 	// Esta função é iniciada junto com a classe
 	public function __construct() {
 		if ($_SESSION['prod']) {
 			$this->prod = $_SESSION['prod'];
 		}
-
 		if ($_SESSION['curTask']) {
-			if ($this->preparePages()) {
-				$this->getQuestions($this->numberOfCurPage, $this->numberOfPages);
-				$this->setData();
-				$this->printQuestions();
-			}
-		} else {
-			$this->numberOfPgaes = $_SESSION['numberOfPages'];
-			$this->numberOfCurPage = $_SESSION['curPage']++;
-			if ($this->numberOfCurPage > $this->numberOfPages) {
-				$this->showResultAndFinishForm();
-			} else {
-				$this->getQuestions($this->numberOfCurPage, $this->numberOfPages);
-				$this->setData();
-				$this->printQuestions();
-			}
+			$this->setData();
+			$this->printQuestions();
+			unset($_SESSION['curTask']);
 		}
 	}
 
@@ -49,38 +31,6 @@ class FormBehaviour {
                 return false;
             }
         }
-	}
-
-	// Divide as questões por página
-	private function preparePages() {
-		$nQ = count($this->prod);
-		$nP = $nQ/$this->maxQuestionsPerPage;
-		ceil($nP);
-		$this->numberOfPgaes = $nP;
-		$this->numberOfCurPage = 1;
-		$_SESSION['curPage'] = $this->numberOfCurPage;
-		$_SESSION['numberOfPages'] = $this->numberOfPages;
-		$this->getQuestions($this->numberOfCurPage, $this->numberOfPages);
-		unset($_SESSION['curTask']);
-		echo 'Página '.$this->numberOfCurPage.' de '.$this->numberOfPgaes;
-		return true;
-	}
-
-	// Obtem as questões da página atual 
-	private function getQuestions($cur, $total) {
-		$i = 0;
-		foreach ($this->prod as $a) {
-			if ($i < $cur*$this->maxQuestionsPerPage) {
-				$i++;
-				continue;
-			}
-			$x[] = $a;
-			if (count($x) == $this->maxQuestionsPerPage) {
-				break;
-			}
-		}
-		$this->questionsOfThisPage = $x;
-		return true;
 	}
 
 	// Corrige os exercícios recebidos
@@ -147,13 +97,13 @@ class FormBehaviour {
 	// Adiciona as questões ao HTML
 	private function printQuestions() {
 		//var_dump($this->questionsOfThisPage);
-		$x = count($this->questionsOfThisPage);
+		$x = count($this->prod);
 		$output = '	<div class="simple-container">
 						<div class="content">
 							<form action="" method="post" name="FormQuestions">
 							<input type="hidden" name="form" value="'.$this->numberOfCurPage.'">';
 		for ($i=0; $i < $x; $i++) {
-			$a = $this->questionsOfThisPage[$i];
+			$a = $this->prod[$i];
 			$l = "div".$i;
 			$output .= '<div class="q-box" id="div'.$i.'">
 							<div class="q-top-box">
@@ -182,7 +132,7 @@ class FormBehaviour {
 				$output .= '</div>';
 			}
 		}
-		$output .= '<input type="submit" name="questions_form_submit" onclikck="btFaz();">
+		$output .= '<input type="button" name="questions_form_submit" onclick="btFaz();"value="proxima">
 				</form>
 			</div>
 		</div>';
