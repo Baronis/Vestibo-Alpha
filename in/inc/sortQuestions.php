@@ -3,7 +3,7 @@
 class sortQuestions {
 	// Variável que armazena a conexão
 	private $conn 	= null;
-	public $prod 	= null;
+	private $prod 	= null;
 	// Esta função é iniciada junto com a classe
 	public function __construct() {
 		if($this->databaseConnection()) {
@@ -23,10 +23,7 @@ class sortQuestions {
 				}
 			}
 			if($this->prod) {
-				$_SESSION['prod'] = $this->prod;
 				$_SESSION['prepared'] = true;
-				header("Location: index?page=2");
-				//$this->showQuestions();
 			}
 		} else {
 			echo ERROR_DB;
@@ -46,6 +43,10 @@ class sortQuestions {
                 return false;
             }
         }
+	}
+
+	public function getProd() {
+		return $this->prod;
 	}
 
 	// Sorteia questôes caso o usuário não possua histórico de seu desempenho

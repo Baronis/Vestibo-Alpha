@@ -3,19 +3,10 @@ class FormBehaviour {
 	// Variável que armazena a conexão
 	private $conn 					= null;
 	// Variável que armazena as questões sorteadas
-	private $prod 					= null;
+	private $prod					= null;
 	private $maxQuestionsPerPage 	= 10;
 	// Esta função é iniciada junto com a classe
-	public function __construct() {
-		if ($_SESSION['prod']) {
-			$this->prod = $_SESSION['prod'];
-		}
-		if ($_SESSION['curTask']) {
-			$this->setData();
-			$this->printQuestions();
-			unset($_SESSION['curTask']);
-		}
-	}
+	public function __construct() {}
 
 	// Realiza a conexão com o Banco de Dados
 	private function databaseConnection() {
@@ -81,11 +72,8 @@ class FormBehaviour {
 	}
 
 	//Realiza o processo de mostragem e correção simulktânea
-	private function setData() {
+	public function setData() {
 		if(isset($_POST['questions_form_submit'])) {
-			$Pag = $_POST['pagina'];
-			$idques = $_POST['id_question'];
-			$itemselec = $_POST['item_selected'];
 			$dataString = $this->correction($idques, $itemselec);
 			//tem q mexe com data, mas é a ultima coisa a ver aqui
 			//no caso das pag vai armazenando e quando chega na ultima grava q acabo pra iniciar outra
@@ -95,15 +83,14 @@ class FormBehaviour {
 	}
 
 	// Adiciona as questões ao HTML
-	private function printQuestions() {
-		//var_dump($this->questionsOfThisPage);
-		$x = count($this->prod);
+	public function printQuestions($prod) {
+		$x = count($prod);
 		$output = '	<div class="simple-container">
 						<div class="content">
 							<form action="" method="post" name="FormQuestions">
 							<input type="hidden" name="form" value="'.$this->numberOfCurPage.'">';
 		for ($i=0; $i < $x; $i++) {
-			$a = $this->prod[$i];
+			$a = $prod[$i];
 			$l = "div".$i;
 			$output .= '<div class="q-box" id="div'.$i.'">
 							<div class="q-top-box">
@@ -132,7 +119,7 @@ class FormBehaviour {
 				$output .= '</div>';
 			}
 		}
-		$output .= '<input type="button" name="questions_form_submit" onclick="btFaz();"value="proxima">
+		$output .= '<input type="button" name="questions_form_submit" onclick="btFaz();" class="btn btn-lg btn-default" value="Próxima">
 				</form>
 			</div>
 		</div>';

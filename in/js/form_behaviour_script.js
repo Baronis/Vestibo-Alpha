@@ -5,9 +5,9 @@
 
         Ultima revisao: 11/05/2015		(Dennys Pistoni, William Vecchini e Matheus Baroni)
 */
+	
 	var pageteste = 0;
 	var t = 0;
-	var qtdquestions = 20;
 	var p = qtdquestions-1;
 	//at é de atual
 	var numquesat = 0;
@@ -15,7 +15,6 @@
 	var contapags = qtdquestions/10;
 	var qtdpag = Math.ceil(contapags);
 	var testvalue = false;
-	var campoquestao = 20;
 	locais = new Array(campoquestao);
 	//ao se inicializa executa
 	window.onload = function(){showpages();}
