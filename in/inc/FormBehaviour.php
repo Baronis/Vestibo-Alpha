@@ -62,6 +62,7 @@ class FormBehaviour {
 		$_SESSION['numberOfPages'] = $this->numberOfPages;
 		$this->getQuestions($this->numberOfCurPage, $this->numberOfPages);
 		unset($_SESSION['curTask']);
+		echo 'Página '.$this->numberOfCurPage.' de '.$this->numberOfPgaes;
 		return true;
 	}
 
@@ -163,11 +164,11 @@ class FormBehaviour {
 							</div>
 							<div class="q-alt-box">
 								<div class="alt">
-									<input value="1" type="radio" id="'.$a[0].'" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'">'.$a[5].'</label>
-									<input value="2" type="radio" id="'.$a[0].'" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'">'.$a[6].'</label>
-									<input value="3" type="radio" id="'.$a[0].'" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'">'.$a[7].'</label>
-									<input value="4" type="radio" id="'.$a[0].'" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'">'.$a[8].'</label>
-									<input value="5" type="radio" id="'.$a[0].'" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'">'.$a[9].'</label>
+									<input value="1" type="radio" id="'.$a[0].'1" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'1">'.$a[5].'</label>
+									<input value="2" type="radio" id="'.$a[0].'2" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'2">'.$a[6].'</label>
+									<input value="3" type="radio" id="'.$a[0].'3" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'3">'.$a[7].'</label>
+									<input value="4" type="radio" id="'.$a[0].'4" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'4">'.$a[8].'</label>
+									<input value="5" type="radio" id="'.$a[0].'5" name="id_res'.$i.'" onclick="feito(\''.$l.'\');"></input><label for="'.$a[0].'5">'.$a[9].'</label>
 								</div>
 							</div>';
 			if(!empty($a[12])) {

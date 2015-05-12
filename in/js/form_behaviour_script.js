@@ -6,14 +6,14 @@
         Ultima revisao: 07/05/2015		(Dennys Pistoni e William Vecchini)
 */
 var pageteste=0;
-var qtdquestions=11;var p=qtdquestions-1;
+var qtdquestions=10;var p=qtdquestions-1;
 //at é de atual
 var numquesat=0;
 var atpag=1;
 var contapags=qtdquestions/10;
 var qtdpag= Math.ceil(contapags);
 var testvalue =false;
-var campoquestao=11;
+var campoquestao=10;
 locais = new Array(campoquestao);
 alert("ATENCAO! Ao se reponder uma questao a cor verde significa que a questao foi repondida, e nao que esta correta ou incorreta.");
 //ao se inicializa executa
@@ -39,7 +39,7 @@ function showpages() {
 		};numquesat=numques;
 		for(var i=10;i<=qtdquestions; i++)
 		{
-			document.getElementById("div"+i).style.visibility="hidden";
+			document.getElementById("div"+i).style.visibility = "hidden";
 			document.getElementById("div"+i).style.display = "none";
 		};
 		atpag++;
