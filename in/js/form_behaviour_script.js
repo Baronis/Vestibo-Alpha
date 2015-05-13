@@ -5,7 +5,6 @@
 
         Ultima revisao: 11/05/2015		(Dennys Pistoni, William Vecchini e Matheus Baroni)
 */
-	
 	var pageteste = 0;
 	var t = 0;
 	var p = qtdquestions-1;
@@ -21,7 +20,7 @@
 	//exibe os blocos de questoes ou os esconde
 	function showpages() {
 		$("html, body").animate({ scrollTop: 0 }, "slow");
-		if(pageteste == 10) {alert("Pagina: "+atpag+" de "+qtdpag);}
+		document.getElementById("curr_page").innerText = "Pagina: "+atpag+" de "+qtdpag+".";
 		if(atpag == 1 && qtdpag <= 1 && p < 10) {
 			for(var i=0;i<qtdquestions; i++) {
 				document.getElementById("div"+i).style.visibility="visible";
@@ -83,6 +82,7 @@
 	}
 	//marca a quetao feita e liga as funcoes verifica e showpages
 	function feito(local) {
+		document.getElementById(local).style.color="#000";
 		for (var x = 0; x < campoquestao; x++){
 			if(locais[x] == local) {testvalue = true;}
 		};
@@ -104,7 +104,7 @@
 			var radios = document.getElementsByName("id_res"+x);
 			if(document.getElementById("div"+x).style.visibility == "visible" && document.getElementById("div"+x).style.display == "block" ) {
 				if (radios[0].checked == false && radios[1].checked == false && radios[2].checked == false && radios[3].checked == false && radios[4].checked == false) {
-					if (c == 1) {alert("voce esqueceu de alguma das questoes"); c++;};
+					if (c == 1) {alert("Você se esqueceu de alguma das questões."); c++;};
 					document.getElementById('div'+x).style.color="#D20808";
 				}
 				else{ document.getElementById('div'+x).style.color="#000";}
@@ -118,8 +118,7 @@
 			contaques = qtdquestions-(numquesat+1);
 			if(pageteste == contaques) {
 				if(t == 2) {
-					alert("encerrou");
-					document.FormQuestions.action="";
+					document.FormQuestions.action="index?page=2";
 					document.FormQuestions.submit();
 				}
 			}

@@ -87,6 +87,7 @@ class FormBehaviour {
 		$x = count($prod);
 		$output = '	<div class="simple-container">
 						<div class="content">
+							<h1 id="curr_page" style="color: #003A91;">Página 0 de 0.</h1>
 							<form action="" method="post" name="FormQuestions">
 							<input type="hidden" name="form" value="'.$this->numberOfCurPage.'">';
 		for ($i=0; $i < $x; $i++) {
