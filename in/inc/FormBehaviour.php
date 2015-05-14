@@ -5,6 +5,9 @@ class FormBehaviour {
 	// Variável que armazena as questões sorteadas
 	private $prod					= null;
 	private $maxQuestionsPerPage 	= 10;
+	//variveis necessarias para mostrar resultado
+	private $correctQ				= null;
+	private $wrongQ					= null;
 	// Esta função é iniciada junto com a classe
 	public function __construct() {}
 
@@ -53,7 +56,8 @@ class FormBehaviour {
 			if (!empty($fqX)) {	$Xcorecao = implode(";", $fqX); } else {$Xcorecao="";}
 			if (!empty($fqC)) {	$Ccorecao = implode(";", $fqC); } else {$Ccorecao="";}
 			if (!empty($fqE)) {	$Ecorecao = implode(";", $fqE); } else {$Ecorecao="";}
-			echo $Xcorecao.$Ccorecao.$Ecorecao;
+			$Result = $Ecorecao."_".$Ccorecao."_".$Xcorecao;
+			return $Result;
 		}
 	}
 
@@ -73,12 +77,27 @@ class FormBehaviour {
 
 	//Realiza o processo de mostragem e correção simulktânea
 	public function setData() {
-		if(isset($_POST['questions_form_submit'])) {
-			$dataString = $this->correction($idques, $itemselec);
-			//tem q mexe com data, mas é a ultima coisa a ver aqui
-			//no caso das pag vai armazenando e quando chega na ultima grava q acabo pra iniciar outra
-			//quando coloca no hostinger libera os if da sessao
-			//TODO É SÓ FAZER
+		if(isset($_POST['questions_form_submit']) && isset($_SESSION['prod'])) {
+			$questions = "";
+			$answers = "";
+			$a = 0;
+			foreach ($_SESSION['prod'] as $z) {
+				if($a == 0) {
+					$questions .= $z[0];
+				} else {
+					$questions .= ",".$z[0];
+				} $a++;
+			} $a = 0;
+			foreach ($_POST as $i) {
+				if($a == 0){
+					$answers.="".$i;
+				} else {
+					$answers.=",".$i;
+				} $a++;
+			}
+			$dataString = $this->correction($questions, $answers);
+			// ...
+			unset($_SESSION['prod']);
 		}
 	}
 
@@ -88,8 +107,7 @@ class FormBehaviour {
 		$output = '	<div class="simple-container">
 						<div class="content">
 							<h1 id="curr_page" style="color: #003A91;">Página 0 de 0.</h1>
-							<form action="" method="post" name="FormQuestions">
-							<input type="hidden" name="form" value="'.$this->numberOfCurPage.'">';
+							<form action="" method="post" name="FormQuestions">';
 		for ($i=0; $i < $x; $i++) {
 			$a = $prod[$i];
 			$l = "div".$i;
