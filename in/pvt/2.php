@@ -1,7 +1,12 @@
 <?php
 // PAGE 2: Exercícios
-
-if (!isset($_POST['sub'])): ?>
+if(!isset($_POST['sub']) && isset($_POST['questions_form_submit'])):
+	require('inc/defines.php');
+	require_once('inc/FormBehaviour.php');
+	$form = new FormBehaviour();
+	$form->setData();
+	$form->printResult();
+elseif (!isset($_POST['sub']) && !isset($_POST['questions_form_submit'])): ?>
 <div id="popup">
 	<div class="popup-box">
 		<div class="popup-box-content">
@@ -93,7 +98,6 @@ if (!isset($_POST['sub'])): ?>
 </div>
 <?php
 elseif (isset($_POST['sub'])):
-
 	$v = $_SESSION['user_name'].time();
 	$_SESSION['curTask'] = sha1($v);
 	require('inc/defines.php');
@@ -110,11 +114,10 @@ elseif (isset($_POST['sub'])):
 		var campoquestao = <?php echo $r; ?>;
 	</script>
 	<script src="js/form_behaviour_script.js"></script> <?php
-
 else: ?>
 <div class="simple-container">
 	<div class="content">
-		<h1 style="color: #003A91;">Por favor, informe o erro #P2L99 ao desenvolvedor!</h1>
+		<h1 style="color: #003A91;">Por favor, informe o erro #P2L117 ao desenvolvedor!</h1>
 	</div>
 </div>
 <?php
