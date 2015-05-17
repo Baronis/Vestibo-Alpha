@@ -23,7 +23,7 @@ class sortQuestions {
 				}
 			}
 			if($this->prod) {
-				$_SESSION['prod'] = $this->prod;
+				$_SESSION['prepared'] = true;
 			}
 		} else {
 			echo ERROR_DB;
