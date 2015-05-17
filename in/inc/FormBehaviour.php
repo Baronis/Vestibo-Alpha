@@ -8,6 +8,11 @@ class FormBehaviour {
 	//variveis necessarias para mostrar resultado
 	private $correctQ				= null;
 	private $wrongQ					= null;
+	// Variaáveis de armazenamento pós-correção
+	private $correctAnswers			= new Array();
+	private $incorrectAnswers 		= new Array();
+	private $incorrectAnswersHTML 	= null;
+	private $correctionString 		= null;
 	// Esta função é iniciada junto com a classe
 	public function __construct() {}
 
@@ -97,7 +102,10 @@ class FormBehaviour {
 			}
 			$dataString = $this->correction($questions, $answers);
 			// ...
+			$this->setIncorrectAnswersHTML();
 			unset($_SESSION['prod']);
+		} else {
+			echo "ERRO #SETDATA1";
 		}
 	}
 
@@ -143,6 +151,36 @@ class FormBehaviour {
 			</div>
 		</div>';
 		echo $output;
+	}
+
+	// Mostra o resultado do formulário
+	public function printResult() {
+		$htmlString = '
+			<div class="simple-container">
+				<div class="content">
+					<h1 style="color: #003A91;">Resultado</h1>
+					<div class="q-box">
+						<div class="q-top-box">
+							<div class="top">
+								<p>Pontuação:<h2 style="float: right;">'. (count($this->correctAnswers)*100)/count($_SESSION['prod']) .'%</h2></p>
+							</div>
+						</div>
+						<div class="q-alt-box">
+							<div class="alt">
+								<p>Acertos: <h2 style="float: right;">'.count($this->correctAnswers).'</h2></p>
+								<p>Erros: : <h2 style="float: right;">'.count($this->incorrectAnswers).'</h2></p>
+							</div>
+						</div>
+						<div class="q-top-box">
+							<div class="top">
+								<a style="float: right;" href="javascript:{}" onclick="showIncorrectQuestions();">Clique aqui para visualizar as questões incorretas!</a>
+							</div>
+						</div>
+					</div>
+					<div class="incorrectAnswersWrapper">'.$this->incorrectAnswersHTML.'</div>
+				</div>
+			</div>
+		';
 	}
 }
 ?>
