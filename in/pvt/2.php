@@ -5,8 +5,19 @@ if(!isset($_POST['sub']) && isset($_POST['questions_form_submit'])):
 	require_once('inc/FormBehaviour.php');
 	$form = new FormBehaviour();
 	$form->setData();
-	$form->printResult();
-elseif (!isset($_POST['sub']) && !isset($_POST['questions_form_submit'])): ?>
+	$form->printResult(); ?>
+	<script>
+		function showIncorrectQuestions() {
+			if (document.getElementById("incorrectAnswersWrapper").style.visibility == "hidden") {
+				document.getElementById("incorrectAnswersWrapper").style.visibility = "visible";
+				document.getElementById("incorrectAnswersWrapper").style.display = "block";
+			} else {
+				document.getElementById("incorrectAnswersWrapper").style.visibility = "hidden";
+				document.getElementById("incorrectAnswersWrapper").style.display = "none";
+			}
+		}
+	</script>
+<?php elseif (!isset($_POST['sub']) && !isset($_POST['questions_form_submit'])): ?>
 <div id="popup">
 	<div class="popup-box">
 		<div class="popup-box-content">
