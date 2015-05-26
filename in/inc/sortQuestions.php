@@ -22,9 +22,6 @@ class sortQuestions {
 					$this->prod = $this->sortByPerformace($nQ, $subArray);
 				}
 			}
-			if($this->prod) {
-				$_SESSION['prod'] = $this->prod;
-			}
 		} else {
 			echo ERROR_DB;
 		}
@@ -46,6 +43,7 @@ class sortQuestions {
 	}
 
 	public function getProd() {
+		$_SESSION['prod'] = $this->prod;
 		return $this->prod;
 	}
 

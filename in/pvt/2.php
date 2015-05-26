@@ -1,11 +1,14 @@
 <?php
+require_once("../accounts/config/config.php");
+if (isset($_SESSION['prod'])) {
+	echo "PROD ARMAZENADO";
+}
 // PAGE 2: Exercícios
-if(!isset($_POST['sub']) && isset($_POST['questions_form_submit'])):
+if(!isset($_POST['sub']) && isset($_POST['id_res0'])):
 	require('inc/defines.php');
 	require_once('inc/FormBehaviour.php');
 	$form = new FormBehaviour();
-	$form->setData();
-	$form->printResult(); ?>
+	$form->setData(); ?>
 	<script>
 		function showIncorrectQuestions() {
 			if (document.getElementById("incorrectAnswersWrapper").style.visibility == "hidden") {
@@ -17,7 +20,7 @@ if(!isset($_POST['sub']) && isset($_POST['questions_form_submit'])):
 			}
 		}
 	</script>
-<?php elseif (!isset($_POST['sub']) && !isset($_POST['questions_form_submit'])): ?>
+<?php elseif (!isset($_POST['sub']) && !isset($_POST['id_res0'])): ?>
 <div id="popup">
 	<div class="popup-box">
 		<div class="popup-box-content">
@@ -117,6 +120,7 @@ elseif (isset($_POST['sub'])):
 	$sort = new SortQuestions();
 	$form = new FormBehaviour();
 	$x = $sort->getProd();
+	$_SESSION['prod'] = $x;
 	$r = count($x);
 	$form->setData();
 	$form->printQuestions($x); ?>

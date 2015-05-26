@@ -9,12 +9,17 @@ class FormBehaviour {
 	private $correctQ				= null;
 	private $wrongQ					= null;
 	// Variaáveis de armazenamento pós-correção
-	private $correctAnswers			= new Array();
-	private $incorrectAnswers 		= new Array();
+	private $correctAnswers			= null; // Array
+	private $incorrectAnswers 		= null; // Array
 	private $incorrectAnswersHTML 	= null;
 	private $correctionString 		= null;
+
 	// Esta função é iniciada junto com a classe
-	public function __construct() {}
+	public function __construct() {
+		if(!$this->databaseConnection()) {
+			echo "ERRO EM __CONSTRUCT";
+		}
+	}
 
 	// Realiza a conexão com o Banco de Dados
 	private function databaseConnection() {
@@ -22,9 +27,9 @@ class FormBehaviour {
             return true;
         } else {
             try {
-                $this->conn = new PDO('mysql:host=127.0.0.1;dbname=u395938104_1;charset=utf8', 'root', '');//depois de termina taca new PDO('mysql:host=mysql.hostinger.com.br;dbname=u395938104_1;charset=utf8', 'u395938104_adm', 'admpass');
-                $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                return true;
+                $this->conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USER, DB_PASS);
+               	$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+               	return true;
             } catch (PDOException $e) {
                 die ('ERROR_DB_CONN');
                 return false;
@@ -37,32 +42,61 @@ class FormBehaviour {
 		$q = explode(",", $questao);
 		$r = explode(",", $resposta);
 		if($this->databaseConnection()) {
-			$stmt = $this->conn->prepare('SELECT res FROM questions WHERE id IN ('.implode(", ", $q).');');
+			$stmt = $this->conn->prepare('SELECT q_correct_alt FROM questions WHERE q_id IN ('.implode(", ", $q).');');
 			$stmt->execute();
 			$rows = $stmt->fetchAll();
-			$z=count($r)-1;
-			$row=$this->fixSequence($rows,$q);
-			for($i=0; $i<=$z; $i++) {
+			$z = count($r)-1;
+			$row = $this->fixSequence($rows, $q);
+			for($i = 0; $i <= $z; $i++) {
 				if(empty($r[$i])) {
+					$fqXA[$i] = $q[$i];
 					$fqX[$i] = $q[$i]."X";
-					echo $fqX[$i]."<br/>";
 				} else {
 					if ($row[$i] == $r[$i]) {
+						$fqCA[$i] = $q[$i];
 						$fqC[$i] = $q[$i]."C";
-						echo $fqC[$i]."<br/>";
 					} elseif ($row[$i] != $r[$i]) {
+						$fqEA[$i] = $q[$i];
 						$fqE[$i] = $q[$i]."E";
-						echo $fqE[$i]."<br/>";
 					} else {
 						echo "erro na correcao<br/>";
 					}
 				}
 			}
-			if (!empty($fqX)) {	$Xcorecao = implode(";", $fqX); } else {$Xcorecao="";}
-			if (!empty($fqC)) {	$Ccorecao = implode(";", $fqC); } else {$Ccorecao="";}
-			if (!empty($fqE)) {	$Ecorecao = implode(";", $fqE); } else {$Ecorecao="";}
-			$Result = $Ecorecao."_".$Ccorecao."_".$Xcorecao;
-			return $Result;
+			if (!empty($fqX)) {
+				$XcorecaoA = implode(";", $fqXA);
+				$Xcorecao = implode(";", $fqX);
+			} else {
+				$XcorecaoA = "";
+				$Xcorecao = "";
+			}
+			if (!empty($fqC)) {
+				$CcorecaoA = implode(";", $fqCA);
+				$Ccorecao = implode(";", $fqC);
+			} else {
+				$CcorecaoA = "";
+				$Ccorecao = "";
+			}
+			if (!empty($fqE)) {
+				$EcorecaoA = implode(";", $fqEA);
+				$Ecorecao = implode(";", $fqE);
+			} else {
+				$EcorecaoA = "";
+				$Ecorecao = "";
+			}
+			$Result = $Ecorecao."_".$Ccorecao;
+			if ($Xcorecao != null) {
+				$Result .= "_".$Xcorecao;
+			}
+			$this->correctQ = $CcorecaoA;
+			$this->wrongQ = $EcorecaoA;
+			if ($XcorecaoA != null) {
+				$this->wrongQ .= ";".$XcorecaoA;
+			}
+			$this->correctAnswers = explode(";", $this->correctQ);
+			$this->incorrectAnswers = explode(";", $this->wrongQ);
+			$this->correctionString = $Result;
+			return true;
 		}
 	}
 
@@ -74,7 +108,7 @@ class FormBehaviour {
 		$p=count($ro);
 		for($i=0;$i<$z;$i++) {
 			for($i2=0;$i2<$z;$i2++) {
-				if($ques[$i2] == $sq[$i]){ $qs[$i2]=$ro[$i]['res'];}
+				if($ques[$i2] == $sq[$i]){ $qs[$i2]=$ro[$i]['q_correct_alt'];}
 			}
 		}
 		return $qs;
@@ -82,7 +116,7 @@ class FormBehaviour {
 
 	//Realiza o processo de mostragem e correção simulktânea
 	public function setData() {
-		if(isset($_POST['questions_form_submit']) && isset($_SESSION['prod'])) {
+		if(isset($_POST['id_res0']) && isset($_SESSION['prod'])) {
 			$questions = "";
 			$answers = "";
 			$a = 0;
@@ -100,13 +134,49 @@ class FormBehaviour {
 					$answers.=",".$i;
 				} $a++;
 			}
-			$dataString = $this->correction($questions, $answers);
-			// ...
-			$this->setIncorrectAnswersHTML();
+			if ($this->correction($questions, $answers)) {
+				$iProd = $this->getIncorrectQuestionsFromDB();
+				$this->setIncorrectAnswersHTML($iProd);
+				$this->setDBData();
+				$this->printResult();
+			}
 			unset($_SESSION['prod']);
-		} else {
-			echo "ERRO #SETDATA1";
 		}
+	}
+
+	// Obtem do banco as questoes incorretas
+	private function getIncorrectQuestionsFromDB() {
+		$query = 'SELECT * FROM questions WHERE q_id IN ('.implode(", ", $this->incorrectAnswers).');';
+	    $stmt = $this->conn->prepare($query);
+	   	$stmt->execute();
+	   	$rows = $stmt->fetchAll();
+		if ($nQ > count($rows)) {
+	    	echo WARNING_QUESTIONS_EXCEPTION;
+	    }
+		return $rows;
+	}
+
+	// Salva os dados no banco
+	private function setDBData() {
+		// Log
+        $query_log = $this->conn->prepare('INSERT INTO form_log (user_id, data) VALUES (:user_id, :data)');
+        $query_log->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $query_log->bindValue(':data', $this->correctionString, PDO::PARAM_STR);
+        $query_log->execute();
+        if (!$query_log) {
+            return false;
+        }
+		// Perf
+		$stmt = $this->conn->prepare('SELECT q_sub_2_id FROM questions WHERE Q_id IN ('.implode(", ", $this->incorrectAnswers).');');
+	   	$stmt->execute();
+	   	$rows = $stmt->fetchAll();
+   		foreach ($rows as $sub) {
+			$query_update = $this->conn->prepare('INSERT INTO perf (perf_user_id, perf_sub) VALUES (:user_id, :sub)');
+            $query_update->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+            $query_update->bindValue(':sub', $sub, PDO::PARAM_INT);
+            $query_update->execute();
+   		}
+		return true;
 	}
 
 	// Adiciona as questões ao HTML
@@ -180,7 +250,46 @@ class FormBehaviour {
 					<div class="incorrectAnswersWrapper">'.$this->incorrectAnswersHTML.'</div>
 				</div>
 			</div>
-		';
+		'; echo $htmlString;
+	}
+
+	// Prepara variável que armazena o HTML das questões incorretas para a página do resultado
+	private function setIncorrectAnswersHTML($prod) {
+		$x = count($prod);
+		$output = '<div id="incorrectAnswersWrapper">';
+		$output .= '<h1 id="curr_page" style="color: #003A91;">Questões incorretas.</h1>';
+		for ($i=0; $i < $x; $i++) {
+			$a = $prod[$i];
+			$l = "div".$i;
+			$output .= '<div class="q-box" id="div'.$i.'">
+							<div class="q-top-box">
+								<div class="top">
+									<p> '.$a[1].' - '.$a[2].' ('.$a[3].')</p><hr>
+									<p>'.$a[4].'</p>
+								</div>
+							</div>
+							<div class="q-alt-box">
+								<div class="alt">
+									<p>'.$a[5].'</p>
+									<p>'.$a[6].'</p>
+									<p>'.$a[7].'</p>
+									<p>'.$a[8].'</p>
+									<p>'.$a[9].'</p>
+								</div>
+							</div>';
+			if(!empty($a[12])) {
+				$output .= '<div class="q-top-box">
+								<div class="top">
+									<p>'.$a[12].'</p>
+								</div>
+							</div>
+						</div>';
+			} else {
+				$output .= '</div>';
+			}	
+		}
+		$output .= "</div>";
+		$this->incorrectAnswersHTML = $output;
 	}
 }
 ?>
