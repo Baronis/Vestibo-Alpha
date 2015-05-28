@@ -19,10 +19,12 @@
 		<link href="../css/button-style.css" rel="stylesheet">
 		<link href="../css/input-style.css" rel="stylesheet">
 		<link href="../css/question-style.css" rel="stylesheet">
+		<link href="../css/result-style.css" rel="stylesheet">
 		<title>Vestibo</title>
 	</head>
 	<body>
 		<script src="../lib/jquery-1.10.2.js"></script>
+		<script src="../lib/progressbar.min.js"></script>
 		<div class="page">
 			<div class="header">
 				<div class="header-left">

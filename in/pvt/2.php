@@ -1,26 +1,13 @@
 <?php
 require_once("../accounts/config/config.php");
-if (isset($_SESSION['prod'])) {
-	echo "PROD ARMAZENADO";
-}
-// PAGE 2: Exercícios
+// PAGE 2: Matérias
 if(!isset($_POST['sub']) && isset($_POST['id_res0'])):
 	require('inc/defines.php');
 	require_once('inc/FormBehaviour.php');
 	$form = new FormBehaviour();
-	$form->setData(); ?>
-	<script>
-		function showIncorrectQuestions() {
-			if (document.getElementById("incorrectAnswersWrapper").style.visibility == "hidden") {
-				document.getElementById("incorrectAnswersWrapper").style.visibility = "visible";
-				document.getElementById("incorrectAnswersWrapper").style.display = "block";
-			} else {
-				document.getElementById("incorrectAnswersWrapper").style.visibility = "hidden";
-				document.getElementById("incorrectAnswersWrapper").style.display = "none";
-			}
-		}
-	</script>
-<?php elseif (!isset($_POST['sub']) && !isset($_POST['id_res0'])): ?>
+	$form->setData();
+
+elseif (!isset($_POST['sub']) && !isset($_POST['id_res0'])): ?>
 <div id="popup">
 	<div class="popup-box">
 		<div class="popup-box-content">
@@ -127,6 +114,7 @@ elseif (isset($_POST['sub'])):
 	<script type="text/javascript">
 		var qtdquestions = <?php echo $r; ?>;
 		var campoquestao = <?php echo $r; ?>;
+		var actionDir = "?page=2";
 	</script>
 	<script src="js/form_behaviour_script.js"></script> <?php
 else: ?>

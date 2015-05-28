@@ -25,6 +25,7 @@
 						require_once('accounts/libraries/PHPMailer.php');
 						require_once('accounts/classes/Login.php');
 						$login = new Login();
+
 						if ($login->isUserLoggedIn() == true) {
 						    Header('Location: accounts/loading.php');
 						} else {
@@ -44,10 +45,11 @@
 					?>
 					<h1 style="color:#003A91; text-align: left;">Entrar</h1>
 					<div class="form-group">
-						<input type="text" name="user_name" class="form-control" id="login_input_username" placeholder="Nome de usuário">
+						<!--username--><input type="text" name="user_name" class="form-control" id="login_input_username" 
+	          			placeholder="Nome de usuário">
 	        		</div>
 	        		<div class="form-group">
-	        			<input type="password" class="form-control" name="user_password" id="login_input_password" placeholder="Senha">
+	        			<!--Senha--><input type="password" class="form-control" name="user_password" id="login_input_password" placeholder="Senha">
 	        		</div>
 	        		<input type="hidden" name="asking" value="true">
 	        		<div class="form-group">
@@ -56,7 +58,8 @@
 					</div>
 	        		<input type="submit" class="btn btn-default" name="login" value="Entrar" />
 	        		</input>
-	        		<a class="btn btn-default" href="esqueci" style="float:right;padding-right:12px;padding-top:8px;">Esqueci minha senha</a>
+	        		<a class="btn btn-default" href="esqueci" 
+	        		style="float:right;padding-right:12px;padding-top:8px;">Esqueci minha senha</a>
 	        		<div class="box-footer">
 	        			<div class="left">
 							<a href="http://vestibo.com.br/termos.html">Termos e condições</a>

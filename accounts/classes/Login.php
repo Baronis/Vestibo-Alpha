@@ -128,7 +128,7 @@ class Login {
             if ($hash == hash('sha256', $user_id . ':' . $token . COOKIE_SECRET_KEY) && !empty($token)) {
                 if ($this->databaseConnection()) {
                     // pegas os dados certos do cookie...
-                    $sth = $this->db_connection->prepare("SELECT cad_id, cad_nick, cad_email FROM cad_users WHERE cad_id = :user_id
+                    $sth = $this->db_connection->prepare("SELECT cad_first_name, cad_last_name, cad_id, cad_nick, cad_email FROM cad_users WHERE cad_id = :user_id
                     AND cad_rememberme_token = :user_rememberme_token AND cad_rememberme_token IS NOT NULL");
                     $sth->bindValue(':user_id', $user_id, PDO::PARAM_INT);
                     $sth->bindValue(':user_rememberme_token', $token, PDO::PARAM_STR);
@@ -142,6 +142,7 @@ class Login {
                         $_SESSION['user_name'] = $result_row->cad_nick;
                         $_SESSION['user_email'] = $result_row->cad_email;
                         $_SESSION['user_image'] = $result_row->cad_image;
+                        $_SESSION['user_full_name'] = $result_row->cad_first_name." ".$result_row->cad_last_name;
                         if (!$_SESSION['user_image']) {
                             $_SESSION['user_image'] = HTTP_DEFAULT_IMAGE_PATH;
                         }
@@ -207,6 +208,7 @@ class Login {
                 $_SESSION['user_name'] = $result_row->cad_nick;
                 $_SESSION['user_email'] = $result_row->cad_email;
                 $_SESSION['user_image'] = $result_row->cad_image;
+                $_SESSION['user_full_name'] = $result_row->cad_first_name." ".$result_row->cad_last_name;
                 if (!$_SESSION['user_image']) {
                     $_SESSION['user_image'] = HTTP_DEFAULT_IMAGE_PATH;
                 }

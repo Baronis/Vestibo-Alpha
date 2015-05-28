@@ -117,8 +117,8 @@
 			var contaques;
 			contaques = qtdquestions-(numquesat+1);
 			if(pageteste == contaques) {
-				if(t == 2) {
-					document.FormQuestions.action="index?page=2";
+				if(t == 2 || (t == 1 && actionDir == "?page=3")) {
+					document.FormQuestions.action = actionDir;
 					document.FormQuestions.submit();
 				}
 			}

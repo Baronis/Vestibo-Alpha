@@ -2,6 +2,7 @@
 	require_once('accounts/config/config.php');
 	require_once('accounts/classes/Login.php');
 	$login = new Login();
+
 	if ($login->isUserLoggedIn() == true) {
 	    Header('Location: accounts/loading.php');
 	}
@@ -24,7 +25,7 @@
 		<div class="page">
 			<div class="header">
 				<a href="http://vestibo.com.br/"><img src="img/nav-logo-blue.png" class="logo" alt="Vestibo"></a>
-			</div>
+			</div><!-- /header -->
 			<div class="body">
 				<form method="post" action="cadastrar.php" name="registerform">
 					<div class="cadastro-container">
@@ -32,6 +33,7 @@
 							require_once('accounts/libraries/PHPMailer.php');
 							require_once('accounts/classes/Registration.php');
 							$registration = new Registration();
+
 							if (isset($registration)) {
 							    if ($registration->errors) {
 							        foreach ($registration->errors as $error) {
@@ -46,25 +48,31 @@
 							}
 						?>
 						<h1 style="color:#003A91; text-align: left;">Cadastro</h1>
+						<!--nome de usuario-->
 						<div class="form-group">
 	          				<input type="text" class="form-control" id="login_input_username" pattern="[a-zA-Z0-9]{2,64}" placeholder="Nome de usuário" name="user_name" required />
 	          			</div>
+	          			<!--nome e sobrenome-->
 	          			<div class="form-group half">
 	          				<input type="text" class="form-control piece" id="login_input_nome" pattern="[a-zA-Z0-9]{2,64}" placeholder="Nome" name="user_nome" required />
 	          				<input type="text" class="form-control piece" id="login_input_sobnome" pattern="[a-zA-Z0-9]{2,64}" placeholder="Sobrenome" name="user_sobnome" required />
 	          			</div>
+	          			<!--Data Nasc-->
 	          			<div class="form-group">
 	          				<input type="date" class="form-control" id="login_input_user_nasc" placeholder="Data de nascimento" name="user_nasc" required />
 	          			</div>
+	          			<!--email-->
 	          			<div class="form-group">
 	          				<input type="email" class="form-control" id="login_input_email" placeholder="Email" name="user_email" required />
 	          			</div>
+	          			<!--senha-->
 	          			<div class="form-group half">
 	          				<input type="password" class="form-control piece" id="login_input_password_new" placeholder="Senha" name="user_password_new" pattern=".{6,}" required autocomplete="off" />
 	          				<input type="password" class="form-control piece" id="login_input_password_repeat" placeholder="Redigite sua senha" name="user_password_repeat" pattern=".{6,}" required autocomplete="off" />
 	          			</div>
     					<div class="form-group">
-    						<img src="accounts/tools/showCaptcha.php" alt="Captcha" />
+    						<img src="accounts/tools/showCaptcha.php" alt="!!!" />
+    						<label><?php echo WORDING_REGISTRATION_CAPTCHA; ?></label>
     						<input class="form-control" type="text" name="captcha" placeholder="Digite os caracteres acima" required />
     					</div>
 		        		<input class="btn btn-default" type="submit" name="register" value="Cadastrar"/>
@@ -76,7 +84,7 @@
 								<a href="http://vestibo.com.br/quem-somos.html">Quem somos</a>
 							</div>
 							<div class="centered">
-								<p>Vestibo &copy; 2015</p>
+								<p>Vestibo &copy; 2015.</p>
 							</div>
 		        		</div>
 					</div>

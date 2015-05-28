@@ -4,6 +4,23 @@
 <div class="simple-container">
 	<div class="content">
 		<div class="q-box">
+			<div class="q-top-box">
+				<div class="top">
+					<div class="profile-wrapper">
+						<img class="user-image" <?php echo 'src="'.$_SESSION['user_image'].'"'; ?> alt="1"/>
+					</div>
+					<div class="profile-wrapper">
+						<h1>
+							<?php echo $_SESSION['user_full_name']; ?>
+						</h1>
+						<h2>
+							<?php echo $_SESSION['user_name']; ?>
+						</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="q-box">
 			<?php if(!$_SESSION['fb']){
 				echo '	
 					<div class="q-top-box">

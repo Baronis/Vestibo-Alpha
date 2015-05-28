@@ -1,6 +1,6 @@
 /*
         VESTIBO ALPHA === Global Stylesheet === LAMPI
-        Última revisão: 25/04/2015 (Matheus Baroni)
+        Última revisão: 28/05/2015 (Matheus Baroni)
 
 >>>     Indice:
         
@@ -14,6 +14,7 @@
         6. Login;
         7. Extras;
           7.1. Popup;
+          7.2. Perfil
 
 >>>     Cores:
 
@@ -490,6 +491,21 @@ li{
   background-color: #eee;
   color: #003A91;
   border-radius: 5px;
+}
+/*
+        ===================
+        === 7.2. Perfil ===
+        ===================
+*/
+.profile-wrapper {
+  display: inline-block;
+  width: auto;
+}
+.profile-wrapper h1, .profile-wrapper h2 {
+  padding: 0 15px;
+}
+.profile-wrapper h2 {
+  margin: 0;
 }
 /*
         =======================================================================

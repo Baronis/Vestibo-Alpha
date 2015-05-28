@@ -95,6 +95,14 @@ class FormBehaviour {
 			}
 			$this->correctAnswers = explode(";", $this->correctQ);
 			$this->incorrectAnswers = explode(";", $this->wrongQ);
+			// Checar se os arrays não são vazios
+			if ($this->correctAnswers[0] == "") {
+				$this->correctAnswers = 0;
+			}
+			if ($this->incorrectAnswers[0] == "") {
+				$this->incorrectAnswers = 0;
+			}
+			// Finalização
 			$this->correctionString = $Result;
 			return true;
 		}
@@ -146,35 +154,43 @@ class FormBehaviour {
 
 	// Obtem do banco as questoes incorretas
 	private function getIncorrectQuestionsFromDB() {
-		$query = 'SELECT * FROM questions WHERE q_id IN ('.implode(", ", $this->incorrectAnswers).');';
-	    $stmt = $this->conn->prepare($query);
-	   	$stmt->execute();
-	   	$rows = $stmt->fetchAll();
-		if ($nQ > count($rows)) {
-	    	echo WARNING_QUESTIONS_EXCEPTION;
-	    }
-		return $rows;
+		if($this->incorrectAnswers) {
+			$query = 'SELECT * FROM questions WHERE q_id IN ('.implode(", ", $this->incorrectAnswers).');';
+		    $stmt = $this->conn->prepare($query);
+		   	$stmt->execute();
+		   	$rows = $stmt->fetchAll();
+			if ($nQ > count($rows)) {
+		    	echo WARNING_QUESTIONS_EXCEPTION;
+		    }
+			return $rows;
+		} else {
+			return null;
+		}
 	}
 
 	// Salva os dados no banco
 	private function setDBData() {
 		// Log
-        $query_log = $this->conn->prepare('INSERT INTO form_log (user_id, data) VALUES (:user_id, :data)');
+		$x = count($_SESSION['prod']);
+        $query_log = $this->conn->prepare('INSERT INTO form_log (user_id, data, num_q) VALUES (:user_id, :data, :num)');
         $query_log->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $query_log->bindValue(':data', $this->correctionString, PDO::PARAM_STR);
+        $query_log->bindValue(':num', $x, PDO::PARAM_INT);
         $query_log->execute();
         if (!$query_log) {
             return false;
         }
 		// Perf
-		$stmt = $this->conn->prepare('SELECT q_sub_2_id FROM questions WHERE Q_id IN ('.implode(", ", $this->incorrectAnswers).');');
-	   	$stmt->execute();
-	   	$rows = $stmt->fetchAll();
-   		foreach ($rows as $sub) {
-			$query_update = $this->conn->prepare('INSERT INTO perf (perf_user_id, perf_sub) VALUES (:user_id, :sub)');
-            $query_update->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-            $query_update->bindValue(':sub', $sub, PDO::PARAM_INT);
-            $query_update->execute();
+		if ($this->incorrectAnswers) {
+			$stmt = $this->conn->prepare('SELECT q_sub_2_id FROM questions WHERE Q_id IN ('.implode(", ", $this->incorrectAnswers).');');
+	   		$stmt->execute();
+	   		$rows = $stmt->fetchAll();
+   			foreach ($rows as $sub) {
+				$query_update = $this->conn->prepare('INSERT INTO perf (perf_user_id, perf_sub) VALUES (:user_id, :sub)');
+        	    $query_update->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+        	    $query_update->bindValue(':sub', $sub, PDO::PARAM_INT);
+        	    $query_update->execute();
+   			}
    		}
 		return true;
 	}
@@ -225,71 +241,116 @@ class FormBehaviour {
 
 	// Mostra o resultado do formulário
 	public function printResult() {
-		$htmlString = '
-			<div class="simple-container">
-				<div class="content">
-					<h1 style="color: #003A91;">Resultado</h1>
-					<div class="q-box">
-						<div class="q-top-box">
-							<div class="top">
-								<p>Pontuação:<h2 style="float: right;">'. (count($this->correctAnswers)*100)/count($_SESSION['prod']) .'%</h2></p>
-							</div>
+		if ($this->correctAnswers) {
+			$cA = count($this->correctAnswers);
+		} else { $cA = 0; }
+		if ($this->incorrectAnswers) {
+			$iA = count($this->incorrectAnswers);
+		} else { $iA = 0; }
+		?>
+		<div class="simple-container">
+			<div class="content">
+				<h1 style="color: #003A91;">Resultado</h1>
+				<div class="q-box">
+					<div class="q-top-box">
+						<div id="v" class="top">
+							<div class="progress" id="progress"></div>
 						</div>
-						<div class="q-alt-box">
-							<div class="alt">
-								<p>Acertos: <h2 style="float: right;">'.count($this->correctAnswers).'</h2></p>
-								<p>Erros: : <h2 style="float: right;">'.count($this->incorrectAnswers).'</h2></p>
+					</div>
+					<div class="q-alt-box">
+						<div class="alt">
+							<div class="collun-wrapper">
+								<p>Acertos</p>
+								<h2><?php echo $cA ?></h2>
 							</div>
-						</div>
-						<div class="q-top-box">
-							<div class="top">
-								<a style="float: right;" href="javascript:{}" onclick="showIncorrectQuestions();">Clique aqui para visualizar as questões incorretas!</a>
+							<div class="collun-wrapper">
+								<p>Erros</p>
+								<h2><?php echo $iA; ?></h2>
 							</div>
 						</div>
 					</div>
-					<div class="incorrectAnswersWrapper">'.$this->incorrectAnswersHTML.'</div>
+					<div class="line" id="line"></div>
+					<div class="q-top-box">
+						<div class="top">
+							<a href="javascript:{}" id="toggler">Clique aqui para visualizar as questões incorretas!</a>
+						</div>
+					</div>
 				</div>
+				<?php echo $this->incorrectAnswersHTML; ?>
 			</div>
-		'; echo $htmlString;
-	}
+		</div>
+		<script type="text/javascript">
+			var constant = <?php echo $cA/count($_SESSION['prod']); ?>;
+			var circle = new ProgressBar.Circle('#progress', {
+			    color: '#003A91',
+			    strokeWidth: 5,
+			    trailWidth: 1,
+			    duration: 1500,
+			    text: { value: '0' },
+			    step: function(state, bar) {
+			        bar.setText((bar.value() * 100).toFixed(0)+"%");
+			    }
+			});
+			circle.animate(constant, function() {});
+
+			var line = new ProgressBar.Line('#line', {
+			    color: '#003A91',
+			    trailColor: 'red'
+			});
+			line.animate(constant);
+
+			$( "#incorrectAnswersWrapper" ).slideUp();
+			$( "#toggler" ).click(function() {
+			  if ( $( "#incorrectAnswersWrapper" ).is( ":hidden" ) ) {
+			    $( "#incorrectAnswersWrapper" ).show( "slow" );
+			  } else {
+			    $( "#incorrectAnswersWrapper" ).slideUp();
+			  }
+			});
+		</script>
+	<?php }
 
 	// Prepara variável que armazena o HTML das questões incorretas para a página do resultado
 	private function setIncorrectAnswersHTML($prod) {
 		$x = count($prod);
-		$output = '<div id="incorrectAnswersWrapper">';
-		$output .= '<h1 id="curr_page" style="color: #003A91;">Questões incorretas.</h1>';
-		for ($i=0; $i < $x; $i++) {
-			$a = $prod[$i];
-			$l = "div".$i;
-			$output .= '<div class="q-box" id="div'.$i.'">
-							<div class="q-top-box">
-								<div class="top">
-									<p> '.$a[1].' - '.$a[2].' ('.$a[3].')</p><hr>
-									<p>'.$a[4].'</p>
+		if ($prod) {
+			$output = '<div class="incorrectAnswersWrapper" id="incorrectAnswersWrapper">';
+			$output .= '<h1 id="curr_page" style="color: #003A91;">Questões incorretas.</h1>';
+			for ($i=0; $i < $x; $i++) {
+				$a = $prod[$i];
+				$l = "div".$i;
+				$output .= '<div class="q-box" id="div'.$i.'">
+								<div class="q-top-box">
+									<div class="top">
+										<p> '.$a[1].' - '.$a[2].' ('.$a[3].')</p><hr>
+										<p>'.$a[4].'</p>
+									</div>
 								</div>
-							</div>
-							<div class="q-alt-box">
-								<div class="alt">
-									<p>'.$a[5].'</p>
-									<p>'.$a[6].'</p>
-									<p>'.$a[7].'</p>
-									<p>'.$a[8].'</p>
-									<p>'.$a[9].'</p>
+								<div class="q-alt-box">
+									<div class="alt">
+										<p>'.$a[5].'</p>
+										<p>'.$a[6].'</p>
+										<p>'.$a[7].'</p>
+										<p>'.$a[8].'</p>
+										<p>'.$a[9].'</p>
+									</div>
+								</div>';
+				if(!empty($a[12])) {
+					$output .= '<div class="q-top-box">
+									<div class="top">
+										<p>'.$a[12].'</p>
+									</div>
 								</div>
 							</div>';
-			if(!empty($a[12])) {
-				$output .= '<div class="q-top-box">
-								<div class="top">
-									<p>'.$a[12].'</p>
-								</div>
-							</div>
-						</div>';
-			} else {
-				$output .= '</div>';
-			}	
+				} else {
+					$output .= '</div>';
+				}	
+			}
+			$output .= "</div>";
+			$this->incorrectAnswersHTML = $output;
+		} else {
+			$this->incorrectAnswersHTML = "";
 		}
-		$output .= "</div>";
-		$this->incorrectAnswersHTML = $output;
 	}
 }
 ?>

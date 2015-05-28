@@ -1,5 +1,5 @@
 <?php
-// Sorteador de Questões PARCIALMENTE TESTADO (r4)
+// Sorteador de Questões PARCIALMENTE TESTADO (r5)
 class sortQuestions {
 	// Variável que armazena a conexão
 	private $conn 	= null;
@@ -7,21 +7,29 @@ class sortQuestions {
 	// Esta função é iniciada junto com a classe
 	public function __construct() {
 		if($this->databaseConnection()) {
-			if(!isset($_POST['nQ'])) {die(ERROR_GET_NUMBER);}
-			$nQ = $_POST['nQ'];
-			if(isset($_POST['sub'])){
-				$this->prod = $this->sortBySubject($nQ);
-			} else {
-				$stmt = $this->conn->prepare('SELECT sub_id FROM perf WHERE user_id = ?;');
-				$stmt->bindValue(1, $_SESSION['user_id']);
-				$stmt->execute();
-				$rows = $stmt->fetchAll();
-			    if(count($rows) == 0){
-			    	$this->prod = $this->sortByRandom($nQ);
+			if(!isset($_POST['nQ'])) {
+				if (!isset($_POST['vest']) && !isset($_POST['year'])) {
+					die(ERROR_GET_NUMBER);
 				} else {
-					$this->prod = $this->sortByPerformace($nQ, $subArray);
+					$this->prod = $this->sortByVestibular($_POST['vest'], $_POST['year']);
+				}
+			} else {
+				$nQ = $_POST['nQ'];
+				if(isset($_POST['sub'])){
+					$this->prod = $this->sortBySubject($nQ);
+				} else {
+					$stmt = $this->conn->prepare('SELECT sub_id FROM perf WHERE user_id = ?;');
+					$stmt->bindValue(1, $_SESSION['user_id']);
+					$stmt->execute();
+					$rows = $stmt->fetchAll();
+				    if(count($rows) == 0){
+				    	$this->prod = $this->sortByRandom($nQ);
+					} else {
+						$this->prod = $this->sortByPerformace($nQ, $subArray);
+					}
 				}
 			}
+			
 		} else {
 			echo ERROR_DB;
 		}
@@ -49,7 +57,7 @@ class sortQuestions {
 
 	// Sorteia questôes caso o usuário não possua histórico de seu desempenho
 	private function sortByRandom($nQ) {
-		$stmt = $this->conn->prepare('SELECT q_content FROM questions;');
+		$stmt = $this->conn->prepare('SELECT * FROM questions;');
 		$stmt->execute();
 		$rows = $stmt->fetchAll();
 	    if ($nQ > count($rows)) {
@@ -60,6 +68,16 @@ class sortQuestions {
 	    	$prod[] = $rows[$i];
 	    }
 	    return $prod;
+	}
+
+	// Sorteia questôes caso o usuário não possua histórico de seu desempenho
+	private function sortByVestibular($v, $y) {
+		$stmt = $this->conn->prepare('SELECT * FROM questions WHERE q_vestibular = ? AND q_year = ? ORDER BY q_num;');
+		$stmt->bindValue(1, $v);
+		$stmt->bindValue(2, $y);
+		$stmt->execute();
+		$rows = $stmt->fetchAll();
+	    return $rows;
 	}
 
 	// Sorteia questões baseando-se no histórico de desempenho do usuário

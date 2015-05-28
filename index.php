@@ -1,7 +1,9 @@
 ﻿<?php
 	require_once('accounts/config/config.php');
 	require_once('accounts/classes/Login.php');
+
 	$login = new Login();
+
 	if ($login->isUserLoggedIn() == true) {
 	    Header('Location: accounts/loading.php');
 	}
@@ -49,7 +51,7 @@
 						<a href="entrar" class="btn btn-lg btn-default">Entrar</a>
 					</div>
 				</div>
-			</div>
+			</div><!-- /header -->
 			<div class="body">
 				<div class="centered">
 					<div class="simple-container">
@@ -97,8 +99,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			</div><!-- /body -->
+		</div><!-- /page -->
 		<div id="popup">
 			<div class="popup-box">
 				<div class="popup-box-content">
