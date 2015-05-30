@@ -12,7 +12,7 @@
 <html lang="en">
 <head>
 	<title>Redirecionando</title>
-	<META http-equiv="refresh" content="1;URL=http://vestibo.com.br/dev/in">
+	<META http-equiv="refresh" content="1;URL=http://vestibo.com.br/in">
 </head>
 <body>
 <style type="text/css">

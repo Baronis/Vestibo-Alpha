@@ -563,11 +563,15 @@ class Login {
 
     public function deleteUsersCurrentImage() {
         $result_row = $this->getUserData($_SESSION['user_name']);
-        $fileName = explode(DIRECTORY_SEPARATOR, $result_row->cad_image);
-        $path = LOCAL_IMAGE_PATH.DIRECTORY_SEPARATOR.end($fileName);
-        if(unlink($path)) {
+        if ($result_row->cad_image) {
+            $fileName = explode(DIRECTORY_SEPARATOR, $result_row->cad_image);
+            $path = LOCAL_IMAGE_PATH.DIRECTORY_SEPARATOR.end($fileName);
+            if(unlink($path)) {
+                return true;
+            }
+            return false;    
+        } else {
             return true;
         }
-        return false;
     }
 }
