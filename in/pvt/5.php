@@ -10,40 +10,33 @@
 						<img class="user-image" <?php echo 'src="'.$_SESSION['user_image'].'"'; ?> alt="1"/>
 					</div>
 					<div class="profile-wrapper">
-						<h1>
-							<?php echo $_SESSION['user_full_name']; ?>
-						</h1>
-						<h2>
-							<?php echo $_SESSION['user_name']; ?>
-						</h2>
+						<h1> <?php echo $_SESSION['user_full_name']; ?> </h1>
+						<h2> <?php echo $_SESSION['user_name']; ?> </h2>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="q-box">
-			<?php if(!$_SESSION['fb']){
-				echo '	
-					<div class="q-top-box">
-						<div class="top">
-							<p>Foto de perfil<a style="float: right;" href="index?page=5&e=image">Alterar</a></p>
-						</div>
-					</div>
-					<div class="q-alt-box">
-							<div class="alt">
-								<p>Nome de usuário<a style="float: right;" href="index?page=5&e=username">Alterar</a></p>
-							</div>
-						</div>
-						<div class="q-top-box">
-							<div class="top">
-								<p>Email<a style="float: right;" href="index?page=5&e=email">Alterar</a></p>
-							</div>
-						</div>
-						<div class="q-alt-box">
-							<div class="alt">
-								<p>Senha<a style="float: right;" href="index?page=5&e=password">Alterar</a></p>
-							</div>
-						</div>
-				';} ?>
+			<div class="q-top-box">
+				<div class="top">
+					<p>Foto de perfil<a style="float: right;" href="index?page=5&e=image">Alterar</a></p>
+				</div>
+			</div>
+			<div class="q-alt-box">
+				<div class="alt">
+					<p>Nome de usuário<a style="float: right;" href="index?page=5&e=username">Alterar</a></p>
+				</div>
+			</div>
+			<div class="q-top-box">
+				<div class="top">
+					<p>Email<a style="float: right;" href="index?page=5&e=email">Alterar</a></p>
+				</div>
+			</div>
+			<div class="q-alt-box">
+				<div class="alt">
+					<p>Senha<a style="float: right;" href="index?page=5&e=password">Alterar</a></p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -64,7 +57,6 @@
 		echo '<link href="../css/button-style.css" rel="stylesheet"><link href="../css/input-style.css" rel="stylesheet">';
 		if ($_GET['e'] == 'username') {
 			echo '
-
 			<div id="popup">
 				<div class="popup-box">
 					<div class="popup-box-content">
@@ -81,12 +73,9 @@
 						<a href="javascript:void(0)" onclick="close_popup();">Cancelar</a>
 					</div>
 				</div>
-			</div>
-
-			';
+			</div>';
 		} elseif ($_GET['e'] == 'password') {
 			echo '
-			
 			<div id="popup">
 				<div class="popup-box">
 					<div class="popup-box-content">
@@ -106,8 +95,7 @@
 						<a href="javascript:void(0)" onclick="close_popup();">Cancelar</a>
 					</div>
 				</div>
-			</div>
-			';
+			</div>';
 		} elseif ($_GET['e'] == 'email') {
 			echo '
 			<div id="popup">
@@ -126,8 +114,7 @@
 						<a href="javascript:void(0)" onclick="close_popup();">Cancelar</a>
 					</div>
 				</div>
-			</div>
-			';
+			</div>';
 		} elseif ($_GET['e'] == 'image') {
 			echo '
 			<div id="popup">
@@ -145,8 +132,7 @@
 						<a href="javascript:void(0)" onclick="close_popup();">Cancelar</a>
 					</div>
 				</div>
-			</div>
-			';
+			</div>';
 		} else {}
 	}
 ?>

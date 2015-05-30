@@ -17,7 +17,7 @@ class FormBehaviour {
 	// Esta função é iniciada junto com a classe
 	public function __construct() {
 		if(!$this->databaseConnection()) {
-			echo "ERRO EM __CONSTRUCT";
+			echo ERROR_DB;
 		}
 	}
 
@@ -31,7 +31,7 @@ class FormBehaviour {
                	$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                	return true;
             } catch (PDOException $e) {
-                die ('ERROR_DB_CONN');
+                die (ERROR_DB_CONN);
                 return false;
             }
         }
@@ -122,7 +122,7 @@ class FormBehaviour {
 		return $qs;
 	}
 
-	//Realiza o processo de mostragem e correção simulktânea
+	//Realiza o processo de mostragem e correção simultânea
 	public function setData() {
 		if(isset($_POST['id_res0']) && isset($_SESSION['prod'])) {
 			$questions = "";
@@ -188,7 +188,7 @@ class FormBehaviour {
    			foreach ($rows as $sub) {
 				$query_update = $this->conn->prepare('INSERT INTO perf (perf_user_id, perf_sub) VALUES (:user_id, :sub)');
         	    $query_update->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        	    $query_update->bindValue(':sub', $sub, PDO::PARAM_INT);
+        	    $query_update->bindValue(':sub', $sub['q_sub_2_id'], PDO::PARAM_INT);
         	    $query_update->execute();
    			}
    		}

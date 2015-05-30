@@ -25,7 +25,6 @@
 						require_once('accounts/libraries/PHPMailer.php');
 						require_once('accounts/classes/Login.php');
 						$login = new Login();
-
 						if ($login->isUserLoggedIn() == true) {
 						    Header('Location: accounts/loading.php');
 						} else {
@@ -60,18 +59,14 @@
 					</div>
 					<input type="submit" class="btn btn-default" name="submit_new_password" value="Redefinir" />
 					</input>
-
 					<?php } else { ?>
-
 					<h1 style="color:#003A91; text-align: left;">Redefinição de senha</h1>
 					<div class="form-group">
 						<input type="text" name="user_name" class="form-control" id="user_name" required placeholder="Nome de usuário">
 					</div>
 					<input type="submit" class="btn btn-default" name="request_password_reset" value="Próximo" />
 					</input>
-
 					<?php } ?>
-
 	        		<div class="box-footer">
 	        			<div class="left">
 							<a href="http://vestibo.com.br/termos">Termos e condições</a>

@@ -1,3 +1,4 @@
+<!--
 /*
         VESTIBO ALPHA === Popup Switch (Javascript) === LAMPI
         Última revisão: 25/04/2015 (Matheus Baroni)
@@ -17,3 +18,4 @@
         =====        VESTIBO ALPHA === Popup Switch (Javascript) === LAMPI        =====
         ===============================================================================
 */
+//-->

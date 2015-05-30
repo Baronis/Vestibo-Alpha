@@ -1,12 +1,9 @@
 <?php
-require_once("../accounts/config/config.php");
 // PAGE 2: Matérias
 if(!isset($_POST['sub']) && isset($_POST['id_res0'])):
-	require('inc/defines.php');
 	require_once('inc/FormBehaviour.php');
 	$form = new FormBehaviour();
 	$form->setData();
-
 elseif (!isset($_POST['sub']) && !isset($_POST['id_res0'])): ?>
 <div id="popup">
 	<div class="popup-box">
@@ -101,8 +98,7 @@ elseif (!isset($_POST['sub']) && !isset($_POST['id_res0'])): ?>
 elseif (isset($_POST['sub'])):
 	$v = $_SESSION['user_name'].time();
 	$_SESSION['curTask'] = sha1($v);
-	require('inc/defines.php');
-	require('inc/SortQuestions.php');
+	require_once('inc/SortQuestions.php');
 	require_once('inc/FormBehaviour.php');
 	$sort = new SortQuestions();
 	$form = new FormBehaviour();

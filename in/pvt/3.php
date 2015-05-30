@@ -34,16 +34,13 @@ if (!isset($_POST['vest']) && !isset($_POST['year']) && !isset($_POST['id_res0']
 </div>
 <?php
 elseif(!isset($_POST['vest']) && !isset($_POST['year']) && isset($_POST['id_res0'])):
-	require('inc/defines.php');
 	require_once('inc/FormBehaviour.php');
 	$form = new FormBehaviour();
 	$form->setData();
-
 elseif (isset($_POST['vest']) && isset($_POST['year'])):
 	$v = $_SESSION['user_name'].time();
 	$_SESSION['curTask'] = sha1($v);
-	require('inc/defines.php');
-	require('inc/SortQuestions.php');
+	require_once('inc/SortQuestions.php');
 	require_once('inc/FormBehaviour.php');
 	$sort = new SortQuestions();
 	$form = new FormBehaviour();

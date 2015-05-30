@@ -1,9 +1,7 @@
 ﻿<?php
 	require_once('accounts/config/config.php');
 	require_once('accounts/classes/Login.php');
-
 	$login = new Login();
-
 	if ($login->isUserLoggedIn() == true) {
 	    Header('Location: accounts/loading.php');
 	}
@@ -24,6 +22,7 @@
 	</head>
 	<body>
 		<script>
+		<!--
 		  window.fbAsyncInit = function() {
 		    FB.init({
 		      appId      : '297272677138823',
@@ -38,6 +37,7 @@
 		     js.src = "//connect.facebook.net/pt_BR/sdk.js";
 		     fjs.parentNode.insertBefore(js, fjs);
 		   }(document, 'script', 'facebook-jssdk'));
+	    //-->
 		</script>
 		<div class="page">
 		<div class="like"><div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div></div>
@@ -51,7 +51,7 @@
 						<a href="entrar" class="btn btn-lg btn-default">Entrar</a>
 					</div>
 				</div>
-			</div><!-- /header -->
+			</div>
 			<div class="body">
 				<div class="centered">
 					<div class="simple-container">
@@ -99,18 +99,19 @@
 						</div>
 					</div>
 				</div>
-			</div><!-- /body -->
-		</div><!-- /page -->
-		<div id="popup">
-			<div class="popup-box">
-				<div class="popup-box-content">
-					<h1>Atenção!</h1>
-					<img style="padding: 5px; width: 30%; height: 30%;" src="../img/alerta.png">
-					<p class="lead">Este site se encontra em fase inicial de desenvolvimento. Seu uso é destinado apenas para os <b>desenvolvedores</b> da plataforma!</p>
-					<a href="javascript:void(0)" onclick="close_popup();" class="btn btn-lg btn-default">Eu sou um desenvolvedor!</a>
-				</div>
 			</div>
 		</div>
+		<noscript>
+			<div id="popup">
+				<div class="popup-box">
+					<div class="popup-box-content">
+						<h1>Atenção!</h1>
+						<img style="padding: 5px; width: 30%; height: 30%;" src="../img/alerta.png">
+						<p class="lead">Seu navegador está com o Javascript desabilitado. Para utilizar este site, habilite-o.</p>
+					</div>
+				</div>
+			</div>
+		</noscript>
 		<script src="lib/jquery-1.10.2.js"></script>
 		<script src="in/js/popup.js"></script>
 	</body>

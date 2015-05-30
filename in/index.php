@@ -64,6 +64,17 @@
 				</div>
 			</div>
 		</div>
+		<noscript>
+			<div id="popup">
+				<div class="popup-box">
+					<div class="popup-box-content">
+						<h1>Atenção!</h1>
+						<img style="padding: 5px; width: 30%; height: 30%;" src="../img/alerta.png">
+						<p class="lead">Seu navegador está com o Javascript desabilitado. Para utilizar este site, habilite-o.</p>
+					</div>
+				</div>
+			</div>
+		</noscript>
 		<script src="js/menu.js"></script>
 		<script src="js/popup.js"></script>
 	</body>

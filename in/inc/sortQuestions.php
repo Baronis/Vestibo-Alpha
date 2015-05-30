@@ -1,5 +1,5 @@
 <?php
-// Sorteador de Questões PARCIALMENTE TESTADO (r5)
+// Sorteador de Questões (r6)
 class sortQuestions {
 	// Variável que armazena a conexão
 	private $conn 	= null;
@@ -18,14 +18,19 @@ class sortQuestions {
 				if(isset($_POST['sub'])){
 					$this->prod = $this->sortBySubject($nQ);
 				} else {
-					$stmt = $this->conn->prepare('SELECT sub_id FROM perf WHERE user_id = ?;');
-					$stmt->bindValue(1, $_SESSION['user_id']);
-					$stmt->execute();
-					$rows = $stmt->fetchAll();
-				    if(count($rows) == 0){
-				    	$this->prod = $this->sortByRandom($nQ);
+					if(isset($_POST['byPerformace'])) {
+						$stmt = $this->conn->prepare('SELECT sub_id FROM perf WHERE user_id = ?;');
+						$stmt->bindValue(1, $_SESSION['user_id']);
+						$stmt->execute();
+						$rows = $stmt->fetchAll();
+					    if(count($rows) == 0){
+					    	$this->prod = $this->sortByRandom($nQ);
+						} else {
+							$this->prod = $this->sortByPerformace($nQ, $subArray);
+						}
 					} else {
-						$this->prod = $this->sortByPerformace($nQ, $subArray);
+						(int) $x = $nQ;
+						$this->prod = $this->sortByRandom($x);
 					}
 				}
 			}
@@ -106,7 +111,7 @@ class sortQuestions {
 		if ($nQ > count($result)) {
 	    	echo WARNING_QUESTIONS_EXCEPTION;
 	    }
-	    for ($i=0; $i < $nQ; $i++) { 
+	    for ($i=0; $i < $nQ; $i++) {
 	    	$fRes[] = $result[$i];
 	    }
 		shuffle($fRes);

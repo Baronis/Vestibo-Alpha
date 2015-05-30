@@ -45,7 +45,6 @@ define("EMAIL_VERIFICATION_FROM", "naoresponda@vestibo.com.br");
 define("EMAIL_VERIFICATION_FROM_NAME", "Vestibo");
 define("EMAIL_VERIFICATION_SUBJECT", "Ativacao para Vestibo");
 define("EMAIL_VERIFICATION_CONTENT", "Clique aqui para ativar sua conta:");
-//existe vários níveis de segurança, mas o 10 é padrão...
 define("HASH_COST_FACTOR", "10");
 /**
  * Caminho para a gravação das imagens de perfil dos usuários
@@ -53,10 +52,9 @@ define("HASH_COST_FACTOR", "10");
 define('HTTP_IMAGE_PATH', 'http://vestibo.com.br/img/users/');
 define('LOCAL_IMAGE_PATH', '../img/users/');
 define('HTTP_DEFAULT_IMAGE_PATH', 'http://vestibo.com.br/img/user-image.png');
-
-//conteudo do pt_BR 
-
-// login & registration classes
+/**
+ * Definições para as classes Login e Registration
+ */
 define('MESSAGE_ACCOUNT_NOT_ACTIVATED', 'Sua conta ainda não foi ativada.<br>Favor clicar no link de confirmação enviado por email.<br><a href="../entrar.php">Ir para o Login.</a>');
 define("MESSAGE_CAPTCHA_WRONG", "Captcha incorreto!");
 define("MESSAGE_COOKIE_INVALID", "Cookie inválido");
@@ -67,13 +65,13 @@ define("MESSAGE_EMAIL_CHANGED_SUCCESSFULLY", "Seu e-mail foi alterado com sucess
 define("MESSAGE_EMAIL_EMPTY", "Email não pode ficar em branco");
 define("MESSAGE_EMAIL_INVALID", "Seu e-mail possui um formato inválido");
 define("MESSAGE_EMAIL_SAME_LIKE_OLD_ONE", "Desculpe, este email é o mesmo do atual. Por favor informe outro email.");
-define("MESSAGE_EMAIL_TOO_LONG", "Email não pode ter mais de 64 caracteres");
+define("MESSAGE_EMAIL_TOO_LONG", "Email não pode ter mais de 64 caracteres.");
 define("MESSAGE_LINK_PARAMETER_EMPTY", "Link vazio.");
 define("MESSAGE_LOGGED_OUT", "Você saiu..");
-define("MESSAGE_NOME_EMPTY", "Digite seu Nome...");
-define("MESSAGE_SOBRENOME_EMPTY", "Digite seu Sobrenome...");
-define("MESSAGE_NASCIMENTO_EMPTY", "Digite a data de seu nascimento...");
 define("MESSAGE_LOGIN_FAILED", "Login falhou.");
+define("MESSAGE_NASCIMENTO_EMPTY", "Digite a data de seu nascimento...");
+define("MESSAGE_NOME_EMPTY", "Digite seu Nome...");
+define("MESSAGE_OLDIMAGE_DELETE_FAILED", "Erro ao remover a imagem atual.");
 define("MESSAGE_OLD_PASSWORD_WRONG", "Sua senha antiga está incorreta.");
 define("MESSAGE_PASSWORD_BAD_CONFIRM", "As senhas informadas não coincidem");
 define("MESSAGE_PASSWORD_CHANGE_FAILED", "Desculpe, a alteração de senha falhou.");
@@ -88,6 +86,7 @@ define("MESSAGE_REGISTRATION_ACTIVATION_NOT_SUCCESSFUL", "Desculpe, nenhum id en
 define("MESSAGE_REGISTRATION_ACTIVATION_SUCCESSFUL", 'Ativação bem sucedida!<br>Você pode entrar agora!<a href="entrar.php">Ir para o Login.</a>');
 define("MESSAGE_REGISTRATION_FAILED", "Desculpe, seu registro falhou. Volte e tente novamente.");
 define("MESSAGE_RESET_LINK_HAS_EXPIRED", "Este link de recuperação expirou. Use o link sempre em menos de uma hora.");
+define("MESSAGE_SOBRENOME_EMPTY", "Digite seu Sobrenome...");
 define("MESSAGE_VERIFICATION_MAIL_ERROR", "Desculpe, não foi possível enviar um email de verificação. Sua conta não foi criada.");
 define("MESSAGE_VERIFICATION_MAIL_NOT_SENT", "Email de verificação não foi enviado! Erro: ");
 define("MESSAGE_VERIFICATION_MAIL_SENT", "Sua conta foi criada e enviamos um email.<br>Clique no link de verificação deste email.");
@@ -104,35 +103,12 @@ define("MESSAGE_UNSUPPORTED_IMAGE", "Desculpe, mas este formato de imagem não �
 define("MESSAGE_PROCESSING_IMAGE_FAILURE", "Erro ao processar a imagem.");
 define("MESSAGE_IMAGE_CHANGE_FAILED", "Desculpe, mas não foi possível enviar a imagem para o banco de dados.");
 define("MESSAGE_IMAGE_CHANGED_SUCCESSFULLY", "Imagem alterada com sucesso.");
-// views 
-define("WORDING_BACK_TO_LOGIN", "Voltar ao Login");
-define("WORDING_CHANGE_EMAIL", "Alterar email");
-define("WORDING_CHANGE_PASSWORD", "Alterar senha");
-define("WORDING_CHANGE_USERNAME", "Alterar nome de usuário");
-define("WORDING_CURRENTLY", "atualmente");
-define("WORDING_EDIT_USER_DATA", "Editar dados do usuário");
-define("WORDING_EDIT_YOUR_CREDENTIALS", "Você está logado e pode editar suas informações aqui");
-define("WORDING_FORGOT_MY_PASSWORD", "Esqueci minha senha");
-define("WORDING_LOGIN", "Entrar");
-define("WORDING_LOGOUT", "Sair");
-define("WORDING_NEW_EMAIL", "Novo email");
-define("WORDING_NEW_PASSWORD", "Nova senha");
-define("WORDING_NEW_PASSWORD_REPEAT", "Repetir nova senha");
-define("WORDING_NEW_USERNAME", "Novo nome de usuário (não pode ficar vazio e deve ser azAZ09 e possuir 2-64 caracteres)");
-define("WORDING_OLD_PASSWORD", "Sua senha antiga");
-define("WORDING_PASSWORD", "Senha");
-define("WORDING_PROFILE_PICTURE", "Sua foto de perfil (do gravatar):");
-define("WORDING_REGISTER", "Registrar");
-define("WORDING_REGISTER_NEW_ACCOUNT", "Registrar nova conta");
 define("WORDING_REGISTRATION_CAPTCHA", "Digite os caracteres");
-define("WORDING_REGISTRATION_EMAIL", "Email do usuário (informe um email real, enviaremos um email de confirmação com link de ativação)");
-define("WORDING_REGISTRATION_PASSWORD", "Senha (min. 6 caracteres!)");
-define("WORDING_REGISTRATION_PASSWORD_REPEAT", "Repita a senha");
-define("WORDING_REGISTRATION_USERNAME", "Nome de usuário (comente letras e numeros, 2 a 64 caracteres)");
-define("WORDING_REMEMBER_ME", "Manter logado (por 2 semanas)");
-define("WORDING_REQUEST_PASSWORD_RESET", "Solicitar recuperação de senha. Informe seu nome de usuário e enviaremos um email com instruções:");
-define("WORDING_RESET_PASSWORD", "recuperar senha");
-define("WORDING_SUBMIT_NEW_PASSWORD", "Enviar nova senha");
-define("WORDING_USERNAME", "Nome de usuário");
-define("WORDING_YOU_ARE_LOGGED_IN_AS", "Você está logado como ");
+/**
+ * Definições para as classes SortQuestions e FormBehaviour
+ */
+define("WARNING_QUESTIONS_EXCEPTION", '<b>Aviso: Numero de questoes pedidas excede o numero de questoes disponiveis no servidor!</b><br>');
+define("ERROR_DB", '<b>Problema ao acessar o Banco de Dados!</b><br>');
+define("ERROR_DB_CONN", '<b>Problema de conexão com o Banco de Dados!</b><br>');
+define("ERROR_GET_NUMBER", '<b>Quantas questoes?</b><br>');
 ?>
