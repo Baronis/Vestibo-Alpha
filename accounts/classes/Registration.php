@@ -134,8 +134,10 @@ class Registration
     //Toda a configuração no config...
     public function sendVerificationEmail($user_id, $user_email, $user_activation_hash) {
         $mail = new PHPMailer;
+
         if (EMAIL_USE_SMTP) {
             $mail->IsSMTP();
+            $mail->SMTPDebug = 4;
             $mail->SMTPAuth = EMAIL_SMTP_AUTH;
             if (defined(EMAIL_SMTP_ENCRYPTION)) {
                 $mail->SMTPSecure = EMAIL_SMTP_ENCRYPTION;
@@ -143,6 +145,7 @@ class Registration
             $mail->Host = EMAIL_SMTP_HOST;
             $mail->Username = EMAIL_SMTP_USERNAME;
             $mail->Password = EMAIL_SMTP_PASSWORD;
+            $mail->Priority = 1;
             $mail->Port = EMAIL_SMTP_PORT;
         } 
         else {

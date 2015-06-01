@@ -26,7 +26,9 @@
 			for(var i=0;i<qtdquestions; i++) {
 				document.getElementById("div"+i).style.visibility="visible";
 				document.getElementById("div"+i).style.display = "block";
+				numques = i;
 			};
+			numquesat = numques;
 			t++;
 		} else if(atpag == 1 && qtdpag >= 1) {
 			for(var i = 0; i < 10; i++) {
@@ -117,6 +119,10 @@
 		if(atpag == qtdpag) {
 			var contaques;
 			contaques = qtdquestions-(numquesat+1);
+			if((pageteste == (numquesat+1) || (pageteste+10) == (numquesat+1) || (pageteste+20) == (numquesat+1)) && actionDir =="?page=1" ){
+				pageteste = 0;
+				if(qtdquestions == (numquesat+1) && qtdquestions > 10){t++;}
+			}
 			if(pageteste == contaques) {
 				if(t == 2 || (t == 1 && actionDir == "?page=3")) {
 					document.FormQuestions.action = actionDir;
