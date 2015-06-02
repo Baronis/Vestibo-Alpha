@@ -19,22 +19,22 @@
 		<div class="q-box">
 			<div class="q-top-box">
 				<div class="top">
-					<p>Foto de perfil<a style="float: right;" href="index?page=5&e=image">Alterar</a></p>
+					<p>Foto de perfil<a style="float: right;" href="?page=5&e=image">Alterar</a></p>
 				</div>
 			</div>
 			<div class="q-alt-box">
 				<div class="alt">
-					<p>Nome de usuário<a style="float: right;" href="index?page=5&e=username">Alterar</a></p>
+					<p>Nome de usuário<a style="float: right;" href="?page=5&e=username">Alterar</a></p>
 				</div>
 			</div>
 			<div class="q-top-box">
 				<div class="top">
-					<p>Email<a style="float: right;" href="index?page=5&e=email">Alterar</a></p>
+					<p>Email<a style="float: right;" href="?page=5&e=email">Alterar</a></p>
 				</div>
 			</div>
 			<div class="q-alt-box">
 				<div class="alt">
-					<p>Senha<a style="float: right;" href="index?page=5&e=password">Alterar</a></p>
+					<p>Senha<a style="float: right;" href="?page=5&e=password">Alterar</a></p>
 				</div>
 			</div>
 		</div>
@@ -62,7 +62,7 @@
 					<div class="popup-box-content">
 						<h1>Alterar nome de usuário</h1>
 						'.$alert.'
-						<form method="post" class="popup-form" action="index?page=5&e=username" name="user_edit_form_name">
+						<form method="post" class="popup-form" action="?page=5&e=username" name="user_edit_form_name">
 							<div class="form-group">
 								<input type="text" name="user_name" pattern="[a-zA-Z0-9]{2,64}" required class="form-control" id="user_name" 
 			          			placeholder="Novo nome de usuário">
@@ -81,7 +81,7 @@
 					<div class="popup-box-content">
 						<h1>Alterar nome de usuário</h1>
 						'.$alert.'
-						<form method="post" class="popup-form" action="index?page=5&e=password" name="user_edit_form_password">
+						<form method="post" class="popup-form" action="?page=5&e=password" name="user_edit_form_password">
 							<div class="form-group">
 								<input type="password" name="user_password_old" required class="form-control" id="user_password_old" autocomplete="off" placeholder="Senha antiga">
 			        		</div>
@@ -103,7 +103,7 @@
 					<div class="popup-box-content">
 						<h1>Alterar nome de usuário</h1>
 						'.$alert.'
-						<form method="post" class="popup-form" action="index?page=5&e=email" name="user_edit_form_email">
+						<form method="post" class="popup-form" action="?page=5&e=email" name="user_edit_form_email">
 							<div class="form-group">
 								<input type="email" name="user_email" required class="form-control" id="user_email" 
 			          			placeholder="Novo endereço de email">
@@ -122,7 +122,7 @@
 					<div class="popup-box-content">
 						<h1>Alterar foto de perfil</h1>
 						'.$alert.'
-						<form method="post" enctype="multipart/form-data" class="popup-form" action="index?page=5&e=image" name="user_change_image">
+						<form method="post" enctype="multipart/form-data" class="popup-form" action="?page=5&e=image" name="user_change_image">
 							<div class="form-group">
 								<input type="file" name="new_image" required class="form-control" id="new_image">
 			        		</div>

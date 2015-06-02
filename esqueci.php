@@ -26,7 +26,7 @@
 						require_once('accounts/classes/Login.php');
 						$login = new Login();
 						if ($login->isUserLoggedIn() == true) {
-						    Header('Location: accounts/loading.php');
+						    Header('Location: accounts/loading');
 						} else {
 						    if (isset($login)) {
 						        if ($login->errors) {

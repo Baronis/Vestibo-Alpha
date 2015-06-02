@@ -23,17 +23,17 @@ define("COOKIE_SECRET_KEY", "1gp@TMPS{+$78sfpMJFe-92s");
  * define("EMAIL_SMTP_ENCRYPTION", "ssl"); e a encriptação do email ssl é dafault em todos...
  */
 define("EMAIL_USE_SMTP", true);
-define("EMAIL_SMTP_HOST", "ssl://smtp.gmail.com");
+define("EMAIL_SMTP_HOST", "smtp.zoho.com");
 define("EMAIL_SMTP_AUTH", true);
-define("EMAIL_SMTP_USERNAME", "noreply.vestibo@gmail.com");
-define("EMAIL_SMTP_PASSWORD", "goldenvestibo");
-define("EMAIL_SMTP_PORT", 465);
-define("EMAIL_SMTP_ENCRYPTION", "ssl");
+define("EMAIL_SMTP_USERNAME", "naoresponda@vestibo.com.br");
+define("EMAIL_SMTP_PASSWORD", "teste123");
+define("EMAIL_SMTP_PORT", 587);
+define("EMAIL_SMTP_ENCRYPTION", "tls");
 /**
  * Configuração para o email de redefinição...
  */
 define("EMAIL_PASSWORDRESET_URL", "http://vestibo.com.br/esqueci");
-define("EMAIL_PASSWORDRESET_FROM", "noreply.vestibo@gmail.com");
+define("EMAIL_PASSWORDRESET_FROM", "naoresponda@vestibo.com.br");
 define("EMAIL_PASSWORDRESET_FROM_NAME", "Vestibo");
 define("EMAIL_PASSWORDRESET_SUBJECT", "Redefinir sua senha");
 define("EMAIL_PASSWORDRESET_CONTENT", "Clique aqui para redefinir sua senha:");
@@ -41,9 +41,9 @@ define("EMAIL_PASSWORDRESET_CONTENT", "Clique aqui para redefinir sua senha:");
  * Configuração para o email de ativação
  */
 define("EMAIL_VERIFICATION_URL", "http://vestibo.com.br/cadastrar");
-define("EMAIL_VERIFICATION_FROM", "noreply.vestibo@gmail.com");
+define("EMAIL_VERIFICATION_FROM", "naoresponda@vestibo.com.br");
 define("EMAIL_VERIFICATION_FROM_NAME", "Vestibo");
-define("EMAIL_VERIFICATION_SUBJECT", "Ativacao para Vestibo");
+define("EMAIL_VERIFICATION_SUBJECT", "Ativação para Vestibo");
 define("EMAIL_VERIFICATION_CONTENT", "Clique aqui para ativar sua conta:");
 define("HASH_COST_FACTOR", "10");
 /**

@@ -29,7 +29,9 @@
 				<form method="post" action="cadastrar.php" name="registerform">
 					<div class="cadastro-container">
 						<?php
-							require_once('accounts/libraries/PHPMailer.php');
+							require("accounts/libraries/class.phpmailer.php");
+							require("accounts/libraries/class.smtp.php");
+							//require_once('accounts/libraries/PHPMailer.php');
 							require_once('accounts/classes/Registration.php');
 							$registration = new Registration();
 							if (isset($registration)) {

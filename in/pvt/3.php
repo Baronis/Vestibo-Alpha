@@ -22,7 +22,7 @@ if (!isset($_POST['vest']) && !isset($_POST['year']) && !isset($_POST['id_res0']
 			</div>
 			<div class="q-alt-box">
 				<div class="alt">
-					<form id="unesp2015" method="post" action="index?page=3">
+					<form id="unesp2015" method="post" action="?page=3">
 					<input type="hidden" name="vest" value="unesp">
 					<input type="hidden" name="year" value="2015">
 					<p>2015<a style="float: right;" href="javascript:{}" onclick="document.getElementById('unesp2015').submit(); return false;">Começar!</a></p>

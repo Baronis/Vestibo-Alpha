@@ -564,12 +564,16 @@ class Login {
     public function deleteUsersCurrentImage() {
         $result_row = $this->getUserData($_SESSION['user_name']);
         if ($result_row->cad_image) {
-            $fileName = explode(DIRECTORY_SEPARATOR, $result_row->cad_image);
-            $path = LOCAL_IMAGE_PATH.DIRECTORY_SEPARATOR.end($fileName);
-            if(unlink($path)) {
+            if ($result_row->cad_image != "http://vestibo.com.br/img/user-image.png") {
+                $fileName = explode(DIRECTORY_SEPARATOR, $result_row->cad_image);
+                $path = LOCAL_IMAGE_PATH.DIRECTORY_SEPARATOR.end($fileName);
+                if(unlink($path)) {
+                    return true;
+                }
+                return false;
+            } else {
                 return true;
             }
-            return false;    
         } else {
             return true;
         }

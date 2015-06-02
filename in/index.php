@@ -3,7 +3,7 @@
 	require_once('../accounts/classes/Login.php');
 	$login = new Login();
 	if ($login->isUserLoggedIn() == false) {
-	    Header('Location: ../entrar.php');
+	    Header('Location: ../entrar');
 	}
 ?>
 <!DOCTYPE html>

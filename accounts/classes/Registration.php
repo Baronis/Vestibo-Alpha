@@ -137,21 +137,23 @@ class Registration
 
         if (EMAIL_USE_SMTP) {
             $mail->IsSMTP();
-            $mail->SMTPDebug = 4;
+            $mail->Host = EMAIL_SMTP_HOST;
+            $mail->SMTPDebug = 2;
             $mail->SMTPAuth = EMAIL_SMTP_AUTH;
             if (defined(EMAIL_SMTP_ENCRYPTION)) {
                 $mail->SMTPSecure = EMAIL_SMTP_ENCRYPTION;
             }
-            $mail->Host = EMAIL_SMTP_HOST;
+            $mail->Port = EMAIL_SMTP_PORT;
             $mail->Username = EMAIL_SMTP_USERNAME;
             $mail->Password = EMAIL_SMTP_PASSWORD;
             $mail->Priority = 1;
-            $mail->Port = EMAIL_SMTP_PORT;
+            $mail->CharSet = 'UTF-8';
+            $mail->Encoding = '8bit';
+            $mail->WordWrap = 900;
         } 
         else {
             $mail->IsMail();
         }
-
         $mail->From = EMAIL_VERIFICATION_FROM;
         $mail->FromName = EMAIL_VERIFICATION_FROM_NAME;
         $mail->AddAddress($user_email);
@@ -166,6 +168,44 @@ class Registration
         } else {
             return true;
         }
+
+
+        ///////////
+
+require_once ( 'class.phpmailer.php' ); // Add the path as appropriate
+  $Mail = new PHPMailer();
+  $Mail->IsSMTP(); // Use SMTP
+  $Mail->Host        = "smtp.gmail.com"; // Sets SMTP server
+  $Mail->SMTPDebug   = 2; // 2 to enable SMTP debug information
+  $Mail->SMTPAuth    = TRUE; // enable SMTP authentication
+  $Mail->SMTPSecure  = "tls"; //Secure conection
+  $Mail->Port        = 587; // set the SMTP port
+  $Mail->Username    = 'MyGmail@gmail.com'; // SMTP account username
+  $Mail->Password    = 'MyGmailPassword'; // SMTP account password
+  $Mail->Priority    = 1; // Highest priority - Email priority (1 = High, 3 = Normal, 5 = low)
+  $Mail->CharSet     = 'UTF-8';
+  $Mail->Encoding    = '8bit';
+  $Mail->Subject     = 'Test Email Using Gmail';
+  $Mail->ContentType = 'text/html; charset=utf-8\r\n';
+  $Mail->From        = 'MyGmail@gmail.com';
+  $Mail->FromName    = 'GMail Test';
+  $Mail->WordWrap    = 900; // RFC 2822 Compliant for Max 998 characters per line
+
+  $Mail->AddAddress( $ToEmail ); // To:
+  $Mail->isHTML( TRUE );
+  $Mail->Body    = $MessageHTML;
+  $Mail->AltBody = $MessageTEXT;
+  $Mail->Send();
+  $Mail->SmtpClose();
+
+  if ( $Mail->IsError() ) { 
+    echo "ERROR<br /><br />";
+  }
+  else {
+    echo "OK<br /><br />";
+  }
+
+        ///////////
     }
     public function verifyNewUser($user_id, $user_activation_hash) {
         // se a conexão esta aberta
