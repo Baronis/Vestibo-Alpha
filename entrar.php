@@ -61,10 +61,10 @@
 	        		style="float:right;padding-right:12px;padding-top:8px;">Esqueci minha senha</a>
 	        		<div class="box-footer">
 	        			<div class="left">
-							<a href="http://vestibo.com.br/termos.html">Termos e condições</a>
+							<a href="http://vestibo.com.br/termos">Termos e condições</a>
 						</div>
 						<div class="right">
-							<a href="http://vestibo.com.br/quem-somos.html">Quem somos</a>
+							<a href="http://vestibo.com.br/quem-somos">Quem somos</a>
 						</div>
 						<div class="centered">
 							<p>Vestibo &copy; 2015.</p>

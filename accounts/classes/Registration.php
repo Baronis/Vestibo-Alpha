@@ -138,7 +138,6 @@ class Registration
         if (EMAIL_USE_SMTP) {
             $mail->IsSMTP();
             $mail->Host = EMAIL_SMTP_HOST;
-            $mail->SMTPDebug = 2;
             $mail->SMTPAuth = EMAIL_SMTP_AUTH;
             if (defined(EMAIL_SMTP_ENCRYPTION)) {
                 $mail->SMTPSecure = EMAIL_SMTP_ENCRYPTION;

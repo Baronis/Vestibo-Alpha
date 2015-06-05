@@ -22,7 +22,8 @@
 				<div class="login-container">
 					<?php
 						require_once('accounts/config/config.php');
-						require_once('accounts/libraries/PHPMailer.php');
+						require_once("accounts/libraries/class.phpmailer.php");
+						require_once("accounts/libraries/class.smtp.php");
 						require_once('accounts/classes/Login.php');
 						$login = new Login();
 						if ($login->isUserLoggedIn() == true) {

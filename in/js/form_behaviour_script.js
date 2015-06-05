@@ -4,10 +4,10 @@
         =====        VESTIBO ALPHA === FormBehaviour  (Javascript) === LAMPI     =====
         ==============================================================================
 
-        Ultima revisao: 11/05/2015		(Dennys Pistoni, William Vecchini e Matheus Baroni)
+        Ultima revisao: 02/06/2015		(Dennys Pistoni, William Vecchini e Matheus Baroni)
 */
 	var pageteste = 0;
-	var t = 0;
+	var end = 0;
 	var p = qtdquestions-1;
 	//at é de atual
 	var numquesat = 0;
@@ -29,7 +29,6 @@
 				numques = i;
 			};
 			numquesat = numques;
-			t++;
 		} else if(atpag == 1 && qtdpag >= 1) {
 			for(var i = 0; i < 10; i++) {
 				document.getElementById("div"+i).style.visibility = "visible";
@@ -57,7 +56,6 @@
 					};
 					pageteste = 0;
 					numquesat = numques;
-					t++;
 				}
 			} else {
 				var numques2 = numques+11;
@@ -93,6 +91,7 @@
 			for (var x = 0; x < campoquestao; x++){
 				if(locais[x] == undefined) {
 					pageteste++;
+					end++;
 					locais[x] = local;
 					testvalue = false;
 					break;
@@ -116,20 +115,11 @@
 	}
 	//funcao para encerrar a prova
 	function encerra() {
-		if(atpag == qtdpag) {
-			var contaques;
-			contaques = qtdquestions-(numquesat+1);
-			if((pageteste == (numquesat+1) || (pageteste+10) == (numquesat+1) || (pageteste+20) == (numquesat+1)) && actionDir =="?page=1" ){
-				pageteste = 0;
-				if(qtdquestions == (numquesat+1) && qtdquestions > 10){t++;}
-			}
-			if(pageteste == contaques) {
-				if(t == 2 || (t == 1 && actionDir == "?page=3")) {
-					document.FormQuestions.action = actionDir;
-					document.FormQuestions.submit();
-				}
-			}
-		}
+		var conta= qtdquestions - end;
+		if(conta == 0){
+			document.FormQuestions.action = actionDir;
+			document.FormQuestions.submit();
+		}			
 	}
 	//executa todas as funcoes relacionadas ao botao
 	function btFaz() {

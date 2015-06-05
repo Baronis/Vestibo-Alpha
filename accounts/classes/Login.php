@@ -12,8 +12,6 @@ class Login {
     private $user_name = "";
     private $user_email = "";
     private $user_is_logged_in = false;
-    public $user_gravatar_image_url = "";
-    public $user_gravatar_image_tag = "";
     private $password_reset_link_is_valid  = false;
     private $password_reset_was_successful = false;
     public $errors = array();
@@ -410,16 +408,15 @@ class Login {
             $mail->Username = EMAIL_SMTP_USERNAME;
             $mail->Password = EMAIL_SMTP_PASSWORD;
             $mail->Port = EMAIL_SMTP_PORT;
-        } 
+        }
         else {
             $mail->IsMail();
         }
-
         $mail->From = EMAIL_PASSWORDRESET_FROM;
         $mail->FromName = EMAIL_PASSWORDRESET_FROM_NAME;
         $mail->AddAddress($user_email);
         $mail->Subject = EMAIL_PASSWORDRESET_SUBJECT;
-        $link    = EMAIL_PASSWORDRESET_URL.'?user_name='.urlencode($user_name).'&verification_code='.urlencode($user_password_reset_hash);
+        $link = EMAIL_PASSWORDRESET_URL.'?user_name='.urlencode($user_name).'&verification_code='.urlencode($user_password_reset_hash);
         $mail->Body = EMAIL_PASSWORDRESET_CONTENT . ' ' . $link;
 
         if(!$mail->Send()) {

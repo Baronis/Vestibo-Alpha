@@ -21,7 +21,7 @@ elseif (!isset($_POST['nQ']) && !isset($_POST['id_res0'])): ?>
 		<div class="q-box">
 			<div class="q-top-box">
 				<div class="top">
-					<form id="por" method="post" action="?page=1">
+					<form id="por" method="post" action="index?page=1">
 						<div class="form-group">
 							<input class="form-control" type="text" name="nQ" maxlength="2" placeholder="Quantidade de questões" value="">
 						</div><div class="form-group">

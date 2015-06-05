@@ -3,7 +3,7 @@
 	require_once('accounts/classes/Login.php');
 	$login = new Login();
 	if ($login->isUserLoggedIn() == true) {
-	    Header('Location: accounts/loading');
+	    Header('Location: accounts/loading.php');
 	}
 ?>
 <!DOCTYPE html>
@@ -57,7 +57,7 @@
 					<div class="simple-container">
 						<div class="content">
 							<h1>Vestibo, um novo jeito de se preparar para o vestibular</h1>
-			            	<p class="lead">Realize simulados, aprenda com as melhores video-aulas da internet e receba questões diariamente de acordo com as sua necessidade, tudo isso de forma simples e prática para que você tenha o melhor desempenho nos Vestibulares.</p>
+			            	<p class="lead">Realize simulados, visualize seu progresso e receba questões diariamente de acordo com as sua necessidade, tudo isso de forma simples e prática para que você tenha o melhor desempenho nos Vestibulares.</p>
 		            	</div>
 					</div>
 					<div class="blue-container">
@@ -94,8 +94,8 @@
 					<div class="footer">
 						<div class="f-left">Vestibo &copy; 2015.</div>
 						<div class="f-right">
-							<a href="http://vestibo.com.br/termos.html">Termos e condições</a>
-							<a href="http://vestibo.com.br/quem-somos.html">Quem somos</a>
+							<a href="http://vestibo.com.br/termos">Termos e condições</a>
+							<a href="http://vestibo.com.br/quem-somos">Quem somos</a>
 						</div>
 					</div>
 				</div>

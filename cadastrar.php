@@ -3,7 +3,7 @@
 	require_once('accounts/classes/Login.php');
 	$login = new Login();
 	if ($login->isUserLoggedIn() == true) {
-	    Header('Location: accounts/loading.php');
+	    Header('Location: accounts/loading');
 	}
 ?>
 <!DOCTYPE html>
@@ -26,12 +26,11 @@
 				<a href="http://vestibo.com.br/"><img src="img/nav-logo-blue.png" class="logo" alt="Vestibo"></a>
 			</div>
 			<div class="body">
-				<form method="post" action="cadastrar.php" name="registerform">
+				<form method="post" action="cadastrar" name="registerform">
 					<div class="cadastro-container">
 						<?php
-							require("accounts/libraries/class.phpmailer.php");
-							require("accounts/libraries/class.smtp.php");
-							//require_once('accounts/libraries/PHPMailer.php');
+							require_once("accounts/libraries/class.phpmailer.php");
+							require_once("accounts/libraries/class.smtp.php");
 							require_once('accounts/classes/Registration.php');
 							$registration = new Registration();
 							if (isset($registration)) {
@@ -73,10 +72,10 @@
 		        		<input class="btn btn-default" type="submit" name="register" value="Cadastrar"/>
 		        		<div class="box-footer">
 		        			<div class="left">
-								<a href="http://vestibo.com.br/termos.html">Termos e condições</a>
+								<a href="http://vestibo.com.br/termos">Termos e condições</a>
 							</div>
 							<div class="right">
-								<a href="http://vestibo.com.br/quem-somos.html">Quem somos</a>
+								<a href="http://vestibo.com.br/quem-somos">Quem somos</a>
 							</div>
 							<div class="centered">
 								<p>Vestibo &copy; 2015.</p>

@@ -49,7 +49,7 @@
 						case '1': require_once("pvt/1.php"); break;
 						case '2': require_once("pvt/2.php"); break;
 						case '3': require_once("pvt/3.php"); break;
-						case '4': require_once("pvt/4.php"); break;
+						case '4': require_once("pvt/0.php"); break;
 						case '5': require_once("pvt/5.php"); break;
 						default: require_once("pvt/0.php"); break;}
 				?>
