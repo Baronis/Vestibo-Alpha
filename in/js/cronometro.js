@@ -1,15 +1,12 @@
-tempo="00:06:00";//troca valor "00:06:00" pela variavel que vier do bd
-tempo2=tempo.split(':');
-tempo3=tempo.split('');
-
+	qtdques=1;
+	time=3*qtdques;
+	mi=time;
+	hrs=0;
+	tempo="";
+	d=0;
 function formatatempo(segs) {
-	min = tempo2[1];
-	hr = tempo3[1];
-	/*
-	if hr < 10 then hr = "0"&hr
-	if min < 10 then min = "0"&min
-	if segs < 10 then segs = "0"&segs
-	*/
+	hr=hrs;
+	min=mi;
 	while(segs<0) {
 		if (segs < 0) {
 		segs = segs+60;
@@ -27,8 +24,9 @@ function formatatempo(segs) {
 	if (hr < 10) {hr = "0"+hr}
 	if (min < 10) {min = "0"+min}
 	if (segs < 10) {segs = "0"+segs}
-	if (hr==0 && min==0 && segs ==0) {clearInterval(interval); alert("O tempo acabou!");}
-	fin = hr+":"+min+":"+segs
+	if (hr==0 && min==0 && segs ==0) {clearInterval(interval); alert("O tempo acabou!"); calculatempo();}
+	fin = hr+":"+min+":"+segs;
+  if(d==0){tempo=fin;d++;}
 	return fin;
 }
 var segundos = 0; //inicio do cronometro
@@ -38,14 +36,23 @@ function conta() {
 }
 
 function inicia(){
+	sla();
 	interval = setInterval("conta();",1000);
 	document.getElementById("btIniciar").disabled=true;
 }
-
+function sla(){
+	hrs=0;
+	while(mi>60) {
+		if (mi >60) {
+		mi = mi-60;
+		hrs = parseInt(hrs)+1;
+		}
+	}
+}
 function encerrar(){
 	clearInterval(interval);
 	calculatempo();
-	var tempofeito=f;
+	var tempofeito=time_test;
 }
 
 function calculatempo(){
@@ -53,17 +60,11 @@ function calculatempo(){
 	to=tempo.split(":");
 	t=60;
 	v1=to[0]-na[0];
-	v2=(to[1]-1)-na[1];
+	v2=(to[1])-na[1];
 	v3=t-na[2];
 	if(v1<10){v1="0"+v1}
 	if(v2<10){v2="0"+v2}
 	if(v3<10){v3="0"+v3}
-	f=v1+":"+v2+":"+v3;//f é quanto tempo se passou desde de o inicio da prova
-}
-
-function proxima(){
-	//codigo pra passa o tempo de pagina em pagina
-	calculatempo();
-	var tempofeito=f;
-	//envia variavel fin e segundos pela sessao
+	time_test=v1+":"+v2+":"+v3;//time_test Ã© quanto tempo se passou desde de o inicio da prova
+  alert("tempo de prova: "+time_test);
 }
